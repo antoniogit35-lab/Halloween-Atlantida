@@ -1,0 +1,14 @@
+RECETARIO OSCURO — PRUEBA DE CONCEPTO
+
+1. Extrae el ZIP y abre index.html con un navegador actualizado.
+2. Si quieres probar tu fondo, copia background.jpg dentro de css/.
+   Sin esa imagen se conserva el fondo oscuro.
+3. Las fotos futuras van en data/, con los nombres indicados en el CSV.
+4. Esta versión incluye en el HTML una copia de las 30 recetas del CSV.
+   No requiere fetch ni servidor. Editar el CSV NO actualiza esa copia:
+   es una decisión exclusiva de esta prueba visual, no el sistema definitivo.
+5. Sustituye la versión anterior completa; no añadas los antiguos parches CSS.
+6. Fuentes provisionales: Georgia en títulos y Arial en textos.
+7. El contador está en la cabecera: total al entrar y coincidencias al buscar.
+
+No se han hecho cambios en GitHub. No se ha validado visualmente en navegador.
