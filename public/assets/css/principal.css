@@ -1,0 +1,44 @@
+:root{--negro:#141414;--verde:#416042;--azul:#0A2353;--marfil:#F2E8D5;--amarillo:#FFF477;--rojo:#CA1616}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:flex;flex-direction:column;background:var(--negro);color:var(--marfil);font-family:Georgia,'Times New Roman',serif}
+
+.cabecera,.pie{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px;padding:16px 30px;background:var(--negro);border-color:#41604290;border-style:solid;border-width:0}
+.cabecera{border-bottom-width:1px}
+.pie{border-top-width:1px;font-size:.9rem}
+.cabecera h1{margin:0;font-size:clamp(1.4rem,3.5vw,2.4rem);font-weight:400;text-align:center}
+.cabecera-logo,.pie-logo{min-height:44px}
+.cabecera-usuario{justify-self:end}
+.sesion{display:inline-block;padding:9px 16px;border:1px solid var(--verde);color:var(--marfil)}
+[aria-disabled="true"]{opacity:.6;cursor:not-allowed}
+.pie span{justify-self:start}
+.pie span:nth-child(2){justify-self:center}
+.pie-logo{justify-self:end}
+
+/* Escenario: las tres imágenes forman un fondo continuo */
+.cementerio{flex:1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;width:100%;background:#0a0a0a;min-height:0}
+
+.zona{position:relative;display:block;overflow:hidden;container-type:inline-size;color:var(--marfil);text-decoration:none;background:#0a0a0a}
+.zona img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 60%;
+  -webkit-mask-image:linear-gradient(to right,transparent 0,#000 14%,#000 86%,transparent 100%);
+          mask-image:linear-gradient(to right,transparent 0,#000 14%,#000 86%,transparent 100%);
+  transition:filter .35s ease}
+
+/* Texto sobre la lápida: se ajusta por acceso si hace falta */
+.zona{--x:24%;--y:36%;--ancho:44%;--alto:34%}
+.zona-texto{position:absolute;left:var(--x);top:var(--y);width:var(--ancho);height:var(--alto);display:flex;align-items:center;justify-content:center;text-align:center;font-size:clamp(.9rem,6.5cqw,1.7rem);line-height:1.35;text-wrap:balance;text-shadow:0 2px 4px #000,0 0 14px #000;transition:color .2s ease}
+
+a.zona:hover img,a.zona:focus-visible img{filter:brightness(1.2)}
+a.zona:hover .zona-texto,a.zona:focus-visible .zona-texto{color:var(--amarillo)}
+a.zona:focus-visible{outline:2px solid var(--amarillo);outline-offset:-4px}
+
+.desactivada img{filter:brightness(.8)}
+.pronto{position:absolute;left:0;right:0;bottom:6%;text-align:center;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;text-shadow:0 1px 4px #000}
+
+@media(max-width:850px){
+  .cementerio{grid-template-columns:1fr}
+  .zona{aspect-ratio:2/3;width:100%;max-width:520px;margin:0 auto}
+  .zona img{
+    -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 12%,#000 88%,transparent 100%);
+            mask-image:linear-gradient(to bottom,transparent 0,#000 12%,#000 88%,transparent 100%)}
+  .cabecera,.pie{padding:12px 16px;gap:10px}
+}
