@@ -33,7 +33,6 @@ Halloween-Atlantida/
 ├── app/
 │   └── recetas.php              # Lectura y validación del CSV
 ├── docs/                        # Documentación del proyecto
-├── img/                         # Imágenes originales de las recetas
 ├── public/                      # Raíz pública del servidor
 │   ├── recetario.php
 │   └── assets/
@@ -219,7 +218,17 @@ El nombre y la extensión deben coincidir con los del archivo, respetando tambi�
 
 Estos ajustes son una convención del proyecto, no una restricción del código.
 
-Los originales se conservan en `img/`. No se deben eliminar ni sobrescribir al generar las versiones para la web.
+Las fotografías finales del recetario están en
+`public/assets/img/recetas/`. Los WebP utilizados durante la conversión
+se han retirado del árbol de trabajo.
+
+Las imágenes de personajes están en `public/assets/img/personajes/`.
+Se utilizarán en la selección del asesino del login, el ranking y,
+para seis personajes, el Cluedo.
+
+Las imágenes de armas y objetos asociados están en
+`public/assets/img/cursores/`, pendientes de su adaptación para el
+cursor de cada asesino.
 
 Cambiar la extensión de un archivo no convierte su formato: utiliza una herramienta de conversión.
 
