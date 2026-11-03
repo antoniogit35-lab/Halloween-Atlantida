@@ -44,15 +44,23 @@ body {
   background-color: var(--negro-fondo);
 }
 
+/* La imagen estática inicial se desvanece de forma más pausada */
 .puerta-estatica {
   z-index: 1;
+  opacity: 1;
+  transition: opacity 1.6s ease-in-out;
 }
 
+.puerta-estatica.desvanecer {
+  opacity: 0;
+}
+
+/* El vídeo aparece gradualmente al mismo ritmo */
 .puerta-video {
   z-index: 2;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.1s ease;
+  transition: opacity 1.6s ease-in-out;
 }
 
 .puerta-video.reproduciendo {
