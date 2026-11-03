@@ -1,0 +1,213 @@
+/* Ranking de asesinos
+   Fila: puesto | foto | nombre | barra | asesinatos (según el boceto lowfi). */
+
+.ranking-pagina {
+    --fondo: #1a0f16;
+    --fondo-claro: #2e1824;
+    --hueso: #efe6d2;
+    --ceniza: #ab9ca3;
+    --sangre: #b3282d;
+    --sangre-oscura: #6a1418;
+    --ambar: #e3902f;
+    --ambar-oscuro: #8a4d12;
+    --linea: #43283a;
+    --pozo: #0f080c;
+
+    margin: 0;
+    min-height: 100vh;
+    background: radial-gradient(ellipse at 50% 0%, var(--fondo-claro) 0%, var(--fondo) 65%) fixed;
+    color: var(--hueso);
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+    line-height: 1.5;
+}
+
+.ranking {
+    max-width: 70rem;
+    margin: 0 auto;
+    padding: 1.25rem clamp(1rem, 4vw, 2.5rem) 4rem;
+}
+
+/* Cabecera */
+
+.ranking__volver {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+    color: var(--ceniza);
+    text-decoration: none;
+}
+
+.ranking__volver:hover {
+    color: var(--hueso);
+    text-decoration: underline;
+}
+
+.ranking__volver:focus-visible {
+    outline: 2px solid var(--ambar);
+    outline-offset: 4px;
+    border-radius: 0.25rem;
+}
+
+.ranking__titulo {
+    margin: 1rem 0 2.5rem;
+    text-align: center;
+    font-size: clamp(2.25rem, 6vw, 4rem);
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    line-height: 1.1;
+    text-shadow: 0 0 0.5em rgba(179, 40, 45, 0.6);
+}
+
+.ranking__vacio {
+    text-align: center;
+    color: var(--ceniza);
+}
+
+/* Lista */
+
+.ranking__lista {
+    display: grid;
+    gap: 0.75rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.fila {
+    display: grid;
+    grid-template-columns: 2.25rem 3.5rem minmax(8rem, 12rem) 1fr 9.5rem;
+    grid-template-areas: "puesto foto nombre barra muertes";
+    align-items: center;
+    gap: 1rem;
+}
+
+.fila__puesto {
+    grid-area: puesto;
+    text-align: right;
+    font-size: 1.25rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--ceniza);
+}
+
+.fila__foto {
+    grid-area: foto;
+    display: grid;
+    place-items: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 2px solid var(--linea);
+    background: var(--fondo-claro);
+}
+
+.fila__foto img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.fila__inicial {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--ceniza);
+}
+
+.fila__nombre {
+    grid-area: nombre;
+    font-size: 1.125rem;
+    overflow-wrap: anywhere;
+}
+
+.fila__barra {
+    grid-area: barra;
+    display: block;
+    height: 1.5rem;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    background: var(--pozo);
+    box-shadow: inset 0 0 0 1px var(--linea);
+}
+
+.fila__relleno {
+    display: block;
+    width: var(--pct);
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--sangre-oscura), var(--sangre));
+}
+
+.fila__muertes {
+    grid-area: muertes;
+    text-align: right;
+    white-space: nowrap;
+    font-size: 0.9375rem;
+    color: var(--ceniza);
+}
+
+.fila__muertes strong {
+    font-size: 1.375rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--hueso);
+}
+
+/* Podio: los tres primeros */
+
+.fila--podio .fila__puesto {
+    font-weight: 700;
+    color: var(--ambar);
+}
+
+.fila--podio .fila__foto {
+    border-color: var(--ambar);
+}
+
+.fila--podio .fila__relleno {
+    background: linear-gradient(90deg, var(--ambar-oscuro), var(--ambar));
+}
+
+/* Animación de entrada: las barras se llenan una sola vez al cargar.
+   Solo se parte de 0 si JavaScript está activo (la clase .js la pone ranking.php). */
+
+.js .fila__relleno {
+    width: 0;
+}
+
+.js .ranking__lista--llena .fila__relleno {
+    width: var(--pct);
+    transition: width 900ms cubic-bezier(0.2, 0.7, 0.2, 1);
+    transition-delay: calc(var(--i) * 40ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .js .ranking__lista--llena .fila__relleno {
+        transition: none;
+    }
+}
+
+/* Pantallas estrechas: la barra pasa debajo del nombre */
+
+@media (max-width: 42rem) {
+    .ranking__lista {
+        gap: 1.25rem;
+    }
+
+    .fila {
+        grid-template-columns: 1.75rem 3rem 1fr auto;
+        grid-template-areas:
+            "puesto foto nombre muertes"
+            "barra barra barra barra";
+        gap: 0.5rem 0.75rem;
+    }
+
+    .fila__foto {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    .fila__puesto {
+        font-size: 1.125rem;
+    }
+}
