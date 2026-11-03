@@ -21,7 +21,7 @@ function foto(receta) {
     imagen.alt = receta.nombre;
     imagen.className = 'foto';
     imagen.onload = () => { bloque.replaceChildren(imagen); bloque.classList.remove('placeholder'); };
-    imagen.src = 'data/' + encodeURIComponent(receta.foto);
+    imagen.src = 'assets/img/recetas/' + encodeURIComponent(receta.foto);
   }
   return bloque;
 }
