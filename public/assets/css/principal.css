@@ -1,44 +1,227 @@
-:root{--negro:#141414;--verde:#416042;--azul:#0A2353;--marfil:#F2E8D5;--amarillo:#FFF477;--rojo:#CA1616}
-*{box-sizing:border-box}
-body{margin:0;min-height:100vh;display:flex;flex-direction:column;background:var(--negro);color:var(--marfil);font-family:Georgia,'Times New Roman',serif}
+:root {
+    --negro: #141414;
+    --verde: #416042;
+    --marfil: #F2E8D5;
+    --amarillo: #FFF477;
+}
 
-.cabecera,.pie{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px;padding:16px 30px;background:var(--negro);border-color:#41604290;border-style:solid;border-width:0}
-.cabecera{border-bottom-width:1px}
-.pie{border-top-width:1px;font-size:.9rem}
-.cabecera h1{margin:0;font-size:clamp(1.4rem,3.5vw,2.4rem);font-weight:400;text-align:center}
-.cabecera-logo,.pie-logo{min-height:44px}
-.cabecera-usuario{justify-self:end}
-.sesion{display:inline-block;padding:9px 16px;border:1px solid var(--verde);color:var(--marfil)}
-[aria-disabled="true"]{opacity:.6;cursor:not-allowed}
-.pie span{justify-self:start}
-.pie span:nth-child(2){justify-self:center}
-.pie-logo{justify-self:end}
+* {
+    box-sizing: border-box;
+}
 
-/* Escenario: las tres imágenes forman un fondo continuo */
-.cementerio{flex:1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;width:100%;background:#0a0a0a;min-height:0}
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: #090a09;
+    color: var(--marfil);
+    font-family: Georgia, "Times New Roman", serif;
+}
 
-.zona{position:relative;display:block;overflow:hidden;container-type:inline-size;color:var(--marfil);text-decoration:none;background:#0a0a0a}
-.zona img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 60%;
-  -webkit-mask-image:linear-gradient(to right,transparent 0,#000 14%,#000 86%,transparent 100%);
-          mask-image:linear-gradient(to right,transparent 0,#000 14%,#000 86%,transparent 100%);
-  transition:filter .35s ease}
+/* Cabecera: el título permanece centrado aunque falte el logo. */
+.cabecera {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 24px;
+    padding: 20px 4%;
+    background: var(--negro);
+    border-bottom: 1px solid #41604270;
+}
 
-/* Texto sobre la lápida: se ajusta por acceso si hace falta */
-.zona{--x:24%;--y:36%;--ancho:44%;--alto:34%}
-.zona-texto{position:absolute;left:var(--x);top:var(--y);width:var(--ancho);height:var(--alto);display:flex;align-items:center;justify-content:center;text-align:center;font-size:clamp(.9rem,6.5cqw,1.7rem);line-height:1.35;text-wrap:balance;text-shadow:0 2px 4px #000,0 0 14px #000;transition:color .2s ease}
+.cabecera h1 {
+    margin: 0;
+    font-size: clamp(1.5rem, 2.8vw, 2.7rem);
+    font-weight: 400;
+    letter-spacing: .035em;
+    text-align: center;
+}
 
-a.zona:hover img,a.zona:focus-visible img{filter:brightness(1.2)}
-a.zona:hover .zona-texto,a.zona:focus-visible .zona-texto{color:var(--amarillo)}
-a.zona:focus-visible{outline:2px solid var(--amarillo);outline-offset:-4px}
+.cabecera-acceso {
+    justify-self: end;
+}
 
-.desactivada img{filter:brightness(.8)}
-.pronto{position:absolute;left:0;right:0;bottom:6%;text-align:center;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;text-shadow:0 1px 4px #000}
+.sesion-pendiente {
+    display: grid;
+    gap: 5px;
+    text-align: right;
+    font-size: .95rem;
+}
 
-@media(max-width:850px){
-  .cementerio{grid-template-columns:1fr}
-  .zona{aspect-ratio:2/3;width:100%;max-width:520px;margin:0 auto}
-  .zona img{
-    -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 12%,#000 88%,transparent 100%);
-            mask-image:linear-gradient(to bottom,transparent 0,#000 12%,#000 88%,transparent 100%)}
-  .cabecera,.pie{padding:12px 16px;gap:10px}
+.sesion-pendiente small,
+.pie small {
+    color: #b0ac9f;
+    font-size: .7rem;
+}
+
+/* Una imagen completa: sin recorte, tarjetas ni divisiones. */
+.principal {
+    width: 100%;
+}
+
+.escenario {
+    position: relative;
+    width: 100%;
+    container-type: inline-size;
+    isolation: isolate;
+}
+
+.escenario-imagen {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* Oscurecimiento leve solo en los extremos verticales. */
+.escenario::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(
+        to bottom,
+        #090a0930,
+        transparent 16%,
+        transparent 82%,
+        #090a0960
+    );
+}
+
+/*
+ * Cada acceso se ajusta a la cara de su soporte.
+ * Los valores son porcentajes de la imagen completa.
+ */
+.acceso {
+    position: absolute;
+    z-index: 2;
+    left: var(--x);
+    top: var(--y);
+    width: var(--ancho);
+    height: var(--alto);
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    text-decoration: none;
+}
+
+.acceso-cluedo {
+    --x: 23.1%;
+    --y: 67.4%;
+    --ancho: 5.6%;
+    --alto: 10.5%;
+    --fuente: .9cqw;
+}
+
+.acceso-recetario {
+    --x: 60.2%;
+    --y: 58.8%;
+    --ancho: 5.4%;
+    --alto: 7%;
+    --fuente: 1cqw;
+}
+
+.acceso-ranking {
+    --x: 74.5%;
+    --y: 65.1%;
+    --ancho: 6.2%;
+    --alto: 10.5%;
+    --fuente: 1cqw;
+}
+
+.acceso h2 {
+    margin: 0;
+    font-size: clamp(.62rem, var(--fuente), 1.6rem);
+    font-weight: 400;
+    line-height: 1.15;
+    text-wrap: balance;
+}
+
+/* Piedra: texto claro y apagado, con sombra que sugiere grabado */
+.acceso-cluedo h2,
+.acceso-ranking h2 {
+    color: #ddd4bf;
+    letter-spacing: .02em;
+    text-shadow:
+        0 -1px 0 rgba(0, 0, 0, .9),
+        0 1px 1px rgba(0, 0, 0, .8),
+        0 0 4px rgba(0, 0, 0, .5);
+}
+
+/* Madera: mismo texto claro que las lápidas, con sombra para el grabado */
+.acceso-recetario h2 {
+    display: grid;
+    gap: 1px;
+    color: #ddd4bf;
+    letter-spacing: .02em;
+    text-shadow:
+        0 -1px 0 rgba(0, 0, 0, .9),
+        0 1px 1px rgba(0, 0, 0, .8),
+        0 0 4px rgba(0, 0, 0, .5);
+}
+
+.etiqueta-codigo {
+    font-size: .72em;
+}
+
+.consulta {
+    display: block;
+    margin-top: .4em;
+    font-family: "Courier New", monospace;
+    font-size: clamp(.5rem, .6cqw, .8rem);
+    line-height: 1.2;
+    color: #cbc2ad;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, .9), 0 0 3px rgba(0, 0, 0, .6);
+}
+
+/* Mensajes sobre el suelo, bajo cada soporte */
+.estado,
+.indicacion {
+    position: absolute;
+    top: calc(100% + .5cqw);
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(.5rem, .65cqw, .8rem);
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    text-shadow: 0 1px 3px #000, 0 0 8px #000;
+}
+
+.estado {
+    color: #b9b2a2;
+}
+
+.indicacion {
+    color: var(--amarillo);
+}
+
+a.acceso:hover h2,
+a.acceso:focus-visible h2 {
+    color: #CA1616;
+}
+
+a.acceso:focus-visible {
+    outline: 2px solid var(--amarillo);
+    outline-offset: 6px;
+    border-radius: 2px;
+}
+
+.pie {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    padding: 20px 4%;
+    background: var(--negro);
+    border-top: 1px solid #41604270;
+    font-size: .9rem;
+}
+
+.atlantida {
+    letter-spacing: .12em;
+    text-transform: uppercase;
 }
