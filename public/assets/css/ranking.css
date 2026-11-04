@@ -1,0 +1,421 @@
+/* Ranking de asesinos
+   Fila: puesto | foto | nombre | barra | asesinatos (según el boceto lowfi). */
+
+.ranking-pagina {
+    /* Paleta del proyecto */
+    --fondo: #141414;                       /* negro humo */
+    --fondo-claro: #0a2353;                 /* azul medianoche */
+    --hueso: #f2e8d5;                       /* marfil antiguo */
+    --sangre: #ca1616;                      /* rojo sangre */
+    --ambar: #fff477;                       /* amarillo luna (podio) */
+
+    /* Tonos derivados de la paleta */
+    --ceniza: rgb(242 232 213 / 0.65);      /* marfil atenuado */
+    --sangre-oscura: #7a0d0d;
+    --ambar-oscuro: #8f892f;
+    --linea: rgb(242 232 213 / 0.18);
+    --pozo: #0b0b0b;
+
+    margin: 0;
+    min-height: 100vh;
+    background: radial-gradient(ellipse at 50% 0%, var(--fondo-claro) 0%, var(--fondo) 65%) fixed;
+    color: var(--hueso);
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+    line-height: 1.5;
+}
+
+.ranking {
+    max-width: 90rem;
+    margin: 0 auto;
+    padding: 1.5rem clamp(1rem, 4vw, 3.5rem) 4rem;
+}
+
+/* Cabecera */
+
+.ranking__volver {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+    color: var(--ceniza);
+    text-decoration: none;
+}
+
+.ranking__volver:hover {
+    color: var(--hueso);
+    text-decoration: underline;
+}
+
+.ranking__volver:focus-visible {
+    outline: 2px solid var(--ambar);
+    outline-offset: 4px;
+    border-radius: 0.25rem;
+}
+
+.ranking__titulo {
+    margin: 1rem 0 3rem;
+    text-align: center;
+    font-size: clamp(2.25rem, 6vw, 4.5rem);
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    line-height: 1.1;
+    text-shadow: 0 0 0.5em rgba(202, 22, 22, 0.6);
+}
+
+.ranking__vacio {
+    text-align: center;
+    color: var(--ceniza);
+}
+
+/* Lista */
+
+.ranking__lista {
+    display: grid;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.fila {
+    display: grid;
+    grid-template-columns: 3rem 5rem minmax(12rem, 18rem) 1fr 13rem;
+    grid-template-areas: "puesto foto nombre barra muertes";
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.fila__puesto {
+    grid-area: puesto;
+    text-align: right;
+    font-size: 1.75rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--ceniza);
+}
+
+.fila__foto {
+    grid-area: foto;
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 5rem;
+    height: 5rem;
+    padding: 0;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 2px solid var(--linea);
+    background: var(--fondo-claro);
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    transition: transform 150ms ease, filter 150ms ease, box-shadow 150ms ease, border-color 150ms ease;
+}
+
+/* Al pasar el ratón la foto se ilumina y crece un poco */
+.fila__foto:hover,
+.fila__foto:focus-visible {
+    z-index: 1;
+    transform: scale(1.12);
+    filter: brightness(1.2);
+    border-color: var(--ambar);
+    box-shadow: 0 0 0.9rem rgb(255 244 119 / 0.45);
+}
+
+.fila__foto:focus-visible {
+    outline: 2px solid var(--ambar);
+    outline-offset: 3px;
+}
+
+.fila__foto img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.fila__inicial {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--ceniza);
+}
+
+.fila__nombre {
+    grid-area: nombre;
+    font-size: 1.5rem;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.fila__barra {
+    grid-area: barra;
+    display: block;
+    height: 2rem;
+    overflow: hidden;
+    border-radius: 0.625rem;
+    background: var(--pozo);
+    box-shadow: inset 0 0 0 1px var(--linea);
+}
+
+.fila__relleno {
+    display: block;
+    width: var(--pct);
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--sangre-oscura), var(--sangre));
+}
+
+.fila__muertes {
+    grid-area: muertes;
+    text-align: right;
+    white-space: nowrap;
+    font-size: 1.125rem;
+    color: var(--ceniza);
+}
+
+.fila__muertes strong {
+    font-size: 1.75rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--hueso);
+}
+
+/* Podio: los tres primeros */
+
+.fila--podio .fila__puesto {
+    font-weight: 700;
+    color: var(--ambar);
+}
+
+.fila--podio .fila__foto {
+    border-color: var(--ambar);
+}
+
+.fila--podio .fila__relleno {
+    background: linear-gradient(90deg, var(--ambar-oscuro), var(--ambar));
+}
+
+/* Animación de entrada: las barras se llenan una sola vez al cargar.
+   Solo se parte de 0 si JavaScript está activo (la clase .js la pone ranking.php). */
+
+.js .fila__relleno {
+    width: 0;
+}
+
+.js .ranking__lista--llena .fila__relleno {
+    width: var(--pct);
+    transition: width 900ms cubic-bezier(0.2, 0.7, 0.2, 1);
+    transition-delay: calc(var(--i) * 40ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .js .ranking__lista--llena .fila__relleno {
+        transition: none;
+    }
+
+    .fila__foto {
+        transition: none;
+    }
+
+    .fila__foto:hover,
+    .fila__foto:focus-visible {
+        transform: none;
+    }
+
+    .ficha[open] {
+        animation: none;
+    }
+}
+
+/* Ficha del asesino (ventana emergente centrada) */
+
+.ficha {
+    width: min(34rem, calc(100vw - 2rem));
+    max-height: calc(100vh - 2rem);
+    padding: 0;
+    overflow: auto;
+    border: 1px solid var(--linea);
+    border-radius: 0.75rem;
+    background: linear-gradient(180deg, var(--fondo-claro) 0%, var(--fondo) 100%);
+    color: var(--hueso);
+    box-shadow: 0 1.5rem 3rem rgb(0 0 0 / 0.6);
+}
+
+.ficha[open] {
+    animation: ficha-entrada 160ms ease-out;
+}
+
+.ficha::backdrop {
+    background: rgb(20 20 20 / 0.78);
+}
+
+@keyframes ficha-entrada {
+    from {
+        opacity: 0;
+        transform: scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.ficha__contenido {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    gap: 0.5rem;
+    padding: 2.5rem 2rem 2rem;
+}
+
+.ficha__cerrar {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--ceniza);
+    font: inherit;
+    font-size: 1.75rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.ficha__cerrar:hover {
+    color: var(--hueso);
+}
+
+.ficha__cerrar:focus-visible {
+    outline: 2px solid var(--ambar);
+    outline-offset: 2px;
+}
+
+.ficha__foto {
+    display: grid;
+    place-items: center;
+    width: 9rem;
+    height: 9rem;
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 3px solid var(--ambar);
+    background: var(--fondo-claro);
+    box-shadow: 0 0 1.5rem rgb(255 244 119 / 0.25);
+}
+
+.ficha__foto img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ficha__foto img[hidden] {
+    display: none;
+}
+
+.ficha__inicial {
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--ceniza);
+}
+
+.ficha__nombre {
+    margin: 0;
+    text-align: center;
+    font-size: 1.75rem;
+    line-height: 1.2;
+}
+
+.ficha__obra {
+    margin: 0;
+    text-align: center;
+    font-style: italic;
+    color: var(--ceniza);
+}
+
+.ficha__descripcion {
+    max-width: 42ch;
+    margin: 0.75rem auto 0;
+    text-align: center;
+    text-indent: 0;
+    line-height: 1.65;
+    overflow-wrap: anywhere;
+}
+
+.ficha__arma {
+    margin-top: 1rem;
+    padding: 0.6rem 1.1rem;
+    border: 1px solid var(--ambar);
+    border-radius: 999px;
+    background: rgb(255 244 119 / 0.12);
+    color: var(--ambar);
+    font: inherit;
+    font-size: 0.9375rem;
+    line-height: 1.2;
+    cursor: pointer;
+    transition: background-color 150ms ease, color 150ms ease, transform 150ms ease;
+}
+
+.ficha__arma:hover,
+.ficha__arma:focus-visible {
+    background: rgb(255 244 119 / 0.22);
+    color: var(--hueso);
+    transform: translateY(-1px);
+}
+
+.ficha__arma:focus-visible {
+    outline: 2px solid var(--ambar);
+    outline-offset: 3px;
+}
+
+/* Pantallas estrechas: la barra pasa debajo del nombre */
+
+@media (max-width: 42rem) {
+    .ranking__lista {
+        gap: 1.25rem;
+    }
+
+    .fila {
+        grid-template-columns: 2rem 3.5rem 1fr auto;
+        grid-template-areas:
+            "puesto foto nombre muertes"
+            "barra barra barra barra";
+        gap: 0.5rem 0.75rem;
+    }
+
+    .fila__foto {
+        width: 3.5rem;
+        height: 3.5rem;
+    }
+
+    .fila__puesto {
+        font-size: 1.25rem;
+    }
+
+    .fila__nombre {
+        font-size: 1.125rem;
+    }
+
+    .fila__barra {
+        height: 1.5rem;
+    }
+
+    .fila__muertes {
+        font-size: 1rem;
+    }
+
+    .fila__muertes strong {
+        font-size: 1.375rem;
+    }
+
+    .ficha__contenido {
+        padding: 2rem 1.25rem 1.75rem;
+    }
+
+    .ficha__arma {
+    display: none;
+}
+}
