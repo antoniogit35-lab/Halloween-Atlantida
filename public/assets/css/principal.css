@@ -361,3 +361,150 @@ a.acceso:focus-visible {
         top: calc(100% + 11cqw);
     }
 }
+
+/* ============================================================
+   PIE: enlace de «Sobre nosotros» y logo
+   ============================================================ */
+.enlace-pie {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-color: #41604290;
+    text-underline-offset: 4px;
+}
+
+.enlace-pie:hover,
+.enlace-pie:focus-visible {
+    color: var(--amarillo);
+}
+
+.enlace-pie:focus-visible {
+    outline: 2px solid var(--amarillo);
+    outline-offset: 4px;
+}
+
+/* El fondo negro del logo se funde con el pie */
+.logo-atlantida {
+    display: block;
+    height: clamp(48px, 7dvh, 76px);
+    width: auto;
+    mix-blend-mode: screen;
+}
+
+@media (max-aspect-ratio: 1/1) {
+    .logo-atlantida {
+        height: auto;
+        width: min(78%, 300px);
+        margin-top: 6px;
+    }
+}
+
+/* ============================================================
+   MODAL «SOBRE NOSOTROS»
+   ============================================================ */
+.modal-sobre {
+    padding: 0;
+    width: min(860px, calc(100% - 28px));
+    max-height: 90dvh;
+    overflow: auto;
+    color: var(--marfil);
+    background: var(--negro);
+    border: 1px solid var(--verde);
+    border-top: 3px solid #CA1616;
+    border-radius: 3px;
+    box-shadow: 0 24px 90px #000;
+}
+
+.modal-sobre::backdrop {
+    background: #141414d9;
+    backdrop-filter: blur(4px);
+}
+
+.modal-interior {
+    position: relative;
+    padding: 54px 30px 34px;
+    background: linear-gradient(135deg, #41604218, transparent);
+}
+
+.cerrar-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    width: 32px;
+    height: 32px;
+    border: 1px solid #CA161680;
+    background: transparent;
+    color: var(--marfil);
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+.cerrar-modal:hover {
+    background: #CA1616;
+}
+
+.cerrar-modal:focus-visible {
+    outline: 2px solid var(--amarillo);
+    outline-offset: 3px;
+}
+
+.equipo {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr) minmax(0, 1fr);
+    gap: 28px;
+    align-items: center;
+}
+
+.miembro {
+    margin: 0;
+    text-align: center;
+}
+
+.miembro img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    border: 1px solid #416042a0;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .6);
+}
+
+.miembro figcaption {
+    margin-top: 12px;
+    font-size: .9rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.texto-sobre h2 {
+    margin: 0 0 18px;
+    font-size: clamp(1.3rem, 2.4vw, 1.9rem);
+    font-weight: 400;
+}
+
+.texto-sobre p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.75;
+}
+
+@media (max-width: 640px) {
+    .modal-interior {
+        padding: 50px 18px 24px;
+    }
+
+    .equipo {
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+    }
+
+    /* Las dos fotos arriba y el texto debajo */
+    .texto-sobre {
+        grid-column: 1 / -1;
+        order: 3;
+    }
+}

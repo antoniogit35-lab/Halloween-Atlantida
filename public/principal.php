@@ -65,9 +65,52 @@
     </main>
 
     <footer class="pie">
-        <span>Sobre nosotros <small>· Próximamente</small></span>
+        <button type="button" class="enlace-pie" id="abrir-sobre-nosotros">
+            Sobre nosotros
+        </button>
+
         <span>Contacta con Jack <small>· Próximamente</small></span>
-        <span class="atlantida">Atlántida</span>
+
+        <img
+            class="logo-atlantida"
+            src="assets/img/logos/logo-atlantida-terrorifico.png"
+            alt="Atlántida Formación Profesional"
+        >
     </footer>
+
+    <dialog id="sobre-nosotros" class="modal-sobre" aria-labelledby="titulo-sobre">
+        <div class="modal-interior">
+            <button
+                type="button"
+                class="cerrar-modal"
+                id="cerrar-sobre-nosotros"
+                aria-label="Cerrar"
+            >×</button>
+
+            <div class="equipo">
+                <figure class="miembro">
+                    <img src="assets/img/equipo/sergio.jpg" alt="Foto de Sergio">
+                    <figcaption>Sergio</figcaption>
+                </figure>
+
+                <div class="texto-sobre">
+                    <h2 id="titulo-sobre">Sobre nosotros</h2>
+                    <p>
+                        Somos Sergio y Antonio, estudiantes de 2.º DAW en
+                        Atlántida Formación Profesional. Hemos creado esta
+                        página para demostrar nuestra capacidad de unir todas
+                        las asignaturas dadas en el curso.
+                    </p>
+                </div>
+
+                <figure class="miembro">
+                    <img src="assets/img/equipo/antonio.jpg" alt="Foto de Antonio">
+                    <figcaption>Antonio</figcaption>
+                </figure>
+            </div>
+        </div>
+    </dialog>
+
+    <script src="assets/js/principal.js"></script>
 </body>
 </html>

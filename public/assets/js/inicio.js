@@ -19,12 +19,12 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }).catch(error => {
       console.warn('Error al reproducir el vídeo:', error);
-      window.location.href = 'recetario.php';
+      window.location.href = 'principal.php';
     });
   });
 
-  // 4. Al terminar la reproducción, navegar
+  // 4. Al terminar la reproducción, navegar a la página principal
   video.addEventListener('ended', () => {
-    window.location.href = 'recetario.php';
+    window.location.href = 'principal.php';
   });
 });
