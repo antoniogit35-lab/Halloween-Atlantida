@@ -25,9 +25,9 @@
 }
 
 .ranking {
-    max-width: 70rem;
+    max-width: 90rem;
     margin: 0 auto;
-    padding: 1.25rem clamp(1rem, 4vw, 2.5rem) 4rem;
+    padding: 1.5rem clamp(1rem, 4vw, 3.5rem) 4rem;
 }
 
 /* Cabecera */
@@ -53,9 +53,9 @@
 }
 
 .ranking__titulo {
-    margin: 1rem 0 2.5rem;
+    margin: 1rem 0 3rem;
     text-align: center;
-    font-size: clamp(2.25rem, 6vw, 4rem);
+    font-size: clamp(2.25rem, 6vw, 4.5rem);
     font-weight: 700;
     letter-spacing: 0.03em;
     line-height: 1.1;
@@ -71,7 +71,7 @@
 
 .ranking__lista {
     display: grid;
-    gap: 0.75rem;
+    gap: 1rem;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -79,16 +79,16 @@
 
 .fila {
     display: grid;
-    grid-template-columns: 2.25rem 3.5rem minmax(8rem, 12rem) 1fr 9.5rem;
+    grid-template-columns: 3rem 5rem minmax(12rem, 18rem) 1fr 13rem;
     grid-template-areas: "puesto foto nombre barra muertes";
     align-items: center;
-    gap: 1rem;
+    gap: 1.5rem;
 }
 
 .fila__puesto {
     grid-area: puesto;
     text-align: right;
-    font-size: 1.25rem;
+    font-size: 1.75rem;
     font-variant-numeric: tabular-nums;
     color: var(--ceniza);
 }
@@ -98,8 +98,8 @@
     position: relative;
     display: grid;
     place-items: center;
-    width: 3.5rem;
-    height: 3.5rem;
+    width: 5rem;
+    height: 5rem;
     padding: 0;
     overflow: hidden;
     border-radius: 50%;
@@ -134,23 +134,24 @@
 }
 
 .fila__inicial {
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: 700;
     color: var(--ceniza);
 }
 
 .fila__nombre {
     grid-area: nombre;
-    font-size: 1.125rem;
+    font-size: 1.5rem;
+    font-weight: 600;
     overflow-wrap: anywhere;
 }
 
 .fila__barra {
     grid-area: barra;
     display: block;
-    height: 1.5rem;
+    height: 2rem;
     overflow: hidden;
-    border-radius: 0.5rem;
+    border-radius: 0.625rem;
     background: var(--pozo);
     box-shadow: inset 0 0 0 1px var(--linea);
 }
@@ -167,12 +168,12 @@
     grid-area: muertes;
     text-align: right;
     white-space: nowrap;
-    font-size: 0.9375rem;
+    font-size: 1.125rem;
     color: var(--ceniza);
 }
 
 .fila__muertes strong {
-    font-size: 1.375rem;
+    font-size: 1.75rem;
     font-variant-numeric: tabular-nums;
     color: var(--hueso);
 }
@@ -227,7 +228,7 @@
 /* Ficha del asesino (ventana emergente centrada) */
 
 .ficha {
-    width: min(26rem, calc(100vw - 2rem));
+    width: min(34rem, calc(100vw - 2rem));
     max-height: calc(100vh - 2rem);
     padding: 0;
     overflow: auto;
@@ -262,7 +263,7 @@
     display: grid;
     justify-items: center;
     gap: 0.5rem;
-    padding: 2rem 1.5rem 1.75rem;
+    padding: 2.5rem 2rem 2rem;
 }
 
 .ficha__cerrar {
@@ -336,9 +337,38 @@
 }
 
 .ficha__descripcion {
-    max-width: 38ch;
-    margin: 0.75rem 0 0;
+    max-width: 42ch;
+    margin: 0.75rem auto 0;
+    text-align: center;
+    text-indent: 0;
     line-height: 1.65;
+    overflow-wrap: anywhere;
+}
+
+.ficha__arma {
+    margin-top: 1rem;
+    padding: 0.6rem 1.1rem;
+    border: 1px solid var(--ambar);
+    border-radius: 999px;
+    background: rgb(255 244 119 / 0.12);
+    color: var(--ambar);
+    font: inherit;
+    font-size: 0.9375rem;
+    line-height: 1.2;
+    cursor: pointer;
+    transition: background-color 150ms ease, color 150ms ease, transform 150ms ease;
+}
+
+.ficha__arma:hover,
+.ficha__arma:focus-visible {
+    background: rgb(255 244 119 / 0.22);
+    color: var(--hueso);
+    transform: translateY(-1px);
+}
+
+.ficha__arma:focus-visible {
+    outline: 2px solid var(--ambar);
+    outline-offset: 3px;
 }
 
 /* Pantallas estrechas: la barra pasa debajo del nombre */
@@ -349,7 +379,7 @@
     }
 
     .fila {
-        grid-template-columns: 1.75rem 3rem 1fr auto;
+        grid-template-columns: 2rem 3.5rem 1fr auto;
         grid-template-areas:
             "puesto foto nombre muertes"
             "barra barra barra barra";
@@ -357,11 +387,35 @@
     }
 
     .fila__foto {
-        width: 3rem;
-        height: 3rem;
+        width: 3.5rem;
+        height: 3.5rem;
     }
 
     .fila__puesto {
+        font-size: 1.25rem;
+    }
+
+    .fila__nombre {
         font-size: 1.125rem;
     }
+
+    .fila__barra {
+        height: 1.5rem;
+    }
+
+    .fila__muertes {
+        font-size: 1rem;
+    }
+
+    .fila__muertes strong {
+        font-size: 1.375rem;
+    }
+
+    .ficha__contenido {
+        padding: 2rem 1.25rem 1.75rem;
+    }
+
+    .ficha__arma {
+    display: none;
+}
 }

@@ -112,13 +112,19 @@ $maximo = $personajes ? max(1, $personajes[0]['muertes']) : 1;
         <dialog class="ficha" id="ficha" aria-labelledby="ficha-nombre">
             <div class="ficha__contenido">
                 <button class="ficha__cerrar" id="ficha-cerrar" type="button" aria-label="Cerrar ficha">×</button>
+
                 <div class="ficha__foto">
                     <img id="ficha-img" src="" alt="" width="144" height="144">
                     <span class="ficha__inicial" id="ficha-inicial" hidden></span>
                 </div>
+
                 <h2 class="ficha__nombre" id="ficha-nombre"></h2>
                 <p class="ficha__obra" id="ficha-obra"></p>
                 <p class="ficha__descripcion" id="ficha-descripcion"></p>
+
+                <button class="ficha__arma" type="button">
+                    Cambiar arma de asesino
+                </button>
             </div>
         </dialog>
 <?php endif; ?>
