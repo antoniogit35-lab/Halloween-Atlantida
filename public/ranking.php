@@ -8,7 +8,7 @@ declare(strict_types=1);
  */
 
 // Ajusta esta ruta si la página principal es otra (por ejemplo index.html).
-const URL_PRINCIPAL = 'cementerio.php';
+const URL_PRINCIPAL = 'principal.php';
 const RUTA_DATOS = __DIR__ . '/data/personajes.json';
 const RUTA_IMAGENES = 'assets/img/personajes/';
 
