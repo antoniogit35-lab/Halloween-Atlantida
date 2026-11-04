@@ -241,3 +241,123 @@ a.acceso:focus-visible {
     outline-offset: 6px;
     border-radius: 2px;
 }
+
+/* ============================================================
+   MÓVIL Y PANTALLAS VERTICALES
+   Se carga la imagen vertical y la página se recorre con scroll.
+   ============================================================ */
+@media (max-aspect-ratio: 1/1) {
+    body {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        min-height: 100dvh;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    /* Cabecera compacta y fija sobre la escena */
+    .cabecera {
+        position: fixed;
+        grid-template-columns: 1fr auto;
+        gap: 12px;
+        padding: 12px 16px 28px;
+    }
+
+    .reserva-logo {
+        display: none;
+    }
+
+    .cabecera h1 {
+        font-size: 1.1rem;
+        text-align: left;
+        letter-spacing: .02em;
+    }
+
+    .sesion-pendiente {
+        font-size: .8rem;
+    }
+
+    .sesion-pendiente small {
+        display: none;
+    }
+
+    /* La escena sigue el flujo normal y mide el ancho completo */
+    .principal {
+        position: static;
+        display: block;
+        width: 100%;
+        flex: 0 0 auto;
+    }
+
+    .escenario {
+        width: 100%;
+        aspect-ratio: 1024 / 1536;
+    }
+
+    /* La imagen se funde con el negro por la parte inferior */
+    .escenario-imagen {
+        -webkit-mask-image: linear-gradient(to bottom, #000 0, #000 92%, transparent 100%);
+                mask-image: linear-gradient(to bottom, #000 0, #000 92%, transparent 100%);
+    }
+
+    /* El pie baja al fondo de la pantalla si sobra espacio */
+    .pie {
+        position: static;
+        margin-top: auto;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px 22px;
+        padding: 22px 16px 26px;
+        font-size: .85rem;
+        text-align: center;
+        background: #090a09;
+    }
+
+        /* Cluedo: lápida pequeña, el texto se ajusta a su tamaño */
+    .acceso-cluedo {
+        --x: 17.8%;
+        --y: 41.5%;
+        --ancho: 11.5%;
+        --alto: 8.5%;
+        --fuente: 2.55cqw;
+    }
+
+    .acceso-cluedo h2 {
+        line-height: 1.08;
+        letter-spacing: 0;
+    }
+
+     /* Cartel de madera */
+    .acceso-recetario {
+        --x: 66.8%;
+        --y: 42%;
+        --ancho: 21%;
+        --alto: 7.8%;
+        --fuente: 3.3cqw;
+    }
+
+    /* Lápida inferior */
+    .acceso-ranking {
+        --x: 67.9%;
+        --y: 76.8%;
+        --ancho: 17.6%;
+        --alto: 12%;
+        --fuente: 3.3cqw;
+    }
+
+    .consulta {
+        font-size: clamp(.5rem, 2.2cqw, .8rem);
+    }
+
+    .estado,
+    .indicacion {
+        top: calc(100% + 1.5cqw);
+        font-size: clamp(.5rem, 2.3cqw, .8rem);
+    }
+
+    /* El aviso del recetario baja hasta el suelo, tras los postes */
+    .acceso-recetario .indicacion {
+        top: calc(100% + 11cqw);
+    }
+}

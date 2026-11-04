@@ -22,14 +22,22 @@
 
     <main class="principal">
         <section class="escenario" aria-label="Explora el cementerio">
-            <img
-                class="escenario-imagen"
-                src="assets/img/fondos/cementerio-principal.png"
-                alt=""
-                width="1673"
-                height="940"
-                fetchpriority="high"
-            >
+            <picture>
+                <source
+                    media="(max-aspect-ratio: 1/1)"
+                    srcset="assets/img/fondos/cementerio-principal-movil.png"
+                    width="1024"
+                    height="1536"
+                >
+                <img
+                    class="escenario-imagen"
+                    src="assets/img/fondos/cementerio-principal.png"
+                    alt=""
+                    width="1673"
+                    height="940"
+                    fetchpriority="high"
+                >
+            </picture>
 
             <div class="acceso acceso-cluedo">
                 <h2>Asesinato en la mansión del código</h2>
