@@ -9,23 +9,41 @@
     box-sizing: border-box;
 }
 
+/* La página ocupa exactamente la ventana, sin scroll */
 body {
     margin: 0;
-    min-height: 100vh;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    position: relative;
     background: #090a09;
     color: var(--marfil);
     font-family: Georgia, "Times New Roman", serif;
 }
 
-/* Cabecera: el título permanece centrado aunque falte el logo. */
+/* Cabecera y pie: superpuestos sobre la escena */
+.cabecera,
+.pie {
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    padding: 18px 4%;
+}
+
 .cabecera {
+    top: 0;
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
     gap: 24px;
-    padding: 20px 4%;
-    background: var(--negro);
-    border-bottom: 1px solid #41604270;
+    padding-bottom: 38px;
+    background: linear-gradient(
+        to bottom,
+        rgba(10, 10, 10, .92) 0%,
+        rgba(10, 10, 10, .6) 55%,
+        transparent 100%
+    );
 }
 
 .cabecera h1 {
@@ -53,14 +71,41 @@ body {
     font-size: .7rem;
 }
 
-/* Una imagen completa: sin recorte, tarjetas ni divisiones. */
-.principal {
-    width: 100%;
+.pie {
+    bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    padding-top: 38px;
+    font-size: .9rem;
+    background: linear-gradient(
+        to top,
+        rgba(10, 10, 10, .92) 0%,
+        rgba(10, 10, 10, .6) 55%,
+        transparent 100%
+    );
 }
 
+.atlantida {
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+/* La escena ocupa toda la ventana y queda centrada */
+.principal {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+}
+
+/* La imagen entra completa: el ancho es el menor entre el de la
+   ventana y el que corresponde a la altura disponible */
 .escenario {
     position: relative;
-    width: 100%;
+    width: min(100vw, calc(100dvh * 1673 / 940));
+    aspect-ratio: 1673 / 940;
     container-type: inline-size;
     isolation: isolate;
 }
@@ -71,20 +116,12 @@ body {
     height: auto;
 }
 
-/* Oscurecimiento leve solo en los extremos verticales. */
-.escenario::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-    background: linear-gradient(
-        to bottom,
-        #090a0930,
-        transparent 16%,
-        transparent 82%,
-        #090a0960
-    );
+/* Si la ventana es más ancha que la imagen, se difuminan los bordes */
+@media (min-aspect-ratio: 1673 / 940) {
+    .escenario-imagen {
+        -webkit-mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
+                mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
+    }
 }
 
 /*
@@ -105,6 +142,7 @@ body {
     justify-content: center;
     text-align: center;
     text-decoration: none;
+    color: var(--marfil);
 }
 
 .acceso-cluedo {
@@ -139,9 +177,10 @@ body {
     text-wrap: balance;
 }
 
-/* Piedra: texto claro y apagado, con sombra que sugiere grabado */
+/* Texto claro y apagado, con sombra que sugiere grabado */
 .acceso-cluedo h2,
-.acceso-ranking h2 {
+.acceso-ranking h2,
+.acceso-recetario h2 {
     color: #ddd4bf;
     letter-spacing: .02em;
     text-shadow:
@@ -150,16 +189,9 @@ body {
         0 0 4px rgba(0, 0, 0, .5);
 }
 
-/* Madera: mismo texto claro que las lápidas, con sombra para el grabado */
 .acceso-recetario h2 {
     display: grid;
     gap: 1px;
-    color: #ddd4bf;
-    letter-spacing: .02em;
-    text-shadow:
-        0 -1px 0 rgba(0, 0, 0, .9),
-        0 1px 1px rgba(0, 0, 0, .8),
-        0 0 4px rgba(0, 0, 0, .5);
 }
 
 .etiqueta-codigo {
@@ -208,20 +240,4 @@ a.acceso:focus-visible {
     outline: 2px solid var(--amarillo);
     outline-offset: 6px;
     border-radius: 2px;
-}
-
-.pie {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 24px;
-    padding: 20px 4%;
-    background: var(--negro);
-    border-top: 1px solid #41604270;
-    font-size: .9rem;
-}
-
-.atlantida {
-    letter-spacing: .12em;
-    text-transform: uppercase;
 }

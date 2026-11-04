@@ -24,7 +24,7 @@
         <section class="escenario" aria-label="Explora el cementerio">
             <img
                 class="escenario-imagen"
-                src="assets/img/fondos/cementerio-principal-v3.png"
+                src="assets/img/fondos/cementerio-principal.png"
                 alt=""
                 width="1673"
                 height="940"
