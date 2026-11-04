@@ -46,6 +46,8 @@ function cargarPersonajes(string $ruta): array
             'nombre'  => trim($dato['nombre']),
             'muertes' => max(0, (int) $dato['muertes']),
             'imagen'  => isset($dato['imagen']) && is_string($dato['imagen']) ? basename($dato['imagen']) : '',
+            'obra'    => isset($dato['obra']) && is_string($dato['obra']) ? trim($dato['obra']) : '',
+            'descripcion' => isset($dato['descripcion']) && is_string($dato['descripcion']) ? trim($dato['descripcion']) : '',
         ];
     }
 
@@ -90,19 +92,35 @@ $maximo = $personajes ? max(1, $personajes[0]['muertes']) : 1;
 ?>
             <li class="<?= $clases ?>" style="--pct: <?= $porcentaje ?>%; --i: <?= $indice ?>;">
                 <span class="fila__puesto"><?= $puesto ?></span>
-                <span class="fila__foto">
+                <button class="fila__foto" type="button"
+                        aria-label="Ver ficha de <?= escapar($personaje['nombre']) ?>"
+                        data-obra="<?= escapar($personaje['obra']) ?>"
+                        data-descripcion="<?= escapar($personaje['descripcion']) ?>">
 <?php if ($personaje['imagen'] !== ''): ?>
                     <img src="<?= escapar(RUTA_IMAGENES . $personaje['imagen']) ?>" alt="" width="56" height="56" loading="lazy" decoding="async">
 <?php else: ?>
                     <span class="fila__inicial"><?= escapar(mb_strtoupper(mb_substr($personaje['nombre'], 0, 1))) ?></span>
 <?php endif; ?>
-                </span>
+                </button>
                 <span class="fila__nombre"><?= escapar($personaje['nombre']) ?></span>
                 <span class="fila__barra" aria-hidden="true"><span class="fila__relleno"></span></span>
                 <span class="fila__muertes"><strong><?= $personaje['muertes'] ?></strong> <?= $etiqueta ?></span>
             </li>
 <?php endforeach; ?>
         </ol>
+
+        <dialog class="ficha" id="ficha" aria-labelledby="ficha-nombre">
+            <div class="ficha__contenido">
+                <button class="ficha__cerrar" id="ficha-cerrar" type="button" aria-label="Cerrar ficha">×</button>
+                <div class="ficha__foto">
+                    <img id="ficha-img" src="" alt="" width="144" height="144">
+                    <span class="ficha__inicial" id="ficha-inicial" hidden></span>
+                </div>
+                <h2 class="ficha__nombre" id="ficha-nombre"></h2>
+                <p class="ficha__obra" id="ficha-obra"></p>
+                <p class="ficha__descripcion" id="ficha-descripcion"></p>
+            </div>
+        </dialog>
 <?php endif; ?>
     </main>
 

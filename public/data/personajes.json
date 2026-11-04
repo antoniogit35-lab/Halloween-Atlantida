@@ -1,38 +1,291 @@
+
 [
-  { "id": "pinhead", "nombre": "Pinhead", "muertes": 200, "imagen": "pinhead.jpg" },
-  { "id": "jason-voorhees", "nombre": "Jason Voorhees", "muertes": 163, "imagen": "jasonvoorhees.jpg" },
-  { "id": "michael-myers", "nombre": "Michael Myers", "muertes": 160, "imagen": "michaelmyers.jpg" },
-  { "id": "dracula", "nombre": "Drácula", "muertes": 100, "imagen": "dracula.jpg" },
-  { "id": "predator", "nombre": "Predator", "muertes": 80, "imagen": "predator.jpg" },
-  { "id": "chucky", "nombre": "Chucky", "muertes": 67, "imagen": "chucky.jpg" },
-  { "id": "freddy-krueger", "nombre": "Freddy Krueger", "muertes": 63, "imagen": "freddyKrueger.jpg" },
-  { "id": "pennywise", "nombre": "Pennywise", "muertes": 60, "imagen": "pennywise.jpg" },
-  { "id": "ghostface", "nombre": "Ghostface", "muertes": 55, "imagen": "ghostface.jpg" },
-  { "id": "art-the-clown", "nombre": "Art the Clown", "muertes": 51, "imagen": "arttheclown.jpg" },
-  { "id": "valak", "nombre": "Valak", "muertes": 35, "imagen": "valaklamonja.jpg" },
-  { "id": "leatherface", "nombre": "Leatherface", "muertes": 31, "imagen": "leatherface.jpg" },
-  { "id": "candyman", "nombre": "Candyman", "muertes": 28, "imagen": "candyman.jpg" },
-  { "id": "entity-from-smile", "nombre": "Entity from Smile", "muertes": 23, "imagen": "entitysmile.jpg" },
-  { "id": "xenomorfo", "nombre": "Xenomorfo", "muertes": 19, "imagen": "xenomorfo.jpg" },
-  { "id": "longlegs", "nombre": "Longlegs", "muertes": 12, "imagen": "longlegs.jpg" },
-  { "id": "la-momia", "nombre": "La Momia", "muertes": 12, "imagen": "lamomia.jpg" },
-  { "id": "samara-morgan", "nombre": "Samara Morgan", "muertes": 10, "imagen": "samaramorgan.jpg" },
-  { "id": "kayako-saeki", "nombre": "Kayako Saeki", "muertes": 10, "imagen": "kayakosaeki.jpg" },
-  { "id": "pazuzu", "nombre": "Pazuzu", "muertes": 8, "imagen": "pazuzu.jpg" },
-  { "id": "esther", "nombre": "Esther", "muertes": 7, "imagen": "esther.jpg" },
-  { "id": "pearl", "nombre": "Pearl", "muertes": 7, "imagen": "pearl.jpg" },
-  { "id": "the-grabber", "nombre": "The Grabber", "muertes": 6, "imagen": "thegrabber.jpg" },
-  { "id": "m3gan", "nombre": "M3GAN", "muertes": 6, "imagen": "m3gan.jpg" },
-  { "id": "el-hombre-lobo", "nombre": "El hombre lobo", "muertes": 5, "imagen": "hombrelobo.jpg" },
-  { "id": "brahms", "nombre": "Brahms", "muertes": 5, "imagen": "brahms.jpg" },
-  { "id": "conde-orlok", "nombre": "Conde Orlok", "muertes": 5, "imagen": "condeorlok.jpg" },
-  { "id": "crooked-man", "nombre": "Crooked Man", "muertes": 4, "imagen": "crookedman.jpg" },
-  { "id": "lipstick-face-demon", "nombre": "Lipstick-Face Demon", "muertes": 4, "imagen": "lipstick-facedemon.jpg" },
-  { "id": "the-babadook", "nombre": "The Babadook", "muertes": 3, "imagen": "babadook.jpg" },
-  { "id": "toshio-saeki", "nombre": "Toshio Saeki", "muertes": 3, "imagen": "toshiosaeki.jpg" },
-  { "id": "capitan-clark", "nombre": "Capitán Clark", "muertes": 3, "imagen": "capitanclark.jpg" },
-  { "id": "annabelle", "nombre": "Annabelle", "muertes": 2, "imagen": "annabelle.jpg" },
-  { "id": "monstruo-de-frankenstein", "nombre": "Monstruo de Frankenstein", "muertes": 2, "imagen": "frankenstein.jpg" },
-  { "id": "tomas-el-orfanato", "nombre": "Tomás (El orfanato)", "muertes": 2, "imagen": "tomasorfanato.jpg" },
-  { "id": "forrest-gump", "nombre": "Forrest Gump", "muertes": 0, "imagen": "forrestgump.jpg" }
+  {
+    "id": "pinhead",
+    "nombre": "Pinhead",
+    "muertes": 200,
+    "obra": "Hellraiser",
+    "descripcion": "El cenobita con clavos distribuidos geométricamente por la cabeza, relacionado con el dolor y el sufrimiento.",
+    "imagen": "pinhead.jpg"
+  },
+  {
+    "id": "jason-voorhees",
+    "nombre": "Jason Voorhees",
+    "muertes": 163,
+    "obra": "Viernes 13",
+    "descripcion": "El asesino de la máscara de hockey, famoso por perseguir a sus víctimas en los alrededores del campamento Crystal Lake.",
+    "imagen": "jasonvoorhees.jpg"
+  },
+  {
+    "id": "michael-myers",
+    "nombre": "Michael Myers",
+    "muertes": 160,
+    "obra": "Halloween",
+    "descripcion": "El asesino enmascarado con mono de trabajo que persigue implacablemente a sus víctimas.",
+    "imagen": "michaelmyers.jpg"
+  },
+  {
+    "id": "dracula",
+    "nombre": "Drácula",
+    "muertes": 100,
+    "obra": "Drácula",
+    "descripcion": "Un vampiro inmortal de aspecto elegante que se alimenta de sangre y posee habilidades sobrenaturales.",
+    "imagen": "dracula.jpg"
+  },
+  {
+    "id": "predator",
+    "nombre": "Predator",
+    "muertes": 80,
+    "obra": "Predator",
+    "descripcion": "Un cazador extraterrestre que busca presas peligrosas y utiliza tecnología avanzada para rastrearlas y cazarlas.",
+    "imagen": "predator.jpg"
+  },
+  {
+    "id": "chucky",
+    "nombre": "Chucky",
+    "muertes": 67,
+    "obra": "Muñeco diabólico",
+    "descripcion": "El muñeco pelirrojo poseído por el asesino Charles Lee Ray, que utiliza su pequeño tamaño para cometer asesinatos.",
+    "imagen": "chucky.jpg"
+  },
+  {
+    "id": "freddy-krueger",
+    "nombre": "Freddy Krueger",
+    "muertes": 63,
+    "obra": "Pesadilla en Elm Street",
+    "descripcion": "El hombre de la cara quemada y el sombrero, capaz de atacar a sus víctimas mientras sueñan.",
+    "imagen": "freddyKrueger.jpg"
+  },
+  {
+    "id": "pennywise",
+    "nombre": "Pennywise",
+    "muertes": 60,
+    "obra": "IT (Eso)",
+    "descripcion": "El payaso que aterroriza a los niños de Derry y utiliza sus mayores miedos para atraerlos.",
+    "imagen": "pennywise.jpg"
+  },
+  {
+    "id": "ghostface",
+    "nombre": "Ghostface",
+    "muertes": 55,
+    "obra": "Scream",
+    "descripcion": "El asesino de la máscara blanca alargada y túnica negra, que aterroriza a sus víctimas mediante llamadas telefónicas y persecuciones.",
+    "imagen": "ghostface.jpg"
+  },
+  {
+    "id": "art-the-clown",
+    "nombre": "Art the Clown",
+    "muertes": 51,
+    "obra": "Terrifier",
+    "descripcion": "Un payaso asesino de cara blanca, maquillaje negro y sonrisa siniestra, conocido por sus actos extremadamente violentos.",
+    "imagen": "arttheclown.jpg"
+  },
+  {
+    "id": "valak",
+    "nombre": "Valak",
+    "muertes": 35,
+    "obra": "Expediente Warren / La monja",
+    "descripcion": "Un demonio que adopta la apariencia de una monja aterradora y atormenta a sus víctimas con poderes sobrenaturales.",
+    "imagen": "valaklamonja.jpg"
+  },
+  {
+    "id": "leatherface",
+    "nombre": "Leatherface",
+    "muertes": 31,
+    "obra": "La matanza de Texas",
+    "descripcion": "El asesino que lleva una máscara hecha de piel humana y persigue a sus víctimas en una granja.",
+    "imagen": "leatherface.jpg"
+  },
+  {
+    "id": "candyman",
+    "nombre": "Candyman",
+    "muertes": 28,
+    "obra": "Candyman",
+    "descripcion": "Un espíritu vengativo que aparece al pronunciar su nombre cinco veces frente a un espejo.",
+    "imagen": "candyman.jpg"
+  },
+  {
+    "id": "entity-from-smile",
+    "nombre": "Entity from Smile",
+    "muertes": 23,
+    "obra": "Smile",
+    "descripcion": "Una entidad sobrenatural que atormenta a sus víctimas mediante visiones y sonrisas inquietantes antes de provocar su muerte.",
+    "imagen": "entitysmile.jpg"
+  },
+  {
+    "id": "xenomorfo",
+    "nombre": "Xenomorfo",
+    "muertes": 19,
+    "obra": "Alien",
+    "descripcion": "Un organismo extraterrestre de sangre ácida, mandíbula interior y cabeza alargada que caza a sus víctimas.",
+    "imagen": "xenomorfo.jpg"
+  },
+  {
+    "id": "longlegs",
+    "nombre": "Longlegs",
+    "muertes": 12,
+    "obra": "Longlegs (2024)",
+    "descripcion": "Un perturbador asesino relacionado con crímenes familiares, conocido por su aspecto pálido y su comportamiento inquietante.",
+    "imagen": "longlegs.jpg"
+  },
+  {
+    "id": "la-momia",
+    "nombre": "La Momia",
+    "muertes": 12,
+    "obra": "La momia",
+    "descripcion": "Un ser antiguo que vuelve a la vida mediante una maldición y utiliza poderes sobrenaturales para perseguir a los vivos.",
+    "imagen": "lamomia.jpg"
+  },
+  {
+    "id": "samara-morgan",
+    "nombre": "Samara Morgan",
+    "muertes": 10,
+    "obra": "The Ring",
+    "descripcion": "Una niña fantasmal de pelo negro que aparece en una grabación maldita y persigue a quienes la ven.",
+    "imagen": "samaramorgan.jpg"
+  },
+  {
+    "id": "kayako-saeki",
+    "nombre": "Kayako Saeki",
+    "muertes": 10,
+    "obra": "La maldición (Ju-On)",
+    "descripcion": "Un espíritu vengativo que persigue a quienes entran en contacto con la maldición de su casa.",
+    "imagen": "kayakosaeki.jpg"
+  },
+  {
+    "id": "pazuzu",
+    "nombre": "Pazuzu",
+    "muertes": 8,
+    "obra": "El exorcista",
+    "descripcion": "Un demonio que posee a Regan MacNeil y provoca comportamientos aterradores y fenómenos sobrenaturales.",
+    "imagen": "pazuzu.jpg"
+  },
+  {
+    "id": "esther",
+    "nombre": "Esther",
+    "muertes": 7,
+    "obra": "La huérfana",
+    "descripcion": "Una niña aparentemente inocente, de vestido oscuro, cuello blanco y lazo en el pelo, que oculta un secreto aterrador.",
+    "imagen": "esther.jpg"
+  },
+  {
+    "id": "pearl",
+    "nombre": "Pearl",
+    "muertes": 7,
+    "obra": "Pearl (2022)",
+    "descripcion": "Una joven con sueños de convertirse en estrella que acaba mostrando un lado muy oscuro.",
+    "imagen": "pearl.jpg"
+  },
+  {
+    "id": "the-grabber",
+    "nombre": "The Grabber",
+    "muertes": 6,
+    "obra": "Black Phone",
+    "descripcion": "Un secuestrador que captura niños y lleva máscaras con expresiones inquietantes.",
+    "imagen": "thegrabber.jpg"
+  },
+  {
+    "id": "m3gan",
+    "nombre": "M3GAN",
+    "muertes": 6,
+    "obra": "M3GAN",
+    "descripcion": "Una muñeca robótica con inteligencia artificial diseñada para proteger a una niña, que acaba desarrollando comportamientos peligrosos.",
+    "imagen": "m3gan.jpg"
+  },
+  {
+    "id": "el-hombre-lobo",
+    "nombre": "El hombre lobo",
+    "muertes": 5,
+    "obra": "El hombre lobo",
+    "descripcion": "Una persona que se transforma en una criatura parecida a un lobo, generalmente durante la luna llena.",
+    "imagen": "hombrelobo.jpg"
+  },
+  {
+    "id": "brahms",
+    "nombre": "Brahms",
+    "muertes": 5,
+    "obra": "The Boy",
+    "descripcion": "Un hombre que vive oculto en una casa y utiliza una muñeca de porcelana como representación de su presencia.",
+    "imagen": "brahms.jpg"
+  },
+  {
+    "id": "conde-orlok",
+    "nombre": "Conde Orlok",
+    "muertes": 5,
+    "obra": "Nosferatu",
+    "descripcion": "Un vampiro de aspecto cadavérico, orejas puntiagudas y dedos largos que extiende una presencia siniestra allá donde va.",
+    "imagen": "condeorlok.jpg"
+  },
+  {
+    "id": "crooked-man",
+    "nombre": "Crooked Man",
+    "muertes": 4,
+    "obra": "Expediente Warren 2",
+    "descripcion": "Una figura sobrenatural alta y deformada que aparece como una presencia amenazante y se mueve de forma inquietante.",
+    "imagen": "crookedman.jpg"
+  },
+  {
+    "id": "lipstick-face-demon",
+    "nombre": "Lipstick-Face Demon",
+    "muertes": 4,
+    "obra": "Insidious",
+    "descripcion": "Un demonio de rostro rojo y negro que intenta apoderarse de personas mientras se encuentran en un estado vulnerable.",
+    "imagen": "lipstick-facedemon.jpg"
+  },
+  {
+    "id": "the-babadook",
+    "nombre": "The Babadook",
+    "muertes": 3,
+    "obra": "Babadook",
+    "descripcion": "Una criatura oscura que aparece vinculada a un misterioso libro infantil y atormenta a una madre y a su hijo.",
+    "imagen": "babadook.jpg"
+  },
+  {
+    "id": "toshio-saeki",
+    "nombre": "Toshio Saeki",
+    "muertes": 3,
+    "obra": "La maldición (Ju-On)",
+    "descripcion": "Un niño fantasma de piel pálida que aparece junto a la maldición y provoca terror con sus apariciones.",
+    "imagen": "toshiosaeki.jpg"
+  },
+  {
+    "id": "capitan-clark",
+    "nombre": "Capitán Clark",
+    "muertes": 3,
+    "obra": "The Backrooms",
+    "descripcion": "Una enorme criatura monstruosa que imita a Clark y aparece vestida con un traje de capitán pirata. Es uno de los principales antagonistas de la película.",
+    "imagen": "capitanclark.jpg"
+  },
+  {
+    "id": "annabelle",
+    "nombre": "Annabelle",
+    "muertes": 2,
+    "obra": "Annabelle / Expediente Warren",
+    "descripcion": "Una muñeca vinculada a una presencia demoníaca que provoca fenómenos paranormales.",
+    "imagen": "annabelle.jpg"
+  },
+  {
+    "id": "monstruo-de-frankenstein",
+    "nombre": "Monstruo de Frankenstein",
+    "muertes": 2,
+    "obra": "Frankenstein",
+    "descripcion": "Una criatura artificial creada a partir de restos humanos que, pese a su aspecto aterrador, también muestra emociones y busca aceptación.",
+    "imagen": "frankenstein.jpg"
+  },
+  {
+    "id": "tomas-el-orfanato",
+    "nombre": "Tomás (El orfanato)",
+    "muertes": 2,
+    "obra": "El orfanato",
+    "descripcion": "Un niño fantasma que lleva una inquietante máscara hecha con una bolsa de tela y está relacionado con los misterios del orfanato.",
+    "imagen": "tomasorfanato.jpg"
+  },
+  {
+    "id": "forrest-gump",
+    "nombre": "Forrest Gump",
+    "muertes": 0,
+    "obra": "Forrest Gump",
+    "descripcion": "Es amable, leal y ayuda a los demás sin esperar nada a cambio. Quiere sinceramente a las personas de su vida y representa la bondad y la inocencia.",
+    "imagen": "forrestgump.jpg"
+  }
 ]

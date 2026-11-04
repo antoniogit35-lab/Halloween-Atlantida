@@ -2,16 +2,19 @@
    Fila: puesto | foto | nombre | barra | asesinatos (según el boceto lowfi). */
 
 .ranking-pagina {
-    --fondo: #1a0f16;
-    --fondo-claro: #2e1824;
-    --hueso: #efe6d2;
-    --ceniza: #ab9ca3;
-    --sangre: #b3282d;
-    --sangre-oscura: #6a1418;
-    --ambar: #e3902f;
-    --ambar-oscuro: #8a4d12;
-    --linea: #43283a;
-    --pozo: #0f080c;
+    /* Paleta del proyecto */
+    --fondo: #141414;                       /* negro humo */
+    --fondo-claro: #0a2353;                 /* azul medianoche */
+    --hueso: #f2e8d5;                       /* marfil antiguo */
+    --sangre: #ca1616;                      /* rojo sangre */
+    --ambar: #fff477;                       /* amarillo luna (podio) */
+
+    /* Tonos derivados de la paleta */
+    --ceniza: rgb(242 232 213 / 0.65);      /* marfil atenuado */
+    --sangre-oscura: #7a0d0d;
+    --ambar-oscuro: #8f892f;
+    --linea: rgb(242 232 213 / 0.18);
+    --pozo: #0b0b0b;
 
     margin: 0;
     min-height: 100vh;
@@ -56,7 +59,7 @@
     font-weight: 700;
     letter-spacing: 0.03em;
     line-height: 1.1;
-    text-shadow: 0 0 0.5em rgba(179, 40, 45, 0.6);
+    text-shadow: 0 0 0.5em rgba(202, 22, 22, 0.6);
 }
 
 .ranking__vacio {
@@ -92,14 +95,35 @@
 
 .fila__foto {
     grid-area: foto;
+    position: relative;
     display: grid;
     place-items: center;
     width: 3.5rem;
     height: 3.5rem;
+    padding: 0;
     overflow: hidden;
     border-radius: 50%;
     border: 2px solid var(--linea);
     background: var(--fondo-claro);
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    transition: transform 150ms ease, filter 150ms ease, box-shadow 150ms ease, border-color 150ms ease;
+}
+
+/* Al pasar el ratón la foto se ilumina y crece un poco */
+.fila__foto:hover,
+.fila__foto:focus-visible {
+    z-index: 1;
+    transform: scale(1.12);
+    filter: brightness(1.2);
+    border-color: var(--ambar);
+    box-shadow: 0 0 0.9rem rgb(255 244 119 / 0.45);
+}
+
+.fila__foto:focus-visible {
+    outline: 2px solid var(--ambar);
+    outline-offset: 3px;
 }
 
 .fila__foto img {
@@ -185,6 +209,136 @@
     .js .ranking__lista--llena .fila__relleno {
         transition: none;
     }
+
+    .fila__foto {
+        transition: none;
+    }
+
+    .fila__foto:hover,
+    .fila__foto:focus-visible {
+        transform: none;
+    }
+
+    .ficha[open] {
+        animation: none;
+    }
+}
+
+/* Ficha del asesino (ventana emergente centrada) */
+
+.ficha {
+    width: min(26rem, calc(100vw - 2rem));
+    max-height: calc(100vh - 2rem);
+    padding: 0;
+    overflow: auto;
+    border: 1px solid var(--linea);
+    border-radius: 0.75rem;
+    background: linear-gradient(180deg, var(--fondo-claro) 0%, var(--fondo) 100%);
+    color: var(--hueso);
+    box-shadow: 0 1.5rem 3rem rgb(0 0 0 / 0.6);
+}
+
+.ficha[open] {
+    animation: ficha-entrada 160ms ease-out;
+}
+
+.ficha::backdrop {
+    background: rgb(20 20 20 / 0.78);
+}
+
+@keyframes ficha-entrada {
+    from {
+        opacity: 0;
+        transform: scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.ficha__contenido {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    gap: 0.5rem;
+    padding: 2rem 1.5rem 1.75rem;
+}
+
+.ficha__cerrar {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--ceniza);
+    font: inherit;
+    font-size: 1.75rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.ficha__cerrar:hover {
+    color: var(--hueso);
+}
+
+.ficha__cerrar:focus-visible {
+    outline: 2px solid var(--ambar);
+    outline-offset: 2px;
+}
+
+.ficha__foto {
+    display: grid;
+    place-items: center;
+    width: 9rem;
+    height: 9rem;
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 3px solid var(--ambar);
+    background: var(--fondo-claro);
+    box-shadow: 0 0 1.5rem rgb(255 244 119 / 0.25);
+}
+
+.ficha__foto img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ficha__foto img[hidden] {
+    display: none;
+}
+
+.ficha__inicial {
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--ceniza);
+}
+
+.ficha__nombre {
+    margin: 0;
+    text-align: center;
+    font-size: 1.75rem;
+    line-height: 1.2;
+}
+
+.ficha__obra {
+    margin: 0;
+    text-align: center;
+    font-style: italic;
+    color: var(--ceniza);
+}
+
+.ficha__descripcion {
+    max-width: 38ch;
+    margin: 0.75rem 0 0;
+    line-height: 1.65;
 }
 
 /* Pantallas estrechas: la barra pasa debajo del nombre */
