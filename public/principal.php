@@ -56,11 +56,14 @@
                 <span class="indicacion">Abrir recetario</span>
             </a>
 
-            <div class="acceso acceso-ranking">
+            <a
+                class="acceso acceso-ranking"
+                href="ranking.php"
+            >
                 <h2>Top asesinos</h2>
                 <span class="consulta">ORDER BY muertes DESC</span>
-                <span class="estado">Próximamente</span>
-            </div>
+                <span class="indicacion">Ver ranking</span>
+            </a>
         </section>
     </main>
 
