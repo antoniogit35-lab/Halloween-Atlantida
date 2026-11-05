@@ -1,0 +1,254 @@
+/* Contacta con Jack
+   Paleta del proyecto: negro humo, verde cementerio, azul medianoche, marfil antiguo,
+   amarillo luna (botón y foco) y rojo sangre (errores y detalles). */
+
+/* Fuentes del proyecto (dafont): Halloweek y Face Your Fears.
+   Cuando los .ttf estén en assets/fonts/, descomenta este bloque.
+@font-face {
+    font-family: "Halloweek";
+    src: url("../fonts/Halloweek.ttf") format("truetype");
+    font-display: swap;
+}
+@font-face {
+    font-family: "Face Your Fears";
+    src: url("../fonts/FaceYourFears.ttf") format("truetype");
+    font-display: swap;
+}
+*/
+
+.contacto-pagina {
+    --negro: #141414;
+    --verde: #416042;
+    --azul: #0a2353;
+    --marfil: #f2e8d5;
+    --luna: #fff477;
+    --sangre: #ca1616;
+
+    /* Tonos derivados de la paleta */
+    --marfil-suave: rgb(242 232 213 / 0.7);
+    --linea: rgb(242 232 213 / 0.22);
+    --sangre-oscura: #7a0d0d;
+    --pozo: #0c0c0c;
+
+    --fuente-titulo: "Halloweek", "Face Your Fears", "Palatino Linotype", Georgia, serif;
+    --fuente-texto: "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+
+    margin: 0;
+    min-height: 100vh;
+    background: radial-gradient(ellipse at 50% 0%, var(--azul) 0%, var(--negro) 65%) fixed;
+    color: var(--marfil);
+    font-family: var(--fuente-texto);
+    font-size: 1.0625rem;
+    line-height: 1.55;
+}
+
+.contacto-pagina *,
+.contacto-pagina *::before,
+.contacto-pagina *::after {
+    box-sizing: border-box;
+}
+
+.contacto {
+    max-width: 44rem;
+    margin: 0 auto;
+    padding: 1.5rem clamp(1rem, 4vw, 2rem) 4rem;
+}
+
+/* Enlace de vuelta */
+
+.contacto__volver {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+    color: var(--marfil-suave);
+    text-decoration: none;
+}
+
+.contacto__volver:hover {
+    color: var(--marfil);
+    text-decoration: underline;
+}
+
+.contacto__volver:focus-visible {
+    outline: 2px solid var(--luna);
+    outline-offset: 4px;
+    border-radius: 0.25rem;
+}
+
+/* Lápida: el panel del formulario tiene la parte de arriba redondeada */
+
+.lapida {
+    margin-top: 1.5rem;
+    padding: clamp(3rem, 9vw, 5rem) clamp(1.25rem, 6vw, 3.5rem) clamp(2rem, 5vw, 3rem);
+    border: 2px solid var(--verde);
+    border-radius: clamp(4rem, 22vw, 11rem) clamp(4rem, 22vw, 11rem) 0.75rem 0.75rem;
+    background: linear-gradient(to bottom, rgb(65 96 66 / 0.22), rgb(20 20 20 / 0.85) 70%);
+    box-shadow: 0 1.5rem 3rem rgb(0 0 0 / 0.5);
+}
+
+.lapida__titulo {
+    margin: 0 0 0.75rem;
+    text-align: center;
+    font-family: var(--fuente-titulo);
+    font-size: clamp(2.25rem, 8vw, 3.75rem);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: 0.03em;
+    text-shadow: 0 0 0.5em rgb(202 22 22 / 0.6);
+}
+
+.lapida__intro {
+    max-width: 32rem;
+    margin: 0 auto 2rem;
+    text-align: center;
+    color: var(--marfil-suave);
+}
+
+/* Avisos */
+
+.aviso {
+    margin: 0 0 1.5rem;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    border-left: 4px solid var(--marfil);
+}
+
+.aviso[hidden] {
+    display: none;
+}
+
+.aviso--ok {
+    background: var(--verde);
+    border-left-color: var(--luna);
+}
+
+.aviso--error {
+    background: rgb(202 22 22 / 0.16);
+    border-left-color: var(--sangre);
+}
+
+.aviso:focus-visible {
+    outline: 2px solid var(--luna);
+    outline-offset: 3px;
+}
+
+/* Formulario */
+
+.formulario {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.campo {
+    display: grid;
+    gap: 0.4rem;
+}
+
+.campo__etiqueta {
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.campo__control {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--linea);
+    border-radius: 0.5rem;
+    background: var(--pozo);
+    color: var(--marfil);
+    font: inherit;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.campo__control--area {
+    min-height: 9rem;
+    resize: vertical;
+}
+
+.campo__control:hover {
+    border-color: var(--marfil-suave);
+}
+
+.campo__control:focus-visible {
+    outline: none;
+    border-color: var(--luna);
+    box-shadow: 0 0 0 3px rgb(255 244 119 / 0.3);
+}
+
+.campo__control[aria-invalid="true"] {
+    border-color: var(--sangre);
+}
+
+.campo__control[aria-invalid="true"]:focus-visible {
+    box-shadow: 0 0 0 3px rgb(202 22 22 / 0.45);
+}
+
+.campo__error {
+    margin: 0;
+    padding-left: 0.75rem;
+    border-left: 3px solid var(--sangre);
+    color: var(--marfil);
+    font-size: 0.975rem;
+}
+
+.campo__error[hidden] {
+    display: none;
+}
+
+.campo__contador {
+    margin: 0;
+    text-align: right;
+    font-size: 0.9rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--marfil-suave);
+}
+
+.campo__contador--limite {
+    color: var(--luna);
+}
+
+/* Botón: amarillo luna; al pasar el ratón "sangra" */
+
+.boton {
+    justify-self: center;
+    margin-top: 0.5rem;
+    padding: 0.85rem 2.5rem;
+    border: 2px solid var(--luna);
+    border-radius: 0.5rem;
+    background: var(--luna);
+    color: var(--negro);
+    font-family: var(--fuente-titulo);
+    font-size: 1.375rem;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease, box-shadow 250ms ease;
+}
+
+.boton:hover {
+    border-color: var(--sangre);
+    background: var(--sangre);
+    color: var(--marfil);
+    box-shadow: 0 0.55rem 0 -0.2rem var(--sangre-oscura), 0 1rem 1.25rem -0.6rem var(--sangre);
+}
+
+.boton:focus-visible {
+    outline: 2px solid var(--marfil);
+    outline-offset: 4px;
+}
+
+.boton:active {
+    transform: translateY(1px);
+}
+
+@media (max-width: 30rem) {
+    .boton {
+        width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .contacto-pagina * {
+        transition: none !important;
+    }
+}
