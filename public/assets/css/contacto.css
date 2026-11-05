@@ -1,22 +1,9 @@
-/* Contacta con Jack
-   Paleta del proyecto: negro humo, verde cementerio, azul medianoche, marfil antiguo,
-   amarillo luna (botón y foco) y rojo sangre (errores y detalles). */
+/* ==========================================================
+   CONTACTA CON JACK
+   Escena realista con formulario HTML sobre la pantalla.
+   ========================================================== */
 
-/* Fuentes del proyecto (dafont): Halloweek y Face Your Fears.
-   Cuando los .ttf estén en assets/fonts/, descomenta este bloque.
-@font-face {
-    font-family: "Halloweek";
-    src: url("../fonts/Halloweek.ttf") format("truetype");
-    font-display: swap;
-}
-@font-face {
-    font-family: "Face Your Fears";
-    src: url("../fonts/FaceYourFears.ttf") format("truetype");
-    font-display: swap;
-}
-*/
-
-.contacto-pagina {
+:root {
     --negro: #141414;
     --verde: #416042;
     --azul: #0a2353;
@@ -24,107 +11,421 @@
     --luna: #fff477;
     --sangre: #ca1616;
 
-    /* Tonos derivados de la paleta */
-    --marfil-suave: rgb(242 232 213 / 0.7);
-    --linea: rgb(242 232 213 / 0.22);
-    --sangre-oscura: #7a0d0d;
-    --pozo: #0c0c0c;
-
-    --fuente-titulo: "Halloweek", "Face Your Fears", "Palatino Linotype", Georgia, serif;
-    --fuente-texto: "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
-
-    margin: 0;
-    min-height: 100vh;
-    background: radial-gradient(ellipse at 50% 0%, var(--azul) 0%, var(--negro) 65%) fixed;
-    color: var(--marfil);
-    font-family: var(--fuente-texto);
-    font-size: 1.0625rem;
-    line-height: 1.55;
+    /*
+     * ENCAJE DEL FORMULARIO EN LA IMAGEN
+     *
+     * Valores iniciales aproximados.
+     * Los porcentajes se calculan respecto a la imagen completa.
+     */
+    --pantalla-x: 14%;
+    --pantalla-y: 13%;
+    --pantalla-ancho: 49%;
+    --pantalla-alto: 58%;
 }
 
-.contacto-pagina *,
-.contacto-pagina *::before,
-.contacto-pagina *::after {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 }
 
-.contacto {
-    max-width: 44rem;
-    margin: 0 auto;
-    padding: 1.5rem clamp(1rem, 4vw, 2rem) 4rem;
+[hidden] {
+    display: none !important;
 }
 
-/* Enlace de vuelta */
+body {
+    margin: 0;
+    min-height: 100vh;
+    min-height: 100dvh;
 
-.contacto__volver {
+    background: var(--negro);
+    color: var(--marfil);
+
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.5;
+}
+
+/* ==========================================================
+   CABECERA
+   ========================================================== */
+
+.cabecera {
+    position: relative;
+    z-index: 2;
+
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 1.5rem;
+
+    padding: 1.25rem 3%;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgb(20 20 20 / 0.98),
+            rgb(20 20 20 / 0.88)
+        );
+
+    border-bottom: 1px solid rgb(65 96 66 / 0.3);
+}
+
+.cabecera h1 {
+    margin: 0;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(1.4rem, 2.5vw, 2.5rem);
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 0.035em;
+    text-align: center;
+
+    text-shadow: 0 2px 8px rgb(20 20 20 / 0.8);
+}
+
+.cabecera__volver {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 0;
-    color: var(--marfil-suave);
+    justify-self: start;
+    gap: 0.6rem;
+
+    color: rgb(242 232 213 / 0.75);
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 0.85rem;
     text-decoration: none;
 }
 
-.contacto__volver:hover {
-    color: var(--marfil);
-    text-decoration: underline;
+.cabecera__volver:hover {
+    color: var(--luna);
 }
 
-.contacto__volver:focus-visible {
+.cabecera__volver:focus-visible {
+    outline: 2px solid var(--luna);
+    outline-offset: 5px;
+}
+
+.cabecera__marca {
+    justify-self: end;
+    margin: 0;
+
+    color: rgb(242 232 213 / 0.65);
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-align: right;
+    text-transform: uppercase;
+}
+
+/* ==========================================================
+   ESCENA
+   ========================================================== */
+
+.contacto {
+    width: 100%;
+}
+
+.escena {
+    position: relative;
+    isolation: isolate;
+
+    width: min(100%, 1672px);
+    margin-inline: auto;
+
+    /*
+     * Las unidades cqw de los elementos interiores
+     * toman como referencia el ancho de esta escena.
+     */
+    container-type: inline-size;
+}
+
+.escena__imagen {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1672 / 941;
+}
+
+/* ==========================================================
+   SUPERFICIE DEL FORMULARIO
+   ========================================================== */
+
+.pantalla {
+    position: absolute;
+    z-index: 1;
+
+    left: var(--pantalla-x);
+    top: var(--pantalla-y);
+    width: var(--pantalla-ancho);
+    height: var(--pantalla-alto);
+
+    min-width: 0;
+
+    /*
+     * Si aparecen errores o el usuario amplía el texto,
+     * el contenido se puede recorrer sin salir del monitor.
+     */
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--verde) var(--negro);
+
+    /*
+     * Sin carcasa ni fondo de tarjeta:
+     * aprovechamos directamente la pantalla de la imagen.
+     */
+    background: transparent;
+    color: var(--marfil);
+    color-scheme: dark;
+}
+
+.pantalla__contenido {
+    width: min(100%, 680px);
+    margin-inline: auto;
+
+    padding:
+        clamp(12px, 1.4cqw, 24px)
+        clamp(16px, 2.2cqw, 36px);
+}
+
+/* ==========================================================
+   CABECERA INTERIOR
+   ========================================================== */
+
+.correo-cabecera {
+    margin-bottom: clamp(10px, 1.2cqw, 20px);
+    text-align: center;
+}
+
+.correo-cabecera__detalle {
+    margin: 0 0 0.35rem;
+
+    color: var(--luna);
+
+    font-size: clamp(9px, 0.65cqw, 11px);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.correo-cabecera h2 {
+    margin: 0;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(20px, 1.9cqw, 32px);
+    font-weight: 400;
+    line-height: 1.2;
+
+    text-shadow: 0 0 12px rgb(242 232 213 / 0.12);
+}
+
+.correo-cabecera__intro {
+    max-width: 32rem;
+    margin: 0.55rem auto 0;
+
+    color: rgb(242 232 213 / 0.72);
+
+    font-size: clamp(11px, 0.8cqw, 14px);
+    line-height: 1.5;
+}
+
+/* ==========================================================
+   FORMULARIO
+   ========================================================== */
+
+.formulario {
+    display: grid;
+    gap: clamp(9px, 0.9cqw, 15px);
+}
+
+.campo {
+    display: grid;
+    gap: 0.3rem;
+    min-width: 0;
+}
+
+.campo__etiqueta {
+    color: var(--marfil);
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(12px, 0.95cqw, 16px);
+}
+
+.campo__control {
+    display: block;
+    width: 100%;
+    min-width: 0;
+
+    padding:
+        clamp(7px, 0.65cqw, 11px)
+        clamp(9px, 0.85cqw, 14px);
+
+    border: 1px solid rgb(65 96 66 / 0.85);
+    border-radius: 3px;
+
+    background:
+        linear-gradient(
+            rgb(65 96 66 / 0.1),
+            rgb(20 20 20 / 0.15)
+        ),
+        rgb(20 20 20 / 0.78);
+
+    color: var(--marfil);
+
+    font: inherit;
+    font-size: clamp(13px, 0.95cqw, 16px);
+    line-height: 1.4;
+
+    box-shadow:
+        inset 0 2px 5px rgb(20 20 20 / 0.65),
+        0 1px 0 rgb(242 232 213 / 0.05);
+
+    transition:
+        border-color 150ms ease,
+        box-shadow 150ms ease;
+}
+
+.campo__control:hover {
+    border-color: rgb(242 232 213 / 0.6);
+}
+
+.campo__control:focus-visible {
+    outline: 2px solid var(--luna);
+    outline-offset: 2px;
+    border-color: var(--luna);
+}
+
+.campo__control--area {
+    min-height: clamp(75px, 6.5cqw, 110px);
+    resize: vertical;
+}
+
+.campo__control[aria-invalid="true"] {
+    border-color: var(--sangre);
+    box-shadow: inset 3px 0 0 var(--sangre);
+}
+
+.campo__informacion {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: start;
+    justify-content: space-between;
+    gap: 0.4rem 1rem;
+}
+
+.campo__error {
+    margin: 0;
+    padding-left: 0.55rem;
+
+    border-left: 3px solid var(--sangre);
+
+    color: var(--marfil);
+
+    font-size: clamp(11px, 0.75cqw, 13px);
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+}
+
+.campo__contador {
+    margin: 0 0 0 auto;
+
+    color: rgb(242 232 213 / 0.65);
+
+    font-size: clamp(10px, 0.7cqw, 12px);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+.campo__contador--limite {
+    color: var(--luna);
+}
+
+/* ==========================================================
+   BOTÓN
+   ========================================================== */
+
+.boton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+    gap: 1rem;
+
+    max-width: 100%;
+    padding:
+        clamp(8px, 0.7cqw, 12px)
+        clamp(16px, 1.6cqw, 27px);
+
+    border: 1px solid var(--verde);
+    border-radius: 3px;
+
+    background:
+        linear-gradient(
+            rgb(65 96 66 / 0.45),
+            rgb(65 96 66 / 0.12)
+        ),
+        var(--negro);
+
+    color: var(--luna);
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(12px, 0.95cqw, 16px);
+
+    box-shadow:
+        inset 0 1px 0 rgb(242 232 213 / 0.1),
+        0 3px 8px rgb(20 20 20 / 0.5);
+
+    cursor: pointer;
+
+    transition:
+        background-color 150ms ease,
+        border-color 150ms ease,
+        color 150ms ease,
+        transform 150ms ease;
+}
+
+.boton:hover {
+    border-color: var(--sangre);
+    background: var(--sangre);
+    color: var(--marfil);
+}
+
+.boton:focus-visible {
     outline: 2px solid var(--luna);
     outline-offset: 4px;
-    border-radius: 0.25rem;
 }
 
-/* Lápida: el panel del formulario tiene la parte de arriba redondeada */
-
-.lapida {
-    margin-top: 1.5rem;
-    padding: clamp(3rem, 9vw, 5rem) clamp(1.25rem, 6vw, 3.5rem) clamp(2rem, 5vw, 3rem);
-    border: 2px solid var(--verde);
-    border-radius: clamp(4rem, 22vw, 11rem) clamp(4rem, 22vw, 11rem) 0.75rem 0.75rem;
-    background: linear-gradient(to bottom, rgb(65 96 66 / 0.22), rgb(20 20 20 / 0.85) 70%);
-    box-shadow: 0 1.5rem 3rem rgb(0 0 0 / 0.5);
+.boton:active {
+    transform: translateY(1px);
 }
 
-.lapida__titulo {
-    margin: 0 0 0.75rem;
-    text-align: center;
-    font-family: var(--fuente-titulo);
-    font-size: clamp(2.25rem, 8vw, 3.75rem);
-    font-weight: 400;
-    line-height: 1.1;
-    letter-spacing: 0.03em;
-    text-shadow: 0 0 0.5em rgb(202 22 22 / 0.6);
-}
-
-.lapida__intro {
-    max-width: 32rem;
-    margin: 0 auto 2rem;
-    text-align: center;
-    color: var(--marfil-suave);
-}
-
-/* Avisos */
+/* ==========================================================
+   AVISOS
+   ========================================================== */
 
 .aviso {
-    margin: 0 0 1.5rem;
-    padding: 0.75rem 1rem;
-    border-radius: 0.5rem;
-    border-left: 4px solid var(--marfil);
+    margin: 0 0 0.75rem;
+    padding: 0.65rem 0.8rem;
+
+    border: 1px solid rgb(65 96 66 / 0.65);
+    border-left-width: 3px;
+
+    background: rgb(20 20 20 / 0.95);
+
+    color: var(--marfil);
+
+    font-size: clamp(11px, 0.8cqw, 14px);
+    overflow-wrap: anywhere;
 }
 
-.aviso[hidden] {
-    display: none;
+.formulario > .aviso {
+    margin-bottom: 0;
 }
 
 .aviso--ok {
-    background: var(--verde);
     border-left-color: var(--luna);
 }
 
 .aviso--error {
-    background: rgb(202 22 22 / 0.16);
     border-left-color: var(--sangre);
 }
 
@@ -133,122 +434,199 @@
     outline-offset: 3px;
 }
 
-/* Formulario */
+/* ==========================================================
+   PIE
+   ========================================================== */
 
-.formulario {
-    display: grid;
-    gap: 1.5rem;
+.pie {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+
+    padding: 1.25rem 3%;
+
+    border-top: 1px solid rgb(65 96 66 / 0.25);
+
+    color: rgb(242 232 213 / 0.65);
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 0.8rem;
 }
 
-.campo {
-    display: grid;
-    gap: 0.4rem;
+.pie > :first-child {
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
 }
 
-.campo__etiqueta {
-    font-size: 1.125rem;
-    font-weight: 600;
-}
+/* ==========================================================
+   TABLETAS
+   ========================================================== */
 
-.campo__control {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    border: 2px solid var(--linea);
-    border-radius: 0.5rem;
-    background: var(--pozo);
-    color: var(--marfil);
-    font: inherit;
-    transition: border-color 150ms ease, box-shadow 150ms ease;
-}
+@media (max-width: 1100px) {
+    .cabecera {
+        grid-template-columns: 1fr auto;
+        gap: 1rem;
+    }
 
-.campo__control--area {
-    min-height: 9rem;
-    resize: vertical;
-}
+    .cabecera h1 {
+        text-align: right;
+    }
 
-.campo__control:hover {
-    border-color: var(--marfil-suave);
-}
+    .cabecera__marca {
+        display: none;
+    }
 
-.campo__control:focus-visible {
-    outline: none;
-    border-color: var(--luna);
-    box-shadow: 0 0 0 3px rgb(255 244 119 / 0.3);
-}
+    .pantalla__contenido {
+        padding: 10px 16px;
+    }
 
-.campo__control[aria-invalid="true"] {
-    border-color: var(--sangre);
-}
+    .correo-cabecera__detalle {
+        display: none;
+    }
 
-.campo__control[aria-invalid="true"]:focus-visible {
-    box-shadow: 0 0 0 3px rgb(202 22 22 / 0.45);
-}
-
-.campo__error {
-    margin: 0;
-    padding-left: 0.75rem;
-    border-left: 3px solid var(--sangre);
-    color: var(--marfil);
-    font-size: 0.975rem;
-}
-
-.campo__error[hidden] {
-    display: none;
-}
-
-.campo__contador {
-    margin: 0;
-    text-align: right;
-    font-size: 0.9rem;
-    font-variant-numeric: tabular-nums;
-    color: var(--marfil-suave);
-}
-
-.campo__contador--limite {
-    color: var(--luna);
-}
-
-/* Botón: amarillo luna; al pasar el ratón "sangra" */
-
-.boton {
-    justify-self: center;
-    margin-top: 0.5rem;
-    padding: 0.85rem 2.5rem;
-    border: 2px solid var(--luna);
-    border-radius: 0.5rem;
-    background: var(--luna);
-    color: var(--negro);
-    font-family: var(--fuente-titulo);
-    font-size: 1.375rem;
-    letter-spacing: 0.04em;
-    cursor: pointer;
-    transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease, box-shadow 250ms ease;
-}
-
-.boton:hover {
-    border-color: var(--sangre);
-    background: var(--sangre);
-    color: var(--marfil);
-    box-shadow: 0 0.55rem 0 -0.2rem var(--sangre-oscura), 0 1rem 1.25rem -0.6rem var(--sangre);
-}
-
-.boton:focus-visible {
-    outline: 2px solid var(--marfil);
-    outline-offset: 4px;
-}
-
-.boton:active {
-    transform: translateY(1px);
-}
-
-@media (max-width: 30rem) {
-    .boton {
-        width: 100%;
+    .correo-cabecera {
+        margin-bottom: 10px;
     }
 }
 
+/* ==========================================================
+   MÓVILES Y TABLETAS PEQUEÑAS
+   La escena se muestra completa y el formulario pasa debajo.
+   No reducimos los campos hasta hacerlos ilegibles.
+   ========================================================== */
+
+@media (max-width: 850px) {
+    .cabecera {
+        grid-template-columns: 1fr;
+        gap: 0.85rem;
+
+        padding: 1rem;
+    }
+
+    .cabecera__volver {
+        font-size: 0.8rem;
+    }
+
+    .cabecera h1 {
+        font-size: clamp(1.7rem, 6vw, 2.3rem);
+        text-align: left;
+    }
+
+    .pantalla {
+        position: relative;
+
+        top: auto;
+        left: auto;
+        width: auto;
+        height: auto;
+
+        margin: 0 1rem 1.5rem;
+
+        overflow: visible;
+
+        border: 1px solid rgb(65 96 66 / 0.7);
+        border-top: 2px solid var(--sangre);
+        border-radius: 3px;
+
+        background:
+            linear-gradient(
+                135deg,
+                rgb(65 96 66 / 0.12),
+                transparent 65%
+            ),
+            var(--negro);
+
+        box-shadow:
+            inset 0 1px 0 rgb(242 232 213 / 0.08),
+            0 12px 30px rgb(20 20 20 / 0.6);
+    }
+
+    .pantalla__contenido {
+        max-width: 640px;
+        padding: 1.5rem;
+    }
+
+    .correo-cabecera {
+        margin-bottom: 1.5rem;
+    }
+
+    .correo-cabecera__detalle {
+        display: block;
+        font-size: 0.65rem;
+    }
+
+    .correo-cabecera h2 {
+        font-size: 1.8rem;
+    }
+
+    .correo-cabecera__intro {
+        font-size: 0.85rem;
+    }
+
+    .formulario {
+        gap: 1.1rem;
+    }
+
+    .campo__etiqueta {
+        font-size: 1rem;
+    }
+
+    .campo__control {
+        padding: 0.8rem;
+        font-size: 1rem;
+    }
+
+    .campo__control--area {
+        min-height: 9rem;
+    }
+
+    .campo__error,
+    .aviso {
+        font-size: 0.85rem;
+    }
+
+    .campo__contador {
+        font-size: 0.75rem;
+    }
+
+    .boton {
+        width: 100%;
+        padding: 0.85rem 1.25rem;
+        font-size: 1rem;
+    }
+
+    .pie {
+        flex-direction: column;
+        justify-content: center;
+        gap: 0.5rem;
+
+        padding: 1.25rem 1rem;
+
+        text-align: center;
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .pantalla {
+        margin-inline: 0.5rem;
+    }
+
+    .pantalla__contenido {
+        padding: 1.25rem 1rem;
+    }
+}
+
+/* ==========================================================
+   ACCESIBILIDAD: MOVIMIENTO REDUCIDO
+   ========================================================== */
+
 @media (prefers-reduced-motion: reduce) {
-    .contacto-pagina * {
+    *,
+    *::before,
+    *::after {
         transition: none !important;
+        animation: none !important;
     }
 }
