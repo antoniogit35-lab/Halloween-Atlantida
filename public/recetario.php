@@ -34,7 +34,16 @@ try {
         </p>
     <?php endif; ?>
     <main class="catalogo">
-<header class="cabecera"><h1><span>&lt;recetas&gt;</span> malditas <span>&lt;/recetas&gt;</span></h1><p id="contador" role="status" aria-live="polite">Cargando recetario…</p></header>
+<header class="cabecera">
+    <a class="cabecera__volver" href="principal.php">
+        <span aria-hidden="true">←</span>
+        Volver a la página principal
+    </a>
+
+    <h1><span>&lt;recetas&gt;</span> malditas <span>&lt;/recetas&gt;</span></h1>
+
+    <p id="contador" role="status" aria-live="polite">Cargando recetario…</p>
+</header>
 <section class="herramientas" aria-label="Búsqueda"><h2>El recetario</h2><label class="busqueda"><span class="sr-only">Buscar receta por nombre</span><input id="buscador" type="search" placeholder="Buscar receta…" autocomplete="off"><span aria-hidden="true">⌕</span></label></section>
 <section id="grid" class="grid" aria-label="Recetas"></section><p id="vacio" hidden>No hay recetas con ese nombre.</p>
 </main>

@@ -117,3 +117,25 @@ dialog {
     transform: none;
   }
 }
+
+/* Volver a la página principal */
+.cabecera__volver {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+    color: #F2E8D5b8;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: .875rem;
+    text-decoration: none;
+}
+
+.cabecera__volver:hover,
+.cabecera__volver:active {
+    color: var(--amarillo);
+}
+
+.cabecera__volver:focus-visible {
+    outline: 2px solid var(--amarillo);
+    outline-offset: 4px;
+}
