@@ -508,3 +508,26 @@ a.acceso:focus-visible {
         order: 3;
     }
 }
+
+/* Acceso de usuario en la cabecera */
+.sesion-activa,
+.sesion-enlace {
+    display: grid;
+    gap: 5px;
+    text-align: right;
+    font-size: .95rem;
+    color: var(--marfil);
+    text-decoration: none;
+}
+
+.sesion-activa a {
+    color: #b0ac9f;
+    font-size: .8rem;
+}
+
+.sesion-enlace:hover,
+.sesion-activa a:hover,
+.sesion-enlace:focus-visible,
+.sesion-activa a:focus-visible {
+    color: var(--amarillo);
+}

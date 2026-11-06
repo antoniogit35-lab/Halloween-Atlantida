@@ -1,3 +1,9 @@
+<?php
+declare(strict_types=1);
+require __DIR__ . '/../app/usuarios.php';
+$sesion = usuarioActual();
+?>
+
 <!doctype html>
 <html lang="es">
 <head>
@@ -13,10 +19,14 @@
         <h1>Enterrados en código</h1>
 
         <div class="cabecera-acceso">
-            <span class="sesion-pendiente">
-                Iniciar sesión
-                <small>Próximamente</small>
-            </span>
+            <?php if ($sesion !== null): ?>
+                <span class="sesion-activa">
+                    <?= htmlspecialchars($sesion['usuario'], ENT_QUOTES, 'UTF-8') ?>
+                    <a href="salir.php">Salir</a>
+                </span>
+            <?php else: ?>
+                <a class="sesion-enlace" href="login.php">Iniciar sesión</a>
+            <?php endif; ?>
         </div>
     </header>
 

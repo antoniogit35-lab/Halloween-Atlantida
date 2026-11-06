@@ -285,3 +285,26 @@ function datosLapida(string $usuario): ?array
         ? ['asesino' => $asesino, 'nacimiento' => $nacimiento, 'alta' => $alta]
         : null;
 }
+
+/**
+ * Devuelve los asesinos disponibles como [id => nombre], leídos de personajes.json.
+ */
+function listaAsesinos(): array
+{
+    $json = @file_get_contents(__DIR__ . '/../public/data/personajes.json');
+    $datos = $json !== false ? json_decode($json, true) : null;
+    $lista = [];
+
+    if (is_array($datos)) {
+        foreach ($datos as $personaje) {
+            if (is_array($personaje)
+                && isset($personaje['id'], $personaje['nombre'])
+                && is_string($personaje['id'])
+                && is_string($personaje['nombre'])) {
+                $lista[$personaje['id']] = $personaje['nombre'];
+            }
+        }
+    }
+
+    return $lista;
+}
