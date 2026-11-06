@@ -1,7 +1,10 @@
-/* ==========================================================
-   CONTACTA CON JACK
-   Escena realista con formulario HTML sobre la pantalla.
-   ========================================================== */
+/*
+ * CONTACTA CON JACK
+ * Ajustado a la nueva jack-contacto.png (1672 × 941).
+ *
+ * No se dibujan un monitor, un teclado ni decoraciones adicionales:
+ * todos esos elementos ya están en la imagen.
+ */
 
 :root {
     --negro: #141414;
@@ -10,17 +13,33 @@
     --marfil: #f2e8d5;
     --luna: #fff477;
     --sangre: #ca1616;
+    --texto-secundario: #c6beb0;
+    --superficie-control: #11171b;
+    --borde-control: #758b76;
 
     /*
-     * ENCAJE DEL FORMULARIO EN LA IMAGEN
-     *
-     * Valores iniciales aproximados.
-     * Los porcentajes se calculan respecto a la imagen completa.
+     * Rectángulo seguro DENTRO del cristal negro del monitor.
+     * Porcentajes de la imagen COMPLETA, no de la carcasa.
+     * La imagen debe conservar su proporción y no usar object-fit: cover.
      */
-    --pantalla-x: 14%;
-    --pantalla-y: 13%;
-    --pantalla-ancho: 49%;
-    --pantalla-alto: 58%;
+    --pantalla-x: 19.25%;
+    --pantalla-y: 14.6%;
+    --pantalla-ancho: 31.15%;
+    --pantalla-alto: 37.8%;
+
+    --fuente-cuerpo: Arial, Helvetica, sans-serif;
+    --fuente-titulo: Georgia, "Times New Roman", serif;
+    --texto-pequeno: 0.75rem;
+    --texto-control: clamp(0.875rem, 1cqw, 1rem);
+    --texto-titulo: clamp(1.5rem, 1.9cqw, 2rem);
+
+    --espacio-1: 0.25rem;
+    --espacio-2: 0.5rem;
+    --espacio-3: 0.75rem;
+    --espacio-4: 1rem;
+    --espacio-5: 1.25rem;
+    --espacio-6: 1.5rem;
+    --radio: 3px;
 }
 
 *,
@@ -35,109 +54,108 @@
 
 body {
     margin: 0;
-    min-height: 100vh;
-    min-height: 100dvh;
-
-    background: var(--negro);
+    position: relative;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    background: #090a09;
     color: var(--marfil);
-
-    font-family: Arial, Helvetica, sans-serif;
-    line-height: 1.5;
+    font-family: var(--fuente-cuerpo);
+    line-height: 1.4;
 }
 
-/* ==========================================================
-   CABECERA
-   ========================================================== */
+a,
+button,
+input,
+textarea {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.saltar {
+    position: fixed;
+    top: var(--espacio-2);
+    left: var(--espacio-2);
+    z-index: 20;
+    padding: var(--espacio-3) var(--espacio-4);
+    transform: translateY(-200%);
+    background: var(--marfil);
+    color: var(--negro);
+}
+
+.saltar:focus {
+    transform: none;
+}
+
+/*
+ * Como en principal.css: cabecera y pie flotan sobre la escena.
+ * Sus degradados se funden con la imagen sin añadir altura al documento.
+ */
+.cabecera,
+.pie {
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    pointer-events: none;
+}
 
 .cabecera {
-    position: relative;
-    z-index: 2;
-
+    top: 0;
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    gap: 1.5rem;
-
-    padding: 1.25rem 3%;
-
-    background:
-        linear-gradient(
-            to bottom,
-            rgb(20 20 20 / 0.98),
-            rgb(20 20 20 / 0.88)
-        );
-
-    border-bottom: 1px solid rgb(65 96 66 / 0.3);
+    gap: var(--espacio-6);
+    padding: var(--espacio-4) 4% calc(var(--espacio-6) + var(--espacio-3));
+    background: linear-gradient(
+        to bottom,
+        rgb(10 10 10 / 0.92) 0%,
+        rgb(10 10 10 / 0.6) 55%,
+        transparent 100%
+    );
 }
 
 .cabecera h1 {
     margin: 0;
-
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: clamp(1.4rem, 2.5vw, 2.5rem);
+    font-family: var(--fuente-titulo);
+    font-size: clamp(1.5rem, 2.5vw, 2.5rem);
     font-weight: 400;
     line-height: 1.2;
     letter-spacing: 0.035em;
     text-align: center;
-
-    text-shadow: 0 2px 8px rgb(20 20 20 / 0.8);
 }
 
 .cabecera__volver {
+    pointer-events: auto;
     display: inline-flex;
     align-items: center;
     justify-self: start;
-    gap: 0.6rem;
-
-    color: rgb(242 232 213 / 0.75);
-
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 0.85rem;
+    gap: var(--espacio-2);
+    min-height: 44px;
+    color: var(--texto-secundario);
+    font-family: var(--fuente-titulo);
+    font-size: 0.875rem;
     text-decoration: none;
 }
 
-.cabecera__volver:hover {
+.cabecera__volver:hover,
+.cabecera__volver:active {
     color: var(--luna);
 }
 
-.cabecera__volver:focus-visible {
-    outline: 2px solid var(--luna);
-    outline-offset: 5px;
-}
-
-.cabecera__marca {
-    justify-self: end;
-    margin: 0;
-
-    color: rgb(242 232 213 / 0.65);
-
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.12em;
-    text-align: right;
-    text-transform: uppercase;
-}
-
-/* ==========================================================
-   ESCENA
-   ========================================================== */
-
+/* La escena entra completa en la ventana, igual que en principal.css. */
 .contacto {
-    width: 100%;
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
 }
 
 .escena {
     position: relative;
     isolation: isolate;
-
-    width: min(100%, 1672px);
-    margin-inline: auto;
-
-    /*
-     * Las unidades cqw de los elementos interiores
-     * toman como referencia el ancho de esta escena.
-     */
     container-type: inline-size;
+    width: min(100vw, calc(100dvh * 1672 / 941));
+    aspect-ratio: 1672 / 941;
 }
 
 .escena__imagen {
@@ -145,163 +163,124 @@ body {
     width: 100%;
     height: auto;
     aspect-ratio: 1672 / 941;
+    background: #090a09;
 }
 
-/* ==========================================================
-   SUPERFICIE DEL FORMULARIO
-   ========================================================== */
+/* Funde los extremos si sobra espacio a los lados, como en la principal. */
+@media (min-aspect-ratio: 1672 / 941) {
+    .escena__imagen {
+        -webkit-mask-image: linear-gradient(
+            to right, transparent, #000 4%, #000 96%, transparent
+        );
+        mask-image: linear-gradient(
+            to right, transparent, #000 4%, #000 96%, transparent
+        );
+    }
+}
 
+/* Única superposición: contenido HTML sobre el cristal existente. */
 .pantalla {
     position: absolute;
     z-index: 1;
-
-    left: var(--pantalla-x);
     top: var(--pantalla-y);
+    left: var(--pantalla-x);
     width: var(--pantalla-ancho);
     height: var(--pantalla-alto);
-
+    display: flex;
+    flex-direction: column;
     min-width: 0;
-
-    /*
-     * Si aparecen errores o el usuario amplía el texto,
-     * el contenido se puede recorrer sin salir del monitor.
-     */
     overflow: auto;
+    overscroll-behavior: contain;
     scrollbar-width: thin;
-    scrollbar-color: var(--verde) var(--negro);
-
-    /*
-     * Sin carcasa ni fondo de tarjeta:
-     * aprovechamos directamente la pantalla de la imagen.
-     */
+    scrollbar-color: var(--borde-control) var(--superficie-control);
     background: transparent;
-    color: var(--marfil);
     color-scheme: dark;
 }
 
 .pantalla__contenido {
-    width: min(100%, 680px);
-    margin-inline: auto;
-
-    padding:
-        clamp(12px, 1.4cqw, 24px)
-        clamp(16px, 2.2cqw, 36px);
+    flex: 0 0 auto;
+    width: 100%;
+    min-width: 0;
+    margin-block: auto;
+    padding: var(--espacio-1) var(--espacio-2);
 }
-
-/* ==========================================================
-   CABECERA INTERIOR
-   ========================================================== */
 
 .correo-cabecera {
-    margin-bottom: clamp(10px, 1.2cqw, 20px);
+    margin-bottom: var(--espacio-2);
     text-align: center;
-}
-
-.correo-cabecera__detalle {
-    margin: 0 0 0.35rem;
-
-    color: var(--luna);
-
-    font-size: clamp(9px, 0.65cqw, 11px);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
 }
 
 .correo-cabecera h2 {
     margin: 0;
-
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: clamp(20px, 1.9cqw, 32px);
+    font-family: var(--fuente-titulo);
+    font-size: var(--texto-titulo);
     font-weight: 400;
-    line-height: 1.2;
-
-    text-shadow: 0 0 12px rgb(242 232 213 / 0.12);
+    line-height: 1.15;
 }
 
+/*
+ * El nuevo monitor es mucho más pequeño que el anterior.
+ * En escritorio se reserva el cristal para el título y los campos.
+ * Los textos introductorios se recuperan en la versión móvil.
+ */
+.correo-cabecera__detalle,
 .correo-cabecera__intro {
-    max-width: 32rem;
-    margin: 0.55rem auto 0;
-
-    color: rgb(242 232 213 / 0.72);
-
-    font-size: clamp(11px, 0.8cqw, 14px);
-    line-height: 1.5;
+    display: none;
 }
 
-/* ==========================================================
-   FORMULARIO
-   ========================================================== */
-
+/* Asunto y email comparten fila; mensaje y botón ocupan todo el ancho. */
 .formulario {
     display: grid;
-    gap: clamp(9px, 0.9cqw, 15px);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--espacio-2) var(--espacio-3);
 }
 
 .campo {
     display: grid;
-    gap: 0.3rem;
+    align-content: start;
+    gap: var(--espacio-1);
     min-width: 0;
+}
+
+.campo--ancho,
+.formulario > .aviso,
+.boton {
+    grid-column: 1 / -1;
 }
 
 .campo__etiqueta {
     color: var(--marfil);
-
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: clamp(12px, 0.95cqw, 16px);
+    font-size: var(--texto-pequeno);
 }
 
 .campo__control {
     display: block;
     width: 100%;
     min-width: 0;
-
-    padding:
-        clamp(7px, 0.65cqw, 11px)
-        clamp(9px, 0.85cqw, 14px);
-
-    border: 1px solid rgb(65 96 66 / 0.85);
-    border-radius: 3px;
-
-    background:
-        linear-gradient(
-            rgb(65 96 66 / 0.1),
-            rgb(20 20 20 / 0.15)
-        ),
-        rgb(20 20 20 / 0.78);
-
+    height: clamp(32px, 2.5cqw, 40px);
+    padding: var(--espacio-1) var(--espacio-2);
+    border: 1px solid var(--borde-control);
+    border-radius: var(--radio);
+    background: var(--superficie-control);
     color: var(--marfil);
-
-    font: inherit;
-    font-size: clamp(13px, 0.95cqw, 16px);
-    line-height: 1.4;
-
-    box-shadow:
-        inset 0 2px 5px rgb(20 20 20 / 0.65),
-        0 1px 0 rgb(242 232 213 / 0.05);
-
-    transition:
-        border-color 150ms ease,
-        box-shadow 150ms ease;
+    font-family: var(--fuente-cuerpo);
+    font-size: var(--texto-control);
+    line-height: 1.35;
 }
 
 .campo__control:hover {
-    border-color: rgb(242 232 213 / 0.6);
-}
-
-.campo__control:focus-visible {
-    outline: 2px solid var(--luna);
-    outline-offset: 2px;
-    border-color: var(--luna);
+    border-color: var(--marfil);
 }
 
 .campo__control--area {
-    min-height: clamp(75px, 6.5cqw, 110px);
+    height: clamp(52px, 4.2cqw, 72px);
+    min-height: 52px;
     resize: vertical;
 }
 
 .campo__control[aria-invalid="true"] {
     border-color: var(--sangre);
-    box-shadow: inset 3px 0 0 var(--sangre);
+    outline: 1px solid var(--sangre);
 }
 
 .campo__informacion {
@@ -309,28 +288,13 @@ body {
     flex-wrap: wrap;
     align-items: start;
     justify-content: space-between;
-    gap: 0.4rem 1rem;
-}
-
-.campo__error {
-    margin: 0;
-    padding-left: 0.55rem;
-
-    border-left: 3px solid var(--sangre);
-
-    color: var(--marfil);
-
-    font-size: clamp(11px, 0.75cqw, 13px);
-    line-height: 1.45;
-    overflow-wrap: anywhere;
+    gap: var(--espacio-1) var(--espacio-2);
 }
 
 .campo__contador {
     margin: 0 0 0 auto;
-
-    color: rgb(242 232 213 / 0.65);
-
-    font-size: clamp(10px, 0.7cqw, 12px);
+    color: var(--texto-secundario);
+    font-size: var(--texto-pequeno);
     font-variant-numeric: tabular-nums;
     text-align: right;
 }
@@ -339,233 +303,219 @@ body {
     color: var(--luna);
 }
 
-/* ==========================================================
-   BOTÓN
-   ========================================================== */
+.campo__error {
+    margin: 0;
+    color: var(--marfil);
+    font-size: var(--texto-pequeno);
+    overflow-wrap: anywhere;
+}
 
 .boton {
     display: inline-flex;
+    justify-self: center;
     align-items: center;
     justify-content: center;
-    justify-self: center;
-    gap: 1rem;
-
+    gap: var(--espacio-4);
+    min-height: 44px;
     max-width: 100%;
-    padding:
-        clamp(8px, 0.7cqw, 12px)
-        clamp(16px, 1.6cqw, 27px);
-
-    border: 1px solid var(--verde);
-    border-radius: 3px;
-
-    background:
-        linear-gradient(
-            rgb(65 96 66 / 0.45),
-            rgb(65 96 66 / 0.12)
-        ),
-        var(--negro);
-
+    padding: var(--espacio-2) var(--espacio-5);
+    border: 1px solid var(--borde-control);
+    border-radius: var(--radio);
+    background: var(--verde);
     color: var(--luna);
-
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: clamp(12px, 0.95cqw, 16px);
-
-    box-shadow:
-        inset 0 1px 0 rgb(242 232 213 / 0.1),
-        0 3px 8px rgb(20 20 20 / 0.5);
-
+    font-family: var(--fuente-titulo);
+    font-size: var(--texto-control);
+    line-height: 1.2;
     cursor: pointer;
-
-    transition:
-        background-color 150ms ease,
-        border-color 150ms ease,
-        color 150ms ease,
-        transform 150ms ease;
 }
 
 .boton:hover {
-    border-color: var(--sangre);
+    border-color: var(--marfil);
     background: var(--sangre);
     color: var(--marfil);
 }
 
-.boton:focus-visible {
-    outline: 2px solid var(--luna);
-    outline-offset: 4px;
-}
-
 .boton:active {
-    transform: translateY(1px);
+    background: var(--sangre);
+    color: var(--marfil);
 }
 
-/* ==========================================================
-   AVISOS
-   ========================================================== */
+.cabecera__volver:focus-visible,
+.boton:focus-visible,
+.campo__control:focus-visible,
+.aviso:focus-visible {
+    outline: 2px solid var(--luna);
+    outline-offset: 2px;
+}
 
 .aviso {
-    margin: 0 0 0.75rem;
-    padding: 0.65rem 0.8rem;
-
-    border: 1px solid rgb(65 96 66 / 0.65);
-    border-left-width: 3px;
-
-    background: rgb(20 20 20 / 0.95);
-
+    margin: 0 0 var(--espacio-2);
+    padding: var(--espacio-2);
+    border: 1px solid var(--borde-control);
+    border-radius: var(--radio);
+    background: var(--superficie-control);
     color: var(--marfil);
-
-    font-size: clamp(11px, 0.8cqw, 14px);
+    font-size: var(--texto-pequeno);
     overflow-wrap: anywhere;
 }
 
 .formulario > .aviso {
-    margin-bottom: 0;
-}
-
-.aviso--ok {
-    border-left-color: var(--luna);
+    margin: 0;
 }
 
 .aviso--error {
-    border-left-color: var(--sangre);
+    border-color: var(--sangre);
 }
-
-.aviso:focus-visible {
-    outline: 2px solid var(--luna);
-    outline-offset: 3px;
-}
-
-/* ==========================================================
-   PIE
-   ========================================================== */
 
 .pie {
+    bottom: 0;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    gap: 1rem;
-
-    padding: 1.25rem 3%;
-
-    border-top: 1px solid rgb(65 96 66 / 0.25);
-
-    color: rgb(242 232 213 / 0.65);
-
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 0.8rem;
+    justify-content: flex-end;
+    gap: var(--espacio-4);
+    padding: calc(var(--espacio-6) + var(--espacio-3)) 4% var(--espacio-5);
+    background: linear-gradient(
+        to top,
+        rgb(10 10 10 / 0.92) 0%,
+        rgb(10 10 10 / 0.6) 55%,
+        transparent 100%
+    );
+    color: var(--texto-secundario);
+    font-family: var(--fuente-titulo);
+    font-size: var(--texto-pequeno);
 }
 
-.pie > :first-child {
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+/*
+ * Si la escena horizontal se reduce por la altura de la ventana,
+ * quitamos el título interior duplicado y compactamos los espacios.
+ * El título principal sigue visible en la cabecera.
+ */
+@media (min-aspect-ratio: 1/1) {
+    @container (max-width: 1100px) {
+        .correo-cabecera {
+            display: none;
+        }
+
+        .pantalla__contenido {
+            padding: var(--espacio-1);
+        }
+
+        .formulario {
+            gap: var(--espacio-1) var(--espacio-2);
+        }
+
+        .campo__control--area {
+            height: 52px;
+            min-height: 52px;
+        }
+    }
 }
 
-/* ==========================================================
-   TABLETAS
-   ========================================================== */
+/*
+ * Como en principal.css, las pantallas VERTICALES sí permiten scroll.
+ * En ellas el formulario queda debajo de la escena.
+ * Así se conserva TODA la fotografía y no se reducen los campos
+ * hasta hacerlos ilegibles. Es el mismo formulario, no una copia.
+ */
+@media (max-aspect-ratio: 1/1) {
+    body {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        min-height: 100dvh;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
 
-@media (max-width: 1100px) {
     .cabecera {
-        grid-template-columns: 1fr auto;
-        gap: 1rem;
+        position: absolute;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: var(--espacio-3);
+        padding: var(--espacio-3) var(--espacio-4) var(--espacio-6);
     }
 
     .cabecera h1 {
+        font-size: 1.1rem;
         text-align: right;
-    }
-
-    .cabecera__marca {
-        display: none;
-    }
-
-    .pantalla__contenido {
-        padding: 10px 16px;
-    }
-
-    .correo-cabecera__detalle {
-        display: none;
-    }
-
-    .correo-cabecera {
-        margin-bottom: 10px;
-    }
-}
-
-/* ==========================================================
-   MÓVILES Y TABLETAS PEQUEÑAS
-   La escena se muestra completa y el formulario pasa debajo.
-   No reducimos los campos hasta hacerlos ilegibles.
-   ========================================================== */
-
-@media (max-width: 850px) {
-    .cabecera {
-        grid-template-columns: 1fr;
-        gap: 0.85rem;
-
-        padding: 1rem;
+        letter-spacing: 0.02em;
     }
 
     .cabecera__volver {
-        font-size: 0.8rem;
+        font-size: var(--texto-pequeno);
     }
 
-    .cabecera h1 {
-        font-size: clamp(1.7rem, 6vw, 2.3rem);
-        text-align: left;
+    .contacto {
+        position: static;
+        display: block;
+        width: 100%;
+        flex: 0 0 auto;
+    }
+
+    .escena {
+        width: 100%;
+        aspect-ratio: auto;
+    }
+
+    .escena__imagen {
+        -webkit-mask-image: linear-gradient(
+            to bottom, #000 0%, #000 92%, transparent 100%
+        );
+        mask-image: linear-gradient(
+            to bottom, #000 0%, #000 92%, transparent 100%
+        );
     }
 
     .pantalla {
         position: relative;
-
         top: auto;
         left: auto;
-        width: auto;
+        width: min(640px, calc(100% - 2rem));
         height: auto;
-
-        margin: 0 1rem 1.5rem;
-
+        margin: var(--espacio-4) auto var(--espacio-6);
         overflow: visible;
-
-        border: 1px solid rgb(65 96 66 / 0.7);
-        border-top: 2px solid var(--sangre);
-        border-radius: 3px;
-
-        background:
-            linear-gradient(
-                135deg,
-                rgb(65 96 66 / 0.12),
-                transparent 65%
-            ),
-            var(--negro);
-
-        box-shadow:
-            inset 0 1px 0 rgb(242 232 213 / 0.08),
-            0 12px 30px rgb(20 20 20 / 0.6);
+        overscroll-behavior: auto;
+        border: 1px solid var(--borde-control);
+        border-radius: var(--radio);
+        background: var(--negro);
     }
 
     .pantalla__contenido {
-        max-width: 640px;
-        padding: 1.5rem;
+        margin: 0;
+        padding: var(--espacio-6);
     }
 
     .correo-cabecera {
-        margin-bottom: 1.5rem;
+        margin-bottom: var(--espacio-6);
     }
 
     .correo-cabecera__detalle {
         display: block;
-        font-size: 0.65rem;
+        margin: 0 0 var(--espacio-2);
+        color: var(--luna);
+        font-size: var(--texto-pequeno);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
     }
 
     .correo-cabecera h2 {
-        font-size: 1.8rem;
+        font-size: 1.75rem;
     }
 
     .correo-cabecera__intro {
-        font-size: 0.85rem;
+        display: block;
+        margin: var(--espacio-2) 0 0;
+        color: var(--texto-secundario);
+        font-size: 0.875rem;
+        line-height: 1.5;
     }
 
     .formulario {
-        gap: 1.1rem;
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--espacio-4);
+    }
+
+    .campo {
+        gap: var(--espacio-2);
     }
 
     .campo__etiqueta {
@@ -573,60 +523,52 @@ body {
     }
 
     .campo__control {
-        padding: 0.8rem;
+        height: auto;
+        min-height: 44px;
+        padding: var(--espacio-3);
         font-size: 1rem;
     }
 
     .campo__control--area {
-        min-height: 9rem;
-    }
-
-    .campo__error,
-    .aviso {
-        font-size: 0.85rem;
-    }
-
-    .campo__contador {
-        font-size: 0.75rem;
+        min-height: 144px;
     }
 
     .boton {
         width: 100%;
-        padding: 0.85rem 1.25rem;
+        padding: var(--espacio-3) var(--espacio-4);
         font-size: 1rem;
     }
 
     .pie {
+        position: static;
+        margin-top: auto;
         flex-direction: column;
-        justify-content: center;
-        gap: 0.5rem;
-
-        padding: 1.25rem 1rem;
-
+        gap: var(--espacio-2);
+        padding: var(--espacio-5) var(--espacio-4) var(--espacio-6);
         text-align: center;
-        font-size: 0.75rem;
+        background: #090a09;
     }
 }
 
-@media (max-width: 400px) {
-    .pantalla {
-        margin-inline: 0.5rem;
-    }
-
+@media (max-width: 600px) and (max-aspect-ratio: 1/1) {
     .pantalla__contenido {
-        padding: 1.25rem 1rem;
+        padding: var(--espacio-5) var(--espacio-4);
     }
 }
 
-/* ==========================================================
-   ACCESIBILIDAD: MOVIMIENTO REDUCIDO
-   ========================================================== */
+/* Cabecera más baja cuando la ventana horizontal tiene poca altura. */
+@media (max-height: 600px) and (min-aspect-ratio: 1/1) {
+    .cabecera {
+        padding-top: var(--espacio-2);
+        padding-bottom: var(--espacio-6);
+    }
 
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        transition: none !important;
-        animation: none !important;
+    .cabecera h1 {
+        font-size: 1.5rem;
+    }
+
+    .pie {
+        padding-top: var(--espacio-6);
+        padding-bottom: var(--espacio-2);
     }
 }
