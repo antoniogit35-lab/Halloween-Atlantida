@@ -1,0 +1,486 @@
+:root {
+    --negro: #141414;
+    --verde: #416042;
+    --marfil: #F2E8D5;
+    --amarillo: #FFF477;
+    --rojo: #CA1616;
+    --piedra: #ddd4bf;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    background: #090a09;
+    color: var(--marfil);
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+.solo-lectores {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+/* La escena mantiene la proporción de la imagen; --u equivale al 1 % de su ancho */
+.escenario {
+    --u: 1cqw;
+    position: relative;
+    width: min(100vw, calc(100dvh * 1672 / 941));
+    aspect-ratio: 1672 / 941;
+    container-type: inline-size;
+    isolation: isolate;
+}
+
+.escenario-imagen {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+@media (min-aspect-ratio: 1672 / 941) {
+    .escenario-imagen {
+        -webkit-mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
+                mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
+    }
+}
+
+/* Texto con efecto de grabado en la piedra */
+.lapida,
+.pedestal,
+.ficha-asesino {
+    color: var(--piedra);
+    text-shadow:
+        0 -1px 0 rgba(0, 0, 0, .9),
+        0 1px 1px rgba(0, 0, 0, .8),
+        0 0 4px rgba(0, 0, 0, .5);
+}
+
+.volver {
+    position: absolute;
+    z-index: 5;
+    top: 3.5%;
+    left: 2%;
+    display: grid;
+    place-items: center;
+    width: max(2rem, calc(var(--u) * 3));
+    aspect-ratio: 1;
+    border: 1px solid rgba(242, 232, 213, .45);
+    border-radius: 50%;
+    background: rgba(10, 10, 10, .55);
+    color: var(--marfil);
+    font-size: max(1rem, calc(var(--u) * 1.6));
+    text-decoration: none;
+}
+
+.volver:hover,
+.volver:focus-visible {
+    color: var(--amarillo);
+    border-color: var(--amarillo);
+}
+
+/* ---------- Cartel con la ficha del asesino ---------- */
+.ficha-asesino {
+    position: absolute;
+    z-index: 2;
+    left: 18.5%;
+    top: 48%;
+    width: 12.2%;
+    height: 36%;
+    transform: translate(-50%, -50%);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    padding: calc(var(--u) * .4);
+    text-align: center;
+}
+
+.ficha-asesino h2 {
+    margin: 0 0 calc(var(--u) * .6);
+    font-size: max(.8rem, calc(var(--u) * 1.45));
+    font-weight: 400;
+    line-height: 1.15;
+}
+
+.ficha-obra {
+    margin: 0 0 calc(var(--u) * .8);
+    font-size: max(.66rem, calc(var(--u) * 1));
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--amarillo);
+}
+
+.ficha-descripcion {
+    margin: 0;
+    font-size: max(.68rem, calc(var(--u) * 1.05));
+    line-height: 1.4;
+    text-align: justify;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+}
+
+/* ---------- Lápida ---------- */
+.lapida {
+    position: absolute;
+    z-index: 2;
+    left: 62.8%;
+    top: 11%;
+    width: 31%;
+    height: 63%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(var(--u) * .9);
+    padding-bottom: calc(var(--u) * 2.5);
+    text-align: center;
+}
+
+.lapida-titulo {
+    margin: 0;
+    font-size: max(.7rem, calc(var(--u) * 1.5));
+    letter-spacing: .18em;
+    text-transform: uppercase;
+}
+
+.foto-asesino {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: calc(var(--u) * 8.2);
+    aspect-ratio: 1;
+    padding: 0;
+    overflow: hidden;
+    border: 2px solid rgba(242, 232, 213, .5);
+    border-radius: 50%;
+    background: rgba(0, 0, 0, .35);
+    color: var(--piedra);
+    cursor: pointer;
+}
+
+.foto-asesino img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.foto-asesino span {
+    font-size: calc(var(--u) * 4);
+}
+
+.foto-asesino:hover,
+.foto-asesino:focus-visible {
+    border-color: var(--amarillo);
+    outline: none;
+}
+
+.lapida-form {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+    gap: calc(var(--u) * .8);
+    width: 82%;
+}
+
+.campo {
+    display: grid;
+    grid-template-columns: calc(var(--u) * 9.5) 1fr;
+    align-items: end;
+    gap: calc(var(--u) * 1);
+}
+
+.campo label {
+    text-align: right;
+    font-size: max(.68rem, calc(var(--u) * 1.25));
+}
+
+/* Campos transparentes: solo una línea, como si estuvieran grabados */
+.campo input {
+    width: 100%;
+    padding: calc(var(--u) * .25) calc(var(--u) * .5);
+    border: 0;
+    border-bottom: 1px solid rgba(242, 232, 213, .45);
+    background: transparent;
+    color: var(--marfil);
+    font: inherit;
+    font-size: max(.72rem, calc(var(--u) * 1.25));
+    text-align: center;
+    text-shadow: inherit;
+    outline: none;
+}
+
+.campo input:focus {
+    border-bottom-color: var(--amarillo);
+}
+
+.mensaje {
+    margin: 0;
+    font-size: max(.62rem, calc(var(--u) * 1.05));
+}
+
+.mensaje.error {
+    color: #ff9a8a;
+}
+
+.mensaje.aviso {
+    color: #a8d8a8;
+}
+
+.entrar {
+    align-self: center;
+    margin-top: auto;
+    padding: calc(var(--u) * .5) calc(var(--u) * 2.4);
+    border: 1px solid rgba(242, 232, 213, .5);
+    background: transparent;
+    color: var(--marfil);
+    font: inherit;
+    font-size: max(.68rem, calc(var(--u) * 1.3));
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    text-shadow: inherit;
+    cursor: pointer;
+}
+
+.entrar:hover,
+.entrar:focus-visible {
+    border-color: var(--rojo);
+    color: var(--rojo);
+    outline: none;
+}
+
+/* Los márgenes automáticos reparten el espacio sobrante a partes iguales */
+.epitafio {
+    min-height: calc(var(--u) * 3.6);
+    margin: auto 0 0;
+    font-size: max(.66rem, calc(var(--u) * 1.3));
+    font-style: italic;
+    text-wrap: balance;
+}
+
+.fechas {
+    min-height: calc(var(--u) * 1.6);
+    margin: auto 0 0;
+    font-size: max(.62rem, calc(var(--u) * 1.15));
+    letter-spacing: .08em;
+}
+
+/* ---------- Pedestal ---------- */
+.pedestal {
+    position: absolute;
+    z-index: 2;
+    left: 62.8%;
+    top: 82%;
+    width: 44%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    gap: calc(var(--u) * 1.4);
+    font-size: max(.7rem, calc(var(--u) * 1.4));
+}
+
+.pedestal a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.pedestal a:hover,
+.pedestal a:focus-visible {
+    color: var(--rojo);
+    outline: none;
+}
+
+/* ---------- Modal de asesinos ---------- */
+.modal-asesinos {
+    padding: 0;
+    width: min(820px, calc(100% - 28px));
+    max-height: 90dvh;
+    overflow: auto;
+    color: var(--marfil);
+    background: var(--negro);
+    border: 1px solid var(--verde);
+    border-top: 3px solid var(--rojo);
+    border-radius: 3px;
+    box-shadow: 0 24px 90px #000;
+}
+
+.modal-asesinos::backdrop {
+    background: #141414d9;
+    backdrop-filter: blur(4px);
+}
+
+.modal-interior {
+    position: relative;
+    padding: 48px 26px 28px;
+}
+
+.modal-interior h2 {
+    margin: 0 0 20px;
+    font-size: 1.4rem;
+    font-weight: 400;
+    text-align: center;
+}
+
+.cerrar-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    width: 32px;
+    height: 32px;
+    border: 1px solid #CA161680;
+    background: transparent;
+    color: var(--marfil);
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+.cerrar-modal:hover {
+    background: var(--rojo);
+}
+
+.cerrar-modal:focus-visible,
+.rejilla-asesinos button:focus-visible {
+    outline: 2px solid var(--amarillo);
+    outline-offset: 3px;
+}
+
+.rejilla-asesinos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+    gap: 14px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.rejilla-asesinos button {
+    display: grid;
+    justify-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 6px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--marfil);
+    font: inherit;
+    font-size: .8rem;
+    cursor: pointer;
+}
+
+.rejilla-asesinos button:hover {
+    border-color: var(--verde);
+}
+
+.rejilla-asesinos img {
+    width: 76px;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border: 1px solid rgba(242, 232, 213, .4);
+    border-radius: 50%;
+}
+
+/* ============================================================
+   MÓVIL Y PANTALLAS VERTICALES
+   La imagen pasa a ser un fondo fijo y los bloques se apilan.
+   ============================================================ */
+@media (max-aspect-ratio: 1/1) {
+    body {
+        display: block;
+        height: auto;
+        min-height: 100dvh;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    .escenario {
+        --u: 2.6cqw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        width: 100%;
+        aspect-ratio: auto;
+        min-height: 100dvh;
+        padding: 70px 16px 28px;
+    }
+
+    .escenario-imagen {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        -webkit-mask-image: none;
+                mask-image: none;
+    }
+
+    .volver {
+        position: fixed;
+        top: 14px;
+        left: 14px;
+    }
+
+    .lapida,
+    .pedestal,
+    .ficha-asesino {
+        position: static;
+        transform: none;
+        width: 100%;
+        max-width: 420px;
+        height: auto;
+    }
+
+    .lapida {
+        padding: 24px 16px;
+        border: 1px solid rgba(65, 96, 66, .7);
+        border-top: 3px solid var(--rojo);
+        border-radius: 3px;
+        background: rgba(10, 10, 10, .72);
+    }
+
+    .lapida-form {
+        width: 100%;
+    }
+
+    .campo {
+        grid-template-columns: 1fr;
+        gap: 4px;
+    }
+
+    .campo label {
+        text-align: center;
+    }
+
+    .pedestal {
+        order: 2;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .ficha-asesino {
+        order: 3;
+        padding: 16px;
+        border: 1px solid rgba(65, 96, 66, .5);
+        background: rgba(10, 10, 10, .72);
+    }
+
+    .ficha-asesino h2 {
+        font-size: 1.1rem;
+    }
+
+    .ficha-obra,
+    .ficha-descripcion {
+        font-size: .85rem;
+    }
+}

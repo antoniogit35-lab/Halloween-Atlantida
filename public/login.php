@@ -36,38 +36,84 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Iniciar sesión · Enterrados en código</title>
+    <link rel="stylesheet" href="assets/css/login.css">
 </head>
 <body class="pagina-login">
-    <a class="volver" href="principal.php">← Volver</a>
+    <main class="escenario">
+        <img
+            class="escenario-imagen"
+            src="assets/img/fondos/fondo-login.jpg"
+            alt=""
+            width="1672"
+            height="941"
+            fetchpriority="high"
+        >
 
-    <main>
-        <h1>Iniciar sesión</h1>
+        <a class="volver" href="principal.php" aria-label="Volver a la página principal">←</a>
 
-        <?php if ($aviso !== ''): ?>
-            <p class="aviso" role="status"><?= escapar($aviso) ?></p>
-        <?php endif; ?>
-        <?php if ($error !== ''): ?>
-            <p class="error" role="alert"><?= escapar($error) ?></p>
-        <?php endif; ?>
+        <!-- Ficha del asesino, sobre el cartel -->
+        <aside class="ficha-asesino" aria-live="polite">
+            <h2 id="ficha-nombre">Elige a tu asesino</h2>
+            <p id="ficha-obra" class="ficha-obra"></p>
+            <p id="ficha-descripcion" class="ficha-descripcion"></p>
+        </aside>
 
-        <form method="post" action="login.php">
-            <?= campoCsrf() ?>
+        <!-- Lápida con el formulario -->
+        <section class="lapida">
+            <h1 class="solo-lectores">Iniciar sesión</h1>
+            <p class="lapida-titulo">Asesinado por</p>
 
-            <label for="usuario">Nombre</label>
-            <input id="usuario" name="usuario" type="text" required
-                   autocomplete="username" value="<?= escapar($usuario) ?>">
+            <button type="button" class="foto-asesino" id="abrir-asesinos"
+                    aria-haspopup="dialog" aria-label="Ver todos los asesinos">
+                <img id="foto-asesino" src="" alt="" hidden>
+                <span id="foto-interrogante" aria-hidden="true">?</span>
+            </button>
 
-            <label for="clave">Contraseña</label>
-            <input id="clave" name="clave" type="password" required
-                   autocomplete="current-password">
+            <form class="lapida-form" method="post" action="login.php">
+                <?= campoCsrf() ?>
 
-            <button type="submit">Entrar</button>
-        </form>
+                <?php if ($aviso !== ''): ?>
+                    <p class="mensaje aviso" role="status"><?= escapar($aviso) ?></p>
+                <?php endif; ?>
+                <?php if ($error !== ''): ?>
+                    <p class="mensaje error" role="alert"><?= escapar($error) ?></p>
+                <?php endif; ?>
 
-        <p>
-            <a href="registro.php">Crear asesinado</a> ·
+                <div class="campo">
+                    <label for="usuario">Nombre</label>
+                    <input id="usuario" name="usuario" type="text" required
+                           autocomplete="username" value="<?= escapar($usuario) ?>">
+                </div>
+
+                    <div class="campo">
+                    <label for="clave">Contraseña</label>
+                    <input id="clave" name="clave" type="password" required
+                           autocomplete="current-password">
+                </div>
+
+                <p class="epitafio" id="epitafio"></p>
+                <p class="fechas" id="fechas"></p>
+
+                <button class="entrar" type="submit">Entrar</button>
+            </form>
+        </section>
+
+        <!-- Base de la lápida -->
+        <nav class="pedestal" aria-label="Otras opciones de acceso">
+            <a href="registro.php">Crear asesinado</a>
+            <span aria-hidden="true">/</span>
             <a href="recuperar.php">Cambiar contraseña</a>
-        </p>
+        </nav>
+
+        <dialog id="modal-asesinos" class="modal-asesinos" aria-labelledby="titulo-modal-asesinos">
+            <div class="modal-interior">
+                <button type="button" class="cerrar-modal" id="cerrar-asesinos" aria-label="Cerrar">×</button>
+                <h2 id="titulo-modal-asesinos">Elige a tu asesino</h2>
+                <ul class="rejilla-asesinos" id="rejilla-asesinos"></ul>
+            </div>
+        </dialog>
     </main>
+
+    <script src="assets/js/login.js" defer></script>
 </body>
 </html>
