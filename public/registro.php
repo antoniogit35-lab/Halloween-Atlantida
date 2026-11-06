@@ -17,17 +17,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $clave = is_string($_POST['clave'] ?? null) ? $_POST['clave'] : '';
             $clave2 = is_string($_POST['clave2'] ?? null) ? $_POST['clave2'] : '';
 
-            $resultado = altaUsuario($_POST);
-            $errores = $resultado['errores'];
-
+            // Se valida todo antes de tocar la base de datos
+            $errores = validarAlta($_POST);
             if ($clave !== $clave2) {
                 $errores['clave2'] = 'Las contraseñas no coinciden.';
             }
 
-            if ($resultado['ok'] && !isset($errores['clave2'])) {
-                // Tras registrarse, entra directamente
-                loginUsuario(trim((string) $_POST['usuario']), $clave);
-                redirigir('principal.php');
+            if (!$errores) {
+                $resultado = altaUsuario($_POST);
+                $errores = $resultado['errores'];
+
+                if ($resultado['ok']) {
+                    // Tras registrarse, entra directamente
+                    loginUsuario(trim((string) $_POST['usuario']), $clave);
+                    redirigir('principal.php');
+                }
             }
 
             // Si las contraseñas no coincidían, el usuario ya se creó: se avisa
