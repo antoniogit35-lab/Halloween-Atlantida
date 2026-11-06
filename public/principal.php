@@ -82,7 +82,7 @@ $sesion = usuarioActual();
             Sobre nosotros
         </button>
 
-        <span>Contacta con Jack <small>· Próximamente</small></span>
+        <a class="enlace-pie" href="contacto.php">Contacta con Jack</a>
 
         <img
             class="logo-atlantida"
