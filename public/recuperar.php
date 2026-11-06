@@ -55,48 +55,68 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cambiar contraseña · Enterrados en código</title>
+    <link rel="stylesheet" href="assets/css/pergamino.css">
 </head>
-<body class="pagina-recuperar">
-    <a class="volver" href="login.php">← Volver</a>
+<body class="pagina-pergamino pagina-recuperar">
+    <main class="escenario">
+        <img
+            class="escenario-imagen"
+            src="assets/img/fondos/fondo-crear-recuperar.jpg"
+            alt=""
+            width="1672"
+            height="941"
+            fetchpriority="high"
+        >
 
-    <main>
-        <h1>Cambiar contraseña</h1>
+        <a class="volver" href="login.php" aria-label="Volver al inicio de sesión">←</a>
 
-        <?php if ($error !== ''): ?>
-            <p class="error" role="alert"><?= escapar($error) ?></p>
-        <?php endif; ?>
+        <section class="pergamino">
+            <h1>Cambiar contraseña</h1>
 
-        <?php if ($paso === 1): ?>
-            <form method="post" action="recuperar.php">
-                <?= campoCsrf() ?>
-                <input type="hidden" name="paso" value="1">
+            <?php if ($error !== ''): ?>
+                <p class="error error-general" role="alert"><?= escapar($error) ?></p>
+            <?php endif; ?>
 
-                <label for="usuario">Nombre</label>
-                <input id="usuario" name="usuario" type="text" required
-                       autocomplete="username" value="<?= escapar($usuario) ?>">
+            <?php if ($paso === 1): ?>
+                <form class="form-recuperar" method="post" action="recuperar.php">
+                    <?= campoCsrf() ?>
+                    <input type="hidden" name="paso" value="1">
 
-                <button type="submit">Continuar</button>
-            </form>
-        <?php else: ?>
-            <form method="post" action="recuperar.php">
-                <?= campoCsrf() ?>
-                <input type="hidden" name="paso" value="2">
-                <input type="hidden" name="usuario" value="<?= escapar($usuario) ?>">
+                    <div class="campo">
+                        <label for="usuario">Nombre</label>
+                        <input id="usuario" name="usuario" type="text" required
+                               autocomplete="username" value="<?= escapar($usuario) ?>">
+                    </div>
 
-                <p><?= escapar($pregunta) ?></p>
+                    <button class="boton-pergamino" type="submit">Continuar</button>
+                </form>
+            <?php else: ?>
+                <form class="form-recuperar" method="post" action="recuperar.php">
+                    <?= campoCsrf() ?>
+                    <input type="hidden" name="paso" value="2">
+                    <input type="hidden" name="usuario" value="<?= escapar($usuario) ?>">
 
-                <label for="respuesta">Respuesta</label>
-                <input id="respuesta" name="respuesta" type="text" required autocomplete="off">
+                    <p class="pregunta-seguridad"><?= escapar($pregunta) ?></p>
 
-                <label for="clave">Nueva contraseña</label>
-                <input id="clave" name="clave" type="password" required autocomplete="new-password">
+                    <div class="campo">
+                        <label for="respuesta">Respuesta</label>
+                        <input id="respuesta" name="respuesta" type="text" required autocomplete="off">
+                    </div>
 
-                <label for="clave2">Repite la contraseña</label>
-                <input id="clave2" name="clave2" type="password" required autocomplete="new-password">
+                    <div class="campo">
+                        <label for="clave">Nueva contraseña</label>
+                        <input id="clave" name="clave" type="password" required autocomplete="new-password">
+                    </div>
 
-                <button type="submit">Cambiar contraseña</button>
-            </form>
-        <?php endif; ?>
+                    <div class="campo">
+                        <label for="clave2">Repite la contraseña</label>
+                        <input id="clave2" name="clave2" type="password" required autocomplete="new-password">
+                    </div>
+
+                    <button class="boton-pergamino" type="submit">Cambiar contraseña</button>
+                </form>
+            <?php endif; ?>
+        </section>
     </main>
 </body>
 </html>
