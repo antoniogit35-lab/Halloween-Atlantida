@@ -82,6 +82,10 @@ $maximo = $personajes ? max(1, $personajes[0]['muertes']) : 1;
 <?php if (!$personajes): ?>
         <p class="ranking__vacio">No se ha podido cargar el ranking. Comprueba que existe <code>data/personajes.json</code> y que su formato es correcto.</p>
 <?php else: ?>
+    <p class="ranking__ayuda">
+            Pulsa la foto del asesino que quieras para ver su ficha. Desde ahí podrás
+            cambiar el arma que te acompaña junto al cursor (solo en ordenador).
+    </p>
         <ol class="ranking__lista" id="ranking-lista">
 <?php foreach ($personajes as $indice => $personaje): ?>
 <?php
