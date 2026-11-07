@@ -118,8 +118,58 @@
                     </fieldset>
                 </div>
             </section>
+            <div class="pie-panel">
+                <p class="intentos-panel">Intentos de acusación: <strong id="intentos-panel"></strong></p>
+                <button type="button" class="boton-acusar" id="abrir-acusacion">Acusar</button>
+            </div>
         </aside>
     </main>
+
+        <!-- Ventana de acusación -->
+    <dialog id="modal-acusacion" class="modal" aria-labelledby="titulo-acusacion">
+        <div class="modal-interior">
+            <h2 id="titulo-acusacion">Acusación</h2>
+            <p class="aviso-acusacion" id="aviso-acusacion"></p>
+
+            <form class="form-acusacion" id="form-acusacion">
+                <fieldset>
+                    <legend>Sospechoso: <span class="elegido" id="elegido-acusar-sospechoso">—</span></legend>
+                    <div class="opciones" id="opciones-acusar-sospechoso"></div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Arma: <span class="elegido" id="elegido-acusar-arma">—</span></legend>
+                    <div class="opciones" id="opciones-acusar-arma"></div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Habitación: <span class="elegido" id="elegido-acusar-habitacion">—</span></legend>
+                    <div class="opciones-texto" id="opciones-acusar-habitacion"></div>
+                </fieldset>
+
+                <p class="error-acusacion" id="error-acusacion" role="alert"></p>
+
+                <div class="acciones-modal">
+                    <button type="button" class="boton-secundario" id="cancelar-acusacion">Cancelar</button>
+                    <button type="submit" class="boton-acusar">Acusar</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
+
+    <!-- Pantalla final: victoria o derrota -->
+    <dialog id="modal-final" class="modal modal-final" aria-labelledby="titulo-final">
+        <div class="modal-interior">
+            <h2 id="titulo-final"></h2>
+            <img class="gif-final" id="gif-final" alt="">
+            <p class="solucion-final" id="solucion-final"></p>
+
+            <div class="acciones-modal">
+                <button type="button" class="boton-acusar" id="jugar-de-nuevo">Jugar de nuevo</button>
+                <a class="boton-secundario" href="principal.php">Volver al cementerio</a>
+            </div>
+        </div>
+    </dialog>
 
     <!-- El orden importa: datos, lógica, pruebas provisionales e interfaz -->
     <script src="assets/js/juego-datos.js" defer></script>
