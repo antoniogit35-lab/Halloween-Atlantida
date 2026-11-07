@@ -58,15 +58,20 @@ body {
 .volver {
     pointer-events: auto;
     justify-self: start;
-    color: #c6beb0;
+    color: rgb(242 232 213 / 0.65);
     font-size: .9rem;
     text-decoration: none;
 }
 
-.volver:hover,
+.volver:hover {
+    color: #f2e8d5;
+    text-decoration: underline;
+}
+
 .volver:focus-visible {
-    color: var(--amarillo);
-    outline: none;
+    outline: 2px solid var(--amarillo);
+    outline-offset: 4px;
+    border-radius: .25rem;
 }
 
 .marcadores {

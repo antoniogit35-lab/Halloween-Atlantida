@@ -121,13 +121,14 @@ dialog {
 /* Volver a la página principal */
 .cabecera__volver {
     position: absolute;
-    top: 14px;
+    top: 6px;
     left: max(16px, 4%);
     z-index: 5;
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    color: #c6beb0;
+    gap: .5rem;
+    padding: .5rem 0;
+    color: rgb(242 232 213 / 0.65);
     font-family: Georgia, 'Times New Roman', serif;
     font-size: .875rem;
     text-decoration: none;
@@ -136,12 +137,14 @@ dialog {
 
 .cabecera__volver:hover,
 .cabecera__volver:active {
-    color: var(--amarillo);
+    color: #f2e8d5;
+    text-decoration: underline;
 }
 
 .cabecera__volver:focus-visible {
     outline: 2px solid var(--amarillo);
     outline-offset: 4px;
+    border-radius: .25rem;
 }
 
 @media (max-width: 850px) {

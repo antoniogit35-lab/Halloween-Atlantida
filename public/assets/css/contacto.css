@@ -1,9 +1,5 @@
 /*
  * CONTACTA CON JACK
- * Ajustado a la nueva jack-contacto.png (1672 × 941).
- *
- * No se dibujan un monitor, un teclado ni decoraciones adicionales:
- * todos esos elementos ya están en la imagen.
  */
 
 :root {
@@ -139,7 +135,14 @@ textarea {
 
 .cabecera__volver:hover,
 .cabecera__volver:active {
-    color: var(--luna);
+    color: #f2e8d5;
+    text-decoration: underline;
+}
+
+.cabecera__volver:focus-visible {
+    outline: 2px solid var(--luna);
+    outline-offset: 4px;
+    border-radius: .25rem;
 }
 
 /* La escena entra completa en la ventana, igual que en principal.css. */
