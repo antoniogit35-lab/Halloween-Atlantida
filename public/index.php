@@ -13,8 +13,11 @@
             <img 
                 id="puerta-estatica" 
                 class="capa-visual puerta-estatica" 
-                src="assets/img/entrada-cementerio.png" 
+                src="assets/img/fondos/entrada-cementerio.jpg" 
                 alt="Entrada al cementerio con la verja cerrada"
+                width="1672"
+                height="941"
+                fetchpriority="high"
             >
 
             <!-- Vídeo de la animación -->

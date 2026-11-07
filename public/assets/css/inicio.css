@@ -11,6 +11,7 @@
 body {
   background-color: var(--negro-fondo);
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,18 +21,18 @@ body {
 .escena {
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Mantiene el contenedor con la proporción exacta de la imagen */
+/* El lienzo mantiene la proporción de la imagen (1672 × 941)
+   y entra completo en la ventana, igual que en la portada. */
 .lienzo-interactivo {
   position: relative;
-  width: 100%;
-  max-width: 1200px;
-  aspect-ratio: 16 / 10;
-  max-height: 100vh;
+  width: min(100vw, calc(100dvh * 1672 / 941));
+  aspect-ratio: 1672 / 941;
 }
 
 /* Capas de imagen y vídeo perfectamente alineadas */
@@ -42,6 +43,22 @@ body {
   height: 100%;
   object-fit: contain;
   background-color: var(--negro-fondo);
+}
+
+/* Si la ventana es más ancha que la imagen, se funden los lados con el negro */
+@media (min-aspect-ratio: 1672 / 941) {
+  .capa-visual {
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
+            mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
+  }
+}
+
+/* Si la ventana es más alta que la imagen, se funden arriba y abajo */
+@media (max-aspect-ratio: 1672 / 941) {
+  .capa-visual {
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 4%, #000 96%, transparent);
+            mask-image: linear-gradient(to bottom, transparent, #000 4%, #000 96%, transparent);
+  }
 }
 
 /* La imagen estática inicial se desvanece de forma más pausada */
@@ -67,32 +84,33 @@ body {
   opacity: 1;
 }
 
-/* Zona interactiva sobre el cartel dibujado en la imagen */
+/* Zona interactiva sobre el cartel «Entrar al cementerio» de la imagen.
+   Son porcentajes de la imagen completa. */
 .zona-cartel {
   position: absolute;
-  left: 17%;
-  top: 47%;
-  width: 19%;
-  height: 11%;
-  transform: rotate(-7deg);
+  left: 15.7%;
+  top: 48.7%;
+  width: 20.5%;
+  height: 10.6%;
+  transform: rotate(-3deg);
   background: transparent;
   border: none;
   cursor: pointer;
   z-index: 10;
-  border-radius: 4px;
+  border-radius: 6px;
   outline: none;
-  transition: filter 0.2s ease, transform 0.2s ease;
+  transition: background 0.2s ease, transform 0.2s ease;
 }
 
-/* Efecto sutil de aura roja al pasar el ratón por encima del cartel */
+/* Brillo rojo suave sobre el cartel al pasar el ratón o enfocarlo */
 .zona-cartel:hover,
 .zona-cartel:focus-visible {
-  filter: drop-shadow(0 0 12px rgba(180, 0, 0, 0.75));
-  transform: rotate(-7deg) scale(1.03);
+  background: radial-gradient(ellipse at center, rgba(202, 22, 22, 0.3), transparent 70%);
+  transform: rotate(-3deg) scale(1.03);
 }
 
 .zona-cartel:active {
-  transform: rotate(-7deg) scale(0.98);
+  transform: rotate(-3deg) scale(0.98);
 }
 
 /* Se desactiva al hacer clic para que no interfiera durante la reproducción */
