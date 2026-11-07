@@ -1,0 +1,239 @@
+:root {
+    --negro: #141414;
+    --verde: #416042;
+    --marfil: #F2E8D5;
+    --amarillo: #FFF477;
+    --rojo: #CA1616;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* La página ocupa exactamente la ventana, sin scroll (como la portada) */
+body {
+    margin: 0;
+    position: relative;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    background: #090a09;
+    color: var(--marfil);
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+/* ---------- Cabecera flotante sobre el mapa ---------- */
+.cabecera {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 24px;
+    padding: 14px 4% 34px;
+    background: linear-gradient(
+        to bottom,
+        rgba(10, 10, 10, .92) 0%,
+        rgba(10, 10, 10, .6) 55%,
+        transparent 100%
+    );
+    pointer-events: none; /* deja pasar los clics al mapa */
+}
+
+.cabecera h1 {
+    margin: 0;
+    font-size: clamp(1.2rem, 2.4vw, 2.2rem);
+    font-weight: 400;
+    letter-spacing: .035em;
+    text-align: center;
+}
+
+.volver {
+    pointer-events: auto;
+    justify-self: start;
+    color: #c6beb0;
+    font-size: .9rem;
+    text-decoration: none;
+}
+
+.volver:hover,
+.volver:focus-visible {
+    color: var(--amarillo);
+    outline: none;
+}
+
+.marcadores {
+    display: flex;
+    justify-self: end;
+    gap: 22px;
+}
+
+.marcador {
+    margin: 0;
+    font-size: .95rem;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+}
+
+.marcador strong {
+    margin-left: 6px;
+    color: var(--amarillo);
+    font-size: 1.25rem;
+    font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Escenario: el mapa entra completo en la ventana ---------- */
+.juego {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+}
+
+.escenario {
+    position: relative;
+    width: min(100vw, calc(100dvh * 1672 / 941));
+    aspect-ratio: 1672 / 941;
+    container-type: inline-size;
+    isolation: isolate;
+}
+
+.escenario-imagen {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* Si la ventana es más ancha que la imagen, se difuminan los bordes */
+@media (min-aspect-ratio: 1672 / 941) {
+    .escenario-imagen {
+        -webkit-mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
+                mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
+    }
+}
+
+/* ---------- Habitaciones pulsables ----------
+   Los valores son porcentajes de la imagen completa. Para ajustarlos,
+   abre la página con ?zonas al final de la dirección y verás cada zona. */
+.sala {
+    position: absolute;
+    z-index: 2;
+    left: var(--x);
+    top: var(--y);
+    width: var(--ancho);
+    height: var(--alto);
+    padding: 0;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--marfil);
+    font: inherit;
+    cursor: pointer;
+}
+
+.sala[data-habitacion="biblioteca"] { --x: 14.4%; --y: 4.8%;  --ancho: 24.8%; --alto: 34%; }
+.sala[data-habitacion="dormitorio"] { --x: 60.4%; --y: 4.8%;  --ancho: 27.2%; --alto: 23.4%; }
+.sala[data-habitacion="bano"]       { --x: 70.3%; --y: 29.2%; --ancho: 16.4%; --alto: 16.5%; }
+.sala[data-habitacion="salon"]      { --x: 11.4%; --y: 46.8%; --ancho: 27.8%; --alto: 31.3%; }
+.sala[data-habitacion="comedor"]    { --x: 62.5%; --y: 52.6%; --ancho: 25.7%; --alto: 26%; }
+.sala[data-habitacion="vestibulo"]  { --x: 39.8%; --y: 9.6%;  --ancho: 19.7%; --alto: 63.8%; }
+
+/* Nombre de la habitación, abajo a la izquierda para no chocar con la cabecera */
+.sala-nombre {
+    position: absolute;
+    left: .6cqw;
+    bottom: .6cqw;
+    padding: .25cqw .8cqw;
+    border: 1px solid rgba(242, 232, 213, .35);
+    border-radius: 2px;
+    background: rgba(10, 10, 10, .72);
+    font-size: clamp(.62rem, 1cqw, 1rem);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.sala:hover,
+.sala:focus-visible {
+    border-color: var(--amarillo);
+    background: rgba(255, 244, 119, .10);
+    outline: none;
+}
+
+.sala:hover .sala-nombre,
+.sala:focus-visible .sala-nombre {
+    color: var(--amarillo);
+}
+
+.sala[aria-pressed="true"] {
+    border-color: var(--rojo);
+    background: rgba(202, 22, 22, .14);
+}
+
+/* Modo ajuste: se activa con ?zonas en la dirección */
+.ver-zonas .sala {
+    border-color: #00e5ff;
+    background: rgba(0, 229, 255, .15);
+}
+
+/* ---------- Barra de estado, sobre el jardín ---------- */
+.estado-juego {
+    position: absolute;
+    z-index: 3;
+    left: 50%;
+    bottom: 2.5%;
+    transform: translateX(-50%);
+    max-width: 90%;
+    margin: 0;
+    padding: .5cqw 1.6cqw;
+    border: 1px solid rgba(65, 96, 66, .8);
+    border-radius: 3px;
+    background: rgba(10, 10, 10, .85);
+    font-size: clamp(.7rem, 1.2cqw, 1.05rem);
+    text-align: center;
+}
+
+/* ============================================================
+   MÓVIL Y PANTALLAS VERTICALES (base sencilla)
+   El mapa ocupa todo el ancho y la página se recorre con scroll.
+   ============================================================ */
+@media (max-aspect-ratio: 1/1) {
+    body {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        min-height: 100dvh;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    .cabecera {
+        position: static;
+        grid-template-columns: 1fr;
+        gap: 8px;
+        padding: 14px 16px;
+        background: #090a09;
+        pointer-events: auto;
+    }
+
+    .cabecera h1 {
+        font-size: 1.15rem;
+    }
+
+    .volver,
+    .marcadores {
+        justify-self: center;
+    }
+
+    .juego {
+        position: static;
+        display: block;
+        width: 100%;
+    }
+
+    .escenario {
+        width: 100%;
+    }
+}
