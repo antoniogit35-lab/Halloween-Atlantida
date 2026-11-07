@@ -28,6 +28,12 @@ try {
 <!doctype html>
 <html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Recetas malditas</title><link rel="stylesheet" href="assets/css/recetario.css"></head>
 <body>
+
+    <a class="cabecera__volver" href="principal.php">
+        <span aria-hidden="true">←</span>
+        Volver a la página principal
+    </a>
+
     <?php if ($errorRecetario !== null): ?>
         <p role="alert">
             <?= htmlspecialchars($errorRecetario, ENT_QUOTES, 'UTF-8') ?>
@@ -35,10 +41,6 @@ try {
     <?php endif; ?>
     <main class="catalogo">
 <header class="cabecera">
-    <a class="cabecera__volver" href="principal.php">
-        <span aria-hidden="true">←</span>
-        Volver a la página principal
-    </a>
 
     <h1><span>&lt;recetas&gt;</span> malditas <span>&lt;/recetas&gt;</span></h1>
 

@@ -120,14 +120,18 @@ dialog {
 
 /* Volver a la página principal */
 .cabecera__volver {
+    position: absolute;
+    top: 14px;
+    left: max(16px, 4%);
+    z-index: 5;
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 18px;
-    color: #F2E8D5b8;
+    gap: 8px;
+    color: #c6beb0;
     font-family: Georgia, 'Times New Roman', serif;
     font-size: .875rem;
     text-decoration: none;
+    text-shadow: 0 1px 3px #000;
 }
 
 .cabecera__volver:hover,
@@ -138,4 +142,16 @@ dialog {
 .cabecera__volver:focus-visible {
     outline: 2px solid var(--amarillo);
     outline-offset: 4px;
+}
+
+@media (max-width: 850px) {
+    .cabecera__volver {
+        position: static;
+        display: flex;
+        padding: 14px 16px 0;
+    }
+
+    .catalogo {
+        margin-top: 10px;
+    }
 }
