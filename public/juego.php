@@ -171,6 +171,53 @@
         </div>
     </dialog>
 
+    <!-- Botón flotante de información -->
+    <button type="button" class="boton-info" id="abrir-info"
+            aria-label="Cómo se juega" aria-haspopup="dialog">i</button>
+
+    <dialog id="modal-info" class="modal" aria-labelledby="titulo-info">
+        <div class="modal-interior">
+            <h2 id="titulo-info">Cómo se juega</h2>
+
+            <p class="texto-info">
+                Uno de los seis sospechosos cometió un crimen con una de las seis armas
+                en una de las seis habitaciones. Tienes que descubrir los tres datos.
+            </p>
+
+            <ol class="reglas">
+                <li><strong>Elige una habitación</strong> pulsándola en el plano de la mansión.</li>
+                <li>
+                    En la pestaña <strong>Interrogar</strong>, elige a quién interrogas, un arma
+                    y un sospechoso, y pulsa <strong>Preguntar</strong>. Cada pregunta gasta un turno
+                    (tienes <span id="info-turnos"></span>).
+                </li>
+                <li>
+                    Si el interrogado tiene alguna de las tres cartas por las que preguntas
+                    (habitación, arma o sospechoso), te enseña <strong>una</strong>. Esa carta no es
+                    la solución, así que puedes descartarla. Si no tiene ninguna, no puede ayudarte.
+                </li>
+                <li>
+                    Usa el <strong>Cuaderno</strong> para anotar lo que descubras y tachar
+                    las opciones descartadas.
+                </li>
+                <li>
+                    Cuando creas saberlo, pulsa <strong>Acusar</strong>. Tienes
+                    <span id="info-intentos"></span> intentos y, si fallas, solo se te dice que es
+                    incorrecta. Cuando se acaben los turnos tendrás una última acusación.
+                </li>
+            </ol>
+
+            <p class="texto-info">
+                Pista: si ninguno de los seis puede enseñarte una carta concreta, esa carta
+                forma parte de la solución.
+            </p>
+
+            <div class="acciones-modal">
+                <button type="button" class="boton-acusar" id="cerrar-info">Entendido</button>
+            </div>
+        </div>
+    </dialog>
+
     <!-- El orden importa: datos, lógica, pruebas provisionales e interfaz -->
     <script src="assets/js/juego-datos.js" defer></script>
     <script src="assets/js/juego-logica.js" defer></script>

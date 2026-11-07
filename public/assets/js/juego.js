@@ -414,6 +414,24 @@ function reiniciarPartida() {
 
 botonJugarDeNuevo.addEventListener('click', reiniciarPartida);
 
+// ---------- Botón de información ----------
+
+const modalInfo = document.getElementById('modal-info');
+
+// Los números salen de las constantes de juego-datos.js, así siempre coinciden
+document.getElementById('info-turnos').textContent = TURNOS_INICIALES + ' turnos';
+document.getElementById('info-intentos').textContent = INTENTOS_ACUSACION;
+
+document.getElementById('abrir-info').addEventListener('click', () => modalInfo.showModal());
+document.getElementById('cerrar-info').addEventListener('click', () => modalInfo.close());
+
+// Un clic fuera de la ventana también la cierra
+modalInfo.addEventListener('click', (evento) => {
+  if (evento.target === modalInfo) {
+    modalInfo.close();
+  }
+});
+
 // ---------- Modo ajuste de zonas: añade ?zonas a la dirección ----------
 
 if (new URLSearchParams(window.location.search).has('zonas')) {
