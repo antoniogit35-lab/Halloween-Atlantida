@@ -97,7 +97,26 @@
 
             <section class="seccion" id="seccion-cuaderno" role="tabpanel"
                      aria-labelledby="pestana-cuaderno" hidden>
-                <p class="proximamente">El cuaderno llegará en el siguiente paso.</p>
+                <label class="etiqueta-notas" for="notas">Notas</label>
+                <textarea class="notas" id="notas" rows="6" maxlength="2000"
+                          placeholder="Por ejemplo: Chucky no tiene el cuchillo ni el baño"></textarea>
+
+                <div class="listas-tachar">
+                    <fieldset>
+                        <legend>Sospechosos</legend>
+                        <ul class="lista-tachar" id="lista-sospechoso"></ul>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Armas</legend>
+                        <ul class="lista-tachar" id="lista-arma"></ul>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Habitaciones</legend>
+                        <ul class="lista-tachar" id="lista-habitacion"></ul>
+                    </fieldset>
+                </div>
             </section>
         </aside>
     </main>

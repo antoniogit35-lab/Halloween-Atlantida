@@ -433,9 +433,96 @@ body {
     color: var(--amarillo);
 }
 
-.proximamente {
-    color: #c6beb0;
-    font-style: italic;
+/* ---------- Cuaderno ---------- */
+.etiqueta-notas {
+    display: block;
+    margin-bottom: .4rem;
+    font-size: .85rem;
+    letter-spacing: .04em;
+}
+
+.notas {
+    display: block;
+    width: 100%;
+    min-height: 7rem;
+    padding: .6rem .7rem;
+    border: 1px solid rgba(242, 232, 213, .3);
+    border-radius: 3px;
+    background: rgba(242, 232, 213, .05);
+    color: var(--marfil);
+    font: inherit;
+    font-size: .9rem;
+    line-height: 1.5;
+    resize: vertical;
+}
+
+.notas::placeholder {
+    color: #8f8a7e;
+}
+
+.notas:focus {
+    border-color: var(--amarillo);
+    outline: none;
+}
+
+.listas-tachar fieldset {
+    min-width: 0;
+    margin: 1rem 0 0;
+    padding: 0;
+    border: 0;
+}
+
+.listas-tachar legend {
+    margin-bottom: .45rem;
+    padding: 0;
+    color: var(--amarillo);
+    font-size: .85rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.lista-tachar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .4rem .8rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.casilla {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: .9rem;
+    cursor: pointer;
+}
+
+.casilla input {
+    flex: none;
+    width: 1.1rem;
+    height: 1.1rem;
+    margin: 0;
+    accent-color: var(--rojo);
+    cursor: pointer;
+}
+
+.casilla span {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+/* Al marcar la casilla, el nombre se tacha en rojo */
+.casilla input:checked + span {
+    color: #8f8a7e;
+    text-decoration: line-through;
+    text-decoration-color: var(--rojo);
+    text-decoration-thickness: 2px;
+}
+
+.casilla input:focus-visible + span {
+    outline: 2px solid var(--amarillo);
+    outline-offset: 2px;
 }
 
 /* ============================================================

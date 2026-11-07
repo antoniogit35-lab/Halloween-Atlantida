@@ -226,6 +226,34 @@ formularioPregunta.addEventListener('submit', (evento) => {
   }
 });
 
+// ---------- Cuaderno: listas para tachar ----------
+
+// Crea una casilla por cada elemento. Marcarla tacha el nombre (lo hace el CSS)
+function construirListaTachar(idLista, lista) {
+  const contenedor = document.getElementById(idLista);
+
+  lista.forEach((elemento) => {
+    const item = document.createElement('li');
+    const etiqueta = document.createElement('label');
+    etiqueta.className = 'casilla';
+
+    const casilla = document.createElement('input');
+    casilla.type = 'checkbox';
+    casilla.value = elemento.id;
+
+    const nombre = document.createElement('span');
+    nombre.textContent = elemento.nombre;
+
+    etiqueta.append(casilla, nombre);
+    item.append(etiqueta);
+    contenedor.append(item);
+  });
+}
+
+construirListaTachar('lista-sospechoso', SOSPECHOSOS);
+construirListaTachar('lista-arma', ARMAS);
+construirListaTachar('lista-habitacion', HABITACIONES);
+
 // ---------- Modo ajuste de zonas: añade ?zonas a la dirección ----------
 
 if (new URLSearchParams(window.location.search).has('zonas')) {
