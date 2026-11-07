@@ -1,0 +1,177 @@
+:root {
+    --negro: #141414;
+    --verde: #416042;
+    --marfil: #F2E8D5;
+    --amarillo: #FFF477;
+    --rojo: #CA1616;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    background: #090a09;
+    color: var(--marfil);
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+/* La escena mantiene la proporción de la imagen; --u equivale al 1 % de su ancho */
+.escenario {
+    --u: 1cqw;
+    position: relative;
+    width: min(100vw, calc(100dvh * 1672 / 941));
+    aspect-ratio: 1672 / 941;
+    container-type: inline-size;
+    isolation: isolate;
+}
+
+.escenario-imagen {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+@media (min-aspect-ratio: 1672 / 941) {
+    .escenario-imagen {
+        -webkit-mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
+                mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
+    }
+}
+
+/* Bocadillo del fantasma, a la derecha de su mano */
+.mensaje-fantasma {
+    position: absolute;
+    z-index: 2;
+    left: 41%;
+    top: 20%;
+    width: 27%;
+    padding: calc(var(--u) * 1.6) calc(var(--u) * 1.8);
+    border: 1px solid rgba(242, 232, 213, .35);
+    border-radius: 6px;
+    background: rgba(10, 12, 16, .62);
+    text-shadow: 0 1px 3px #000;
+}
+
+/* Cola del bocadillo, apuntando al fantasma */
+.mensaje-fantasma::before {
+    content: "";
+    position: absolute;
+    top: calc(var(--u) * 3);
+    left: calc(var(--u) * -1.2);
+    border-style: solid;
+    border-width: calc(var(--u) * .7) calc(var(--u) * 1.2) calc(var(--u) * .7) 0;
+    border-color: transparent rgba(10, 12, 16, .62) transparent transparent;
+}
+
+.codigo-error {
+    margin: 0;
+    color: var(--amarillo);
+    font-size: clamp(2.2rem, 5.5cqw, 5rem);
+    line-height: 1;
+    letter-spacing: .08em;
+    text-shadow: 0 0 .4em rgba(255, 244, 119, .45);
+}
+
+.mensaje-fantasma h1 {
+    margin: calc(var(--u) * .8) 0 calc(var(--u) * .6);
+    font-size: clamp(1.05rem, 1.9cqw, 1.9rem);
+    font-weight: 400;
+    line-height: 1.3;
+}
+
+.pregunta {
+    margin: 0;
+    font-size: clamp(.9rem, 1.35cqw, 1.35rem);
+    font-style: italic;
+}
+
+.boton-guia {
+    display: inline-block;
+    margin-top: calc(var(--u) * 1.2);
+    padding: calc(var(--u) * .7) calc(var(--u) * 1.8);
+    border: 1px solid var(--marfil);
+    border-radius: 3px;
+    background: var(--verde);
+    color: var(--amarillo);
+    font-size: clamp(.85rem, 1.2cqw, 1.2rem);
+    letter-spacing: .08em;
+    text-decoration: none;
+}
+
+.boton-guia:hover,
+.boton-guia:focus-visible {
+    background: var(--rojo);
+    color: var(--marfil);
+    outline: none;
+}
+
+.boton-guia:focus-visible {
+    outline: 2px solid var(--amarillo);
+    outline-offset: 3px;
+}
+
+/* ============================================================
+   MÓVIL Y PANTALLAS VERTICALES
+   Imagen vertical de fondo y bocadillo abajo, sobre el camino.
+   ============================================================ */
+@media (max-aspect-ratio: 1/1) {
+    body {
+        display: block;
+    }
+
+    .escenario {
+        --u: 3.2cqw;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        width: 100%;
+        height: 100dvh;
+        aspect-ratio: auto;
+        padding: 16px 16px 28px;
+    }
+
+    .escenario-imagen {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 35% center;
+        -webkit-mask-image: none;
+                mask-image: none;
+    }
+
+    .mensaje-fantasma {
+        position: relative;
+        left: auto;
+        top: auto;
+        width: 100%;
+        max-width: 440px;
+        margin: 0 auto;
+    }
+
+    /* La cola ahora apunta hacia arriba, hacia el fantasma */
+    .mensaje-fantasma::before {
+        top: calc(var(--u) * -1.2);
+        left: calc(var(--u) * 4);
+        border-width: 0 calc(var(--u) * .7) calc(var(--u) * 1.2) calc(var(--u) * .7);
+        border-color: transparent transparent rgba(10, 12, 16, .62) transparent;
+    }
+
+    .mensaje-fantasma h1 {
+        font-size: 1.15rem;
+    }
+
+    .pregunta,
+    .boton-guia {
+        font-size: 1rem;
+    }
+}
