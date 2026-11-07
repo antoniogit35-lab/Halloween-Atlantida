@@ -202,9 +202,10 @@ body {
     display: block;
     margin-top: .4em;
     font-family: "Courier New", monospace;
-    font-size: clamp(.5rem, .6cqw, .8rem);
-    line-height: 1.2;
-    color: #cbc2ad;
+    font-size: clamp(.7rem, .85cqw, 1rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: #e3dac4;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, .9), 0 0 3px rgba(0, 0, 0, .6);
 }
 
@@ -346,8 +347,8 @@ a.acceso:focus-visible {
         --fuente: 3.3cqw;
     }
 
-    .consulta {
-        font-size: clamp(.5rem, 2.2cqw, .8rem);
+        .consulta {
+        font-size: clamp(.6rem, 2.7cqw, .8rem);
     }
 
     .estado,
