@@ -10,6 +10,10 @@
     box-sizing: border-box;
 }
 
+[hidden] {
+    display: none !important;
+}
+
 /* La página ocupa exactamente la ventana, sin scroll (como la portada) */
 body {
     margin: 0;
@@ -22,7 +26,7 @@ body {
     font-family: Georgia, "Times New Roman", serif;
 }
 
-/* ---------- Cabecera flotante sobre el mapa ---------- */
+/* ---------- Cabecera flotante ---------- */
 .cabecera {
     position: absolute;
     top: 0;
@@ -67,6 +71,7 @@ body {
 
 .marcadores {
     display: flex;
+    align-items: center;
     justify-self: end;
     gap: 22px;
 }
@@ -85,17 +90,52 @@ body {
     font-variant-numeric: tabular-nums;
 }
 
-/* ---------- Escenario: el mapa entra completo en la ventana ---------- */
+.alternar-panel {
+    pointer-events: auto;
+    padding: 6px 12px;
+    border: 1px solid rgba(242, 232, 213, .4);
+    border-radius: 3px;
+    background: rgba(10, 10, 10, .6);
+    color: var(--marfil);
+    font: inherit;
+    font-size: .8rem;
+    cursor: pointer;
+}
+
+.alternar-panel:hover,
+.alternar-panel:focus-visible {
+    border-color: var(--amarillo);
+    color: var(--amarillo);
+    outline: none;
+}
+
+/* ---------- Distribución: mapa a la izquierda, panel a la derecha ---------- */
 .juego {
     position: absolute;
     inset: 0;
     display: grid;
-    place-items: center;
+    grid-template-columns: minmax(0, 1fr) 24rem;
 }
 
+.panel-oculto .juego {
+    grid-template-columns: minmax(0, 1fr);
+}
+
+.panel-oculto .panel {
+    display: none;
+}
+
+.zona-mapa {
+    display: grid;
+    place-items: center;
+    min-width: 0;
+    min-height: 0;
+}
+
+/* El mapa entra completo en el espacio disponible */
 .escenario {
     position: relative;
-    width: min(100vw, calc(100dvh * 1672 / 941));
+    width: min(100%, calc(100dvh * 1672 / 941));
     aspect-ratio: 1672 / 941;
     container-type: inline-size;
     isolation: isolate;
@@ -105,14 +145,8 @@ body {
     display: block;
     width: 100%;
     height: auto;
-}
-
-/* Si la ventana es más ancha que la imagen, se difuminan los bordes */
-@media (min-aspect-ratio: 1672 / 941) {
-    .escenario-imagen {
-        -webkit-mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
-                mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
-    }
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 3%, #000 97%, transparent);
+            mask-image: linear-gradient(to right, transparent, #000 3%, #000 97%, transparent);
 }
 
 /* ---------- Habitaciones pulsables ----------
@@ -195,9 +229,218 @@ body {
     text-align: center;
 }
 
+/* ---------- Panel de investigación ---------- */
+.panel {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    padding: 4.2rem 1rem 1rem;
+    overflow-y: auto;
+    border-left: 1px solid rgba(65, 96, 66, .7);
+    background: #0d100d;
+}
+
+.pestanas {
+    display: flex;
+    border-bottom: 1px solid rgba(65, 96, 66, .7);
+}
+
+.pestanas [role="tab"] {
+    flex: 1;
+    padding: .7rem .5rem;
+    border: 0;
+    border-bottom: 3px solid transparent;
+    background: transparent;
+    color: #c6beb0;
+    font: inherit;
+    font-size: .85rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.pestanas [role="tab"]:hover {
+    color: var(--marfil);
+}
+
+.pestanas [role="tab"][aria-selected="true"] {
+    border-bottom-color: var(--rojo);
+    color: var(--amarillo);
+}
+
+.pestanas [role="tab"]:focus-visible {
+    outline: 2px solid var(--amarillo);
+    outline-offset: -2px;
+}
+
+.seccion {
+    padding-top: 1rem;
+}
+
+.ubicacion {
+    margin: 0 0 .9rem;
+    color: #c6beb0;
+    font-size: .9rem;
+}
+
+.ubicacion strong {
+    color: var(--amarillo);
+    font-weight: 400;
+}
+
+.form-pregunta fieldset {
+    min-width: 0;
+    margin: 0 0 .9rem;
+    padding: 0;
+    border: 0;
+}
+
+.form-pregunta legend {
+    margin-bottom: .45rem;
+    padding: 0;
+    font-size: .85rem;
+    letter-spacing: .04em;
+}
+
+.elegido {
+    color: var(--amarillo);
+}
+
+/* Opciones: botones de radio con aspecto de miniatura */
+.opciones {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 6px;
+}
+
+.opcion {
+    position: relative;
+    display: block;
+    cursor: pointer;
+}
+
+.opcion input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.opcion img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border: 2px solid rgba(242, 232, 213, .25);
+    border-radius: 4px;
+    opacity: .75;
+}
+
+.opcion:hover img {
+    border-color: var(--marfil);
+    opacity: 1;
+}
+
+.opcion input:checked + img {
+    border-color: var(--rojo);
+    box-shadow: 0 0 0 2px rgba(202, 22, 22, .35);
+    opacity: 1;
+}
+
+.opcion input:focus-visible + img {
+    outline: 2px solid var(--amarillo);
+    outline-offset: 2px;
+}
+
+.boton-preguntar {
+    width: 100%;
+    padding: .7rem 1rem;
+    border: 1px solid #758b76;
+    border-radius: 3px;
+    background: var(--verde);
+    color: var(--amarillo);
+    font: inherit;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.boton-preguntar:hover:not(:disabled),
+.boton-preguntar:focus-visible {
+    border-color: var(--marfil);
+    background: var(--rojo);
+    color: var(--marfil);
+    outline: none;
+}
+
+.boton-preguntar:disabled {
+    opacity: .4;
+    cursor: not-allowed;
+}
+
+/* Respuesta del interrogado */
+.respuesta {
+    margin-top: 1rem;
+    padding: .8rem;
+    border-left: 3px solid var(--rojo);
+    background: rgba(242, 232, 213, .05);
+    font-size: .92rem;
+    line-height: 1.45;
+}
+
+.respuesta:empty {
+    display: none;
+}
+
+.respuesta p {
+    margin: 0 0 .5rem;
+}
+
+.pregunta-hecha {
+    color: #c6beb0;
+    font-size: .85rem;
+}
+
+.carta-mostrada {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+    margin: .3rem 0 .6rem;
+}
+
+.carta-mostrada img {
+    width: 64px;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border: 2px solid var(--amarillo);
+    border-radius: 4px;
+}
+
+.carta-mostrada p {
+    margin: 0;
+}
+
+.carta-mostrada small {
+    color: var(--amarillo);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.aviso-final {
+    color: var(--amarillo);
+}
+
+.proximamente {
+    color: #c6beb0;
+    font-style: italic;
+}
+
 /* ============================================================
-   MÓVIL Y PANTALLAS VERTICALES (base sencilla)
-   El mapa ocupa todo el ancho y la página se recorre con scroll.
+   MÓVIL Y PANTALLAS VERTICALES
+   El mapa ocupa todo el ancho y el panel queda justo debajo.
    ============================================================ */
 @media (max-aspect-ratio: 1/1) {
     body {
@@ -227,13 +470,35 @@ body {
         justify-self: center;
     }
 
+    .alternar-panel {
+        display: none;
+    }
+
     .juego {
         position: static;
         display: block;
         width: 100%;
     }
 
+    .zona-mapa {
+        display: block;
+    }
+
     .escenario {
         width: 100%;
+    }
+
+    .escenario-imagen {
+        -webkit-mask-image: none;
+                mask-image: none;
+    }
+
+    .panel,
+    .panel-oculto .panel {
+        display: flex;
+        padding: 0 12px 2rem;
+        overflow: visible;
+        border-top: 1px solid rgba(65, 96, 66, .7);
+        border-left: 0;
     }
 }
