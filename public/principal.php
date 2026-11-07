@@ -49,10 +49,13 @@ $sesion = usuarioActual();
                 >
             </picture>
 
-            <div class="acceso acceso-cluedo">
+            <a
+                class="acceso acceso-cluedo"
+                href="juego.php"
+            >
                 <h2>Asesinato en la mansión del código</h2>
-                <span class="estado">Próximamente</span>
-            </div>
+                <span class="indicacion">Entrar en la mansión</span>
+            </a>
 
             <a
                 class="acceso acceso-recetario"
