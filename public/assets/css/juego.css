@@ -846,3 +846,13 @@ body {
         right: 16px;
     }
 }
+
+/* ---------- Fuentes ---------- */
+body { font-family: var(--tipo-texto); }
+.cabecera h1,
+.modal h2 { font-family: var(--tipo-titulo); font-weight: 400; }
+.marcador,
+.pestanas [role="tab"],
+.boton-acusar,
+.boton-secundario,
+.boton-preguntar { font-family: var(--tipo-decorativa); }

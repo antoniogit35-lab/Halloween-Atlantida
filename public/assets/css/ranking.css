@@ -450,3 +450,7 @@
         display: none; 
     }
 }
+
+/* ---------- Fuentes ---------- */
+.ranking-pagina { font-family: var(--tipo-texto); }
+.ranking__titulo { font-family: var(--tipo-titulo); font-weight: 400; }

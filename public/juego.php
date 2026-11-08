@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Asesinato en la mansión del código · Enterrados en código</title>
+    <link rel="stylesheet" href="assets/css/fuentes.css">
     <link rel="stylesheet" href="assets/css/juego.css">
 </head>
 <body>

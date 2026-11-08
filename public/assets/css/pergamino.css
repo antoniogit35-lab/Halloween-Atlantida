@@ -472,3 +472,12 @@ body {
         font-size: 1.05rem;
     }
 }
+
+/* ---------- Fuentes ---------- */
+body { font-family: var(--tipo-texto); }
+.pergamino h1,
+.modal-interior h2 { font-family: var(--tipo-titulo); font-weight: 400; }
+.campo label,
+.campo legend,
+.etiqueta,
+.boton-pergamino { font-family: var(--tipo-decorativa); }

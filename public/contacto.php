@@ -116,6 +116,7 @@ if ($esPost) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Contacta con Jack</title>
+    <link rel="stylesheet" href="assets/css/fuentes.css">
     <link rel="stylesheet" href="assets/css/contacto.css">
     <script src="assets/js/contacto.js" defer></script>
     <script src="assets/js/cursor-arma.js" defer></script>

@@ -657,3 +657,8 @@ a.acceso:focus-visible {
         font-size: .8rem;
     }
 }
+
+/* ---------- Fuentes ---------- */
+body { font-family: var(--tipo-texto); }
+.cabecera h1,
+.texto-sobre h2 { font-family: var(--tipo-titulo); font-weight: 400; }

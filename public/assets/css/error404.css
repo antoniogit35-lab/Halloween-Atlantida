@@ -175,3 +175,9 @@ body {
         font-size: 1rem;
     }
 }
+
+/* ---------- Fuentes ---------- */
+body { font-family: var(--tipo-texto); }
+.codigo-error,
+.mensaje-fantasma h1 { font-family: var(--tipo-titulo); font-weight: 400; }
+.boton-guia { font-family: var(--tipo-decorativa); }

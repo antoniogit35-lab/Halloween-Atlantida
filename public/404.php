@@ -9,6 +9,7 @@ http_response_code(404);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Te has perdido · Enterrados en código</title>
     <!-- Rutas desde la raíz: la página puede mostrarse en cualquier dirección que no exista -->
+     <link rel="stylesheet" href="/assets/css/fuentes.css">
     <link rel="stylesheet" href="/assets/css/error404.css">
 </head>
 <body>
