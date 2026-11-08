@@ -47,7 +47,7 @@ No hace falta saber nada de informática: todo se maneja con el ratón y, en alg
 2. Verás una verja cerrada en un cementerio de noche, con un cartel de madera a la izquierda que pone **«Entrar al cementerio»**.
 3. Pulsa el cartel. La verja se abre con una pequeña animación y llegas a la portada.
 
-![alt text](img/image.png)
+![Pantalla de entrada: verja cerrada y cartel «Entrar al cementerio»](img/01-entrada.jpg)
 
 ## 3. La portada del cementerio
 
@@ -70,9 +70,9 @@ Es el punto de partida, y desde aquí se llega a todo. Se compone de tres partes
 - **Contacta con Jack**: lleva al formulario de correo (hay que haber iniciado sesión).
 - El logotipo del centro, Atlántida Formación Profesional.
 
-![alt text](img/image-1.png)
+![Portada del cementerio sin sesión iniciada](img/02-portada.jpg)
 
-![alt text](img/image-2.png)
+![Cabecera con la sesión iniciada y botón «Salir del cementerio»](img/03-portada-con-sesion.jpg)
 
 **No necesitas cuenta** para ver el recetario, el ranking ni jugar. La cuenta solo hace falta para escribir a Jack y para que la web recuerde cuál es tu asesino.
 
@@ -92,9 +92,9 @@ Es el punto de partida, y desde aquí se llega a todo. Se compone de tres partes
 3. Pulsa **«Crear usuario»**.
 4. Si falta algo o hay un error, aparece un mensaje en rojo debajo del campo afectado. Corrígelo y vuelve a pulsar. Si todo está bien, entras directamente en la web.
 
-![alt text](img/image-3.png)
+![Formulario «Crear asesinado» sobre el pergamino](img/04-registro.jpg)
 
-![alt text](img/image-4.png)
+![Ventana para elegir al asesino](img/05-elegir-asesino.jpg)
 
 ### 4.2. Iniciar sesión
 
@@ -105,7 +105,7 @@ Es el punto de partida, y desde aquí se llega a todo. Se compone de tres partes
 
 Si el nombre o la contraseña no coinciden, verás el aviso «Usuario o contraseña incorrectos», sin indicar cuál de los dos falla.
 
-![alt text](img/image-5.png)
+![Lápida de inicio de sesión con la foto, las fechas y el epitafio](img/06-login.jpg)
 
 ### 4.3. Si olvidas la contraseña
 
@@ -120,7 +120,7 @@ Si el nombre o la contraseña no coinciden, verás el aviso «Usuario o contrase
 2. Aparece una ventanita que pregunta **«¿De verdad quieres salir del cementerio?»**.
 3. Pulsa **«Cerrar sesión»** para salir, o **«Prefiero quedarme»** para seguir dentro.
 
-![alt text](img/image-6.png)
+![Ventana de confirmación para salir del cementerio](img/07-salir.jpg)
 
 ## 5. Recetas malditas
 
@@ -133,9 +133,9 @@ Un recetario con 30 recetas de cocina temática de Halloween.
 5. Cierra la ventana con la **×** de arriba a la derecha.
 6. Para volver al cementerio, usa **«← Volver a la página principal»**, arriba a la izquierda.
 
-![alt text](img/image-7.png)
+![Recetario con las tarjetas de recetas](img/08-recetario.jpg)
 
-![alt text](img/image-8.png)
+![Ficha de una receta](img/09-receta.jpg)
 
 ## 6. Top asesinos y el arma del cursor
 
@@ -158,9 +158,9 @@ Dos detalles:
 - Cuando **inicias sesión**, la web te pone automáticamente el arma de tu asesino. Después puedes cambiarla por otra cuando quieras.
 - Esta función **solo existe en ordenador con ratón**. En móvil o tableta no aparece.
 
-![alt text](img/image-9.png)
+![Ranking de asesinos con las barras](img/10-ranking.jpg)
 
-![alt text](img/image-10.png)
+![Ficha de un asesino con el botón para llevar su arma](img/11-ficha-asesino.jpg)
 
 ## 7. Contacta con Jack
 
@@ -175,7 +175,7 @@ Un formulario para escribirle un correo a Jack con tus peores pesadillas.
 4. Pulsa **«Enviar pesadilla»**.
 5. Si algo falta, aparecen mensajes junto a los campos. Si todo va bien, verás **«Tu mensaje se ha enviado correctamente. ¡Gracias por escribir a Jack!»**.
 
-![alt text](img/image-11.png)
+![Formulario para escribir a Jack](img/12-contacto.jpg)
 
 ## 8. El juego: Asesinato en la mansión del código
 
@@ -199,7 +199,7 @@ Cada partida es distinta: la solución se elige al azar al empezar.
 - En el ordenador, el botón **«Ocultar panel»**, arriba, deja el plano a pantalla completa.
 - La **«i»** de la esquina inferior abre un resumen de las reglas en cualquier momento.
 
-![alt text](img/image-12.png)
+![Pantalla del juego con el plano y el panel](img/13-juego.jpg)
 
 ### 8.3. Cómo se juega
 
