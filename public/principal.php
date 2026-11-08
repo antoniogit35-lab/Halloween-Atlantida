@@ -1,8 +1,7 @@
-require __DIR__ . '/../app/seguridad.php';
-
 <?php
 declare(strict_types=1);
 require __DIR__ . '/../app/usuarios.php';
+require __DIR__ . '/../app/seguridad.php';
 $sesion = usuarioActual();
 ?>
 
