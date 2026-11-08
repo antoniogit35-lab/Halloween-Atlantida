@@ -70,6 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Crear asesinado · Enterrados en código</title>
+    <link rel="stylesheet" href="assets/css/fuentes.css">
     <link rel="stylesheet" href="assets/css/pergamino.css">
 </head>
 <body class="pagina-pergamino pagina-registro">

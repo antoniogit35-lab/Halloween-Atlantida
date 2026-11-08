@@ -26,7 +26,7 @@ try {
 
 ?>
 <!doctype html>
-<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Recetas malditas</title><link rel="stylesheet" href="assets/css/recetario.css"></head>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Recetas malditas</title><link rel="stylesheet" href="assets/css/fuentes.css"><link rel="stylesheet" href="assets/css/recetario.css"></head>
 <body>
 
     <a class="cabecera__volver" href="principal.php">

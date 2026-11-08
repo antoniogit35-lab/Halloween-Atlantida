@@ -212,3 +212,7 @@ dialog {
         margin-right: calc(8px + var(--grosor));
     }
 }
+
+/* ---------- Fuentes ---------- */
+body { font-family: var(--tipo-texto); }
+h1 { font-family: var(--tipo-titulo); font-weight: 400; }

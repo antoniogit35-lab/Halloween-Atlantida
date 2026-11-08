@@ -12,6 +12,8 @@
     --texto-secundario: #c6beb0;
     --superficie-control: #11171b;
     --borde-control: #758b76;
+    --fuente-cuerpo: var(--tipo-texto);
+    --fuente-titulo: var(--tipo-titulo);
 
     /*
      * Rectángulo seguro DENTRO del cristal negro del monitor.
@@ -575,3 +577,8 @@ textarea {
         padding-bottom: var(--espacio-2);
     }
 }
+
+/* ---------- Fuentes ---------- */
+.cabecera__volver,
+.pie { font-family: var(--tipo-texto); }
+.boton { font-family: var(--tipo-decorativa); }

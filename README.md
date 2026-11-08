@@ -26,6 +26,7 @@ Proyecto web de temática Halloween realizado por **Sergio** y **Antonio** (2.º
 - Apache mediante XAMPP para el entorno local.
 - Se recomienda un navegador actualizado (Chrome, Edge, Firefox o Safari recientes).
 - Extensiones de PHP necesarias: mysqli, mbstring y openssl (XAMPP las trae activadas).
+- - Tipografías Eater y Rubik Wet Paint (Google Fonts, licencia OFL), incluidas en `public/assets/fonts/`.
 
 ## Estructura del proyecto
 

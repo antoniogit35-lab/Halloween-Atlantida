@@ -484,3 +484,14 @@ body {
         font-size: .85rem;
     }
 }
+
+/* ---------- Fuentes ---------- */
+body { font-family: var(--tipo-texto); }
+.lapida-titulo,
+.modal-interior h2 { font-family: var(--tipo-titulo); font-weight: 400; }
+.campo label,
+.epitafio,
+.fechas,
+.entrar,
+.pedestal,
+.ficha-asesino h2 { font-family: var(--tipo-decorativa); }

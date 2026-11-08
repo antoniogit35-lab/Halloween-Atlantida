@@ -11,6 +11,7 @@ $sesion = usuarioActual();
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Enterrados en código</title>
+    <link rel="stylesheet" href="assets/css/fuentes.css">
     <link rel="stylesheet" href="assets/css/principal.css">
 </head>
 <body data-asesino="<?= $sesion !== null ? htmlspecialchars((string) $sesion['asesino'], ENT_QUOTES, 'UTF-8') : '' ?>">
