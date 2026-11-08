@@ -158,3 +158,57 @@ dialog {
         margin-top: 10px;
     }
 }
+
+/* ---------- Bloque con grosor: se ven la cara superior y el lateral derecho ---------- */
+.catalogo {
+    --grosor: 26px;
+    position: relative;
+    max-width: min(1160px, calc(100% - var(--grosor) - 20px));
+}
+
+/* Cara superior: recibe la luz, por eso es más clara */
+.catalogo::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 100%;
+    width: 100%;
+    height: var(--grosor);
+    transform-origin: left bottom;
+    transform: skewX(-45deg);
+    border: 1px solid #416042a0;
+    border-bottom: 0;
+    background: linear-gradient(to right, #3a5a3b, #2a412b);
+    pointer-events: none;
+}
+
+/* Cara lateral derecha: queda en sombra */
+.catalogo::after {
+    content: "";
+    position: absolute;
+    left: 100%;
+    top: 0;
+    width: var(--grosor);
+    height: 100%;
+    transform-origin: left top;
+    transform: skewY(-45deg);
+    border: 1px solid #41604260;
+    border-left: 0;
+    background: linear-gradient(to bottom, #0f160f, #050805);
+    pointer-events: none;
+}
+
+/* En pantallas pequeñas el grosor se reduce y se deja hueco a la derecha */
+@media (max-width: 850px) {
+    .catalogo {
+        --grosor: 10px;
+        margin-right: calc(16px + var(--grosor));
+    }
+}
+
+@media (max-width: 560px) {
+    .catalogo {
+        --grosor: 7px;
+        margin-right: calc(8px + var(--grosor));
+    }
+}
