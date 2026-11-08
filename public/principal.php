@@ -42,13 +42,13 @@ $sesion = usuarioActual();
             <picture>
                 <source
                     media="(max-aspect-ratio: 1/1)"
-                    srcset="assets/img/fondos/cementerio-principal-movil.png"
+                    srcset="assets/img/fondos/cementerio-principal-movil.jpg"
                     width="1024"
                     height="1536"
                 >
                 <img
                     class="escenario-imagen"
-                    src="assets/img/fondos/cementerio-principal.png"
+                    src="assets/img/fondos/cementerio-principal.jpg"
                     alt=""
                     width="1673"
                     height="940"
@@ -96,7 +96,7 @@ $sesion = usuarioActual();
 
         <img
             class="logo-atlantida"
-            src="assets/img/logos/logo-atlantida-terrorifico.png"
+            src="assets/img/logos/logo-atlantida-terrorifico.jpg"
             alt="Atlántida Formación Profesional"
         >
     </footer>
