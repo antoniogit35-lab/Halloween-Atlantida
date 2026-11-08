@@ -258,6 +258,11 @@ git status
 git diff
 ```
 
+## Documentación
+
+- [Guía de uso](docs/guia-de-uso.md): cómo usar la web, paso a paso.
+- [Cómo funciona el código del Cluedo](docs/cluedo-codigo.md): explicación técnica del juego.
+
 ## Créditos
 
 Sergio y Antonio · 2.º DAW · Atlántida Formación Profesional.
