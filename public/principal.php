@@ -12,7 +12,7 @@ $sesion = usuarioActual();
     <title>Enterrados en código</title>
     <link rel="stylesheet" href="assets/css/principal.css">
 </head>
-<body>
+<body data-asesino="<?= $sesion !== null ? htmlspecialchars((string) $sesion['asesino'], ENT_QUOTES, 'UTF-8') : '' ?>">
     <header class="cabecera">
         <div class="reserva-logo" aria-hidden="true"></div>
 
@@ -127,6 +127,7 @@ $sesion = usuarioActual();
         </div>
     </dialog>
 
+    <script src="assets/js/cursor-arma.js" defer></script>
     <script src="assets/js/principal.js"></script>
 </body>
 </html>

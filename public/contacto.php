@@ -118,6 +118,7 @@ if ($esPost) {
     <title>Contacta con Jack</title>
     <link rel="stylesheet" href="assets/css/contacto.css">
     <script src="assets/js/contacto.js" defer></script>
+    <script src="assets/js/cursor-arma.js" defer></script>
 </head>
 <body class="contacto-pagina">
     <a class="saltar" href="#formulario-contacto">Ir al formulario</a>

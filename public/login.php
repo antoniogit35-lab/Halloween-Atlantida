@@ -114,6 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </dialog>
     </main>
 
+    <script src="assets/js/cursor-arma.js" defer></script>
     <script src="assets/js/login.js" defer></script>
 </body>
 </html>

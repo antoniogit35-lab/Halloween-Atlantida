@@ -42,6 +42,7 @@
         </div>
     </main>
 
+    <script src="assets/js/cursor-arma.js" defer></script>
     <script src="assets/js/inicio.js"></script>
 </body>
 </html>

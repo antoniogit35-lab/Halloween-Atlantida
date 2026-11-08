@@ -219,6 +219,7 @@
     </dialog>
 
     <!-- El orden importa: datos, lógica, pruebas provisionales e interfaz -->
+    <script src="assets/js/cursor-arma.js" defer></script>
     <script src="assets/js/juego-datos.js" defer></script>
     <script src="assets/js/juego-logica.js" defer></script>
     <script src="assets/js/juego-pruebas.js" defer></script>
