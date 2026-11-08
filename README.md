@@ -25,7 +25,7 @@ Proyecto web de temática Halloween realizado por **Sergio** y **Antonio** (2.º
 - [PHPMailer](https://github.com/PHPMailer/PHPMailer) para el correo. La carpeta `vendor/` ya viene incluida en el repositorio, así que **no hace falta Composer**.
 - Apache mediante XAMPP para el entorno local.
 - Se recomienda un navegador actualizado (Chrome, Edge, Firefox o Safari recientes).
-- Extensiones de PHP necesarias: mysqli, mbstring y openssl (XAMPP las trae activadas)
+- Extensiones de PHP necesarias: mysqli, mbstring y openssl (XAMPP las trae activadas).
 
 ## Estructura del proyecto
 
