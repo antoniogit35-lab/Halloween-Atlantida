@@ -135,7 +135,7 @@ if ($esPost) {
         <section class="escena" aria-labelledby="contacto-titulo">
             <img
                 class="escena__imagen"
-                src="assets/img/jack-contacto.png"
+                src="assets/img/jack-contacto.jpg"
                 alt=""
                 width="1672"
                 height="941"
