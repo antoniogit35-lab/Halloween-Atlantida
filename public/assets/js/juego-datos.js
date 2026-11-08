@@ -15,7 +15,7 @@ const SOSPECHOSOS = [
   { id: 'jason-voorhees', nombre: 'Jason Voorhees', imagen: 'jasonvoorhees.jpg' },
   { id: 'michael-myers',  nombre: 'Michael Myers',  imagen: 'michaelmyers.jpg' },
   { id: 'chucky',         nombre: 'Chucky',         imagen: 'chucky.jpg' },
-  { id: 'freddy-krueger', nombre: 'Freddy Krueger', imagen: 'freddyKrueger.jpg' },
+  { id: 'freddy-krueger', nombre: 'Freddy Krueger', imagen: 'freddykrueger.jpg' },
   { id: 'pennywise',      nombre: 'Pennywise',      imagen: 'pennywise.jpg' },
   { id: 'ghostface',      nombre: 'Ghostface',      imagen: 'ghostface.jpg' },
 ];
