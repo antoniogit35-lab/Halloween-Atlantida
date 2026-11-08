@@ -48,6 +48,7 @@ function cargarPersonajes(string $ruta): array
             'imagen'  => isset($dato['imagen']) && is_string($dato['imagen']) ? basename($dato['imagen']) : '',
             'obra'    => isset($dato['obra']) && is_string($dato['obra']) ? trim($dato['obra']) : '',
             'descripcion' => isset($dato['descripcion']) && is_string($dato['descripcion']) ? trim($dato['descripcion']) : '',
+            'id' => isset($dato['id']) && is_string($dato['id']) ? $dato['id'] : '',
         ];
     }
 
@@ -99,7 +100,8 @@ $maximo = $personajes ? max(1, $personajes[0]['muertes']) : 1;
                 <button class="fila__foto" type="button"
                         aria-label="Ver ficha de <?= escapar($personaje['nombre']) ?>"
                         data-obra="<?= escapar($personaje['obra']) ?>"
-                        data-descripcion="<?= escapar($personaje['descripcion']) ?>">
+                        data-descripcion="<?= escapar($personaje['descripcion']) ?>"
+                        data-id="<?= escapar($personaje['id']) ?>">
 <?php if ($personaje['imagen'] !== ''): ?>
                     <img src="<?= escapar(RUTA_IMAGENES . $personaje['imagen']) ?>" alt="" width="56" height="56" loading="lazy" decoding="async">
 <?php else: ?>
@@ -126,14 +128,17 @@ $maximo = $personajes ? max(1, $personajes[0]['muertes']) : 1;
                 <p class="ficha__obra" id="ficha-obra"></p>
                 <p class="ficha__descripcion" id="ficha-descripcion"></p>
 
-                <button class="ficha__arma" type="button">
-                    Cambiar arma de asesino
+                <img class="ficha__arma-img" id="ficha-arma-img" src="" alt="" width="64" height="64" hidden>
+                <button class="ficha__arma" id="ficha-arma" type="button">Llevar su arma junto al cursor</button>
+                <button class="ficha__arma ficha__arma--quitar" id="ficha-arma-quitar" type="button" hidden>
+                    Quitar el arma del cursor
                 </button>
             </div>
         </dialog>
 <?php endif; ?>
     </main>
 
+    <script src="assets/js/cursor-arma.js" defer></script>
     <script src="assets/js/ranking.js" defer></script>
 </body>
 </html>

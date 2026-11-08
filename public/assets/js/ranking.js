@@ -43,6 +43,41 @@
         const fichaObra = document.getElementById('ficha-obra');
         const fichaDescripcion = document.getElementById('ficha-descripcion');
 
+        // Arma del personaje como cursor (la gestiona cursor-arma.js)
+        const cursor = window.CursorArma;
+        const fichaArmaImg = document.getElementById('ficha-arma-img');
+        const fichaArma = document.getElementById('ficha-arma');
+        const fichaArmaQuitar = document.getElementById('ficha-arma-quitar');
+        let personajeAbierto = '';
+
+        // Ajusta la vista previa y los botones según el personaje abierto y el arma que se lleva
+        const actualizarBotonesArma = () => {
+            const ruta = cursor ? cursor.ruta(personajeAbierto) : null;
+
+            fichaArmaImg.hidden = !ruta;
+            fichaArma.hidden = !ruta;
+            fichaArmaQuitar.hidden = !cursor || !cursor.actual();
+
+            if (ruta) {
+                const puesta = cursor.actual() === personajeAbierto;
+                fichaArmaImg.src = ruta;
+                fichaArma.disabled = puesta;
+                fichaArma.textContent = puesta
+                    ? 'Llevas su arma junto al cursor'
+                    : 'Llevar su arma junto al cursor';
+            }
+        };
+
+        fichaArma.addEventListener('click', () => {
+            cursor.elegir(personajeAbierto);
+            actualizarBotonesArma();
+        });
+
+        fichaArmaQuitar.addEventListener('click', () => {
+            cursor.quitar();
+            actualizarBotonesArma();
+        });
+
         const abrirFicha = (boton) => {
             const nombre = boton.closest('.fila')?.querySelector('.fila__nombre')?.textContent.trim() ?? '';
             const obra = boton.dataset.obra ?? '';
@@ -65,6 +100,10 @@
                 fichaInicial.textContent = nombre.charAt(0).toUpperCase();
                 fichaInicial.hidden = false;
             }
+
+            personajeAbierto = boton.dataset.id ?? '';
+            actualizarBotonesArma();
+
 
             ficha.showModal();
         };

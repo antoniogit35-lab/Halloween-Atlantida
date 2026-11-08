@@ -378,6 +378,26 @@
     outline-offset: 3px;
 }
 
+.ficha__arma-img {
+    width: 64px;
+    height: 64px;
+    margin-top: 1rem;
+    object-fit: contain;
+}
+
+.ficha__arma--quitar {
+    margin-top: 0.25rem;
+    border-color: var(--ceniza);
+    background: transparent;
+    color: var(--ceniza);
+}
+
+.ficha__arma:disabled {
+    opacity: 0.6;
+    cursor: default;
+    transform: none;
+}
+
 /* Pantallas estrechas: la barra pasa debajo del nombre */
 
 @media (max-width: 42rem) {
@@ -423,6 +443,10 @@
     }
 
     .ficha__arma {
-    display: none;
-}
+        display: none;
+    }
+
+    .ficha__arma-img { 
+        display: none; 
+    }
 }
