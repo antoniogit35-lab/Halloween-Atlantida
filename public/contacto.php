@@ -133,7 +133,6 @@ if ($esPost) {
 
     <main class="contacto">
         <section class="escena" aria-labelledby="contacto-titulo">
-            <!-- Usar la nueva imagen adjunta, completa y sin recortarla. -->
             <img
                 class="escena__imagen"
                 src="assets/img/jack-contacto.png"

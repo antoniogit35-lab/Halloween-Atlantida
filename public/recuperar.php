@@ -118,5 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php endif; ?>
         </section>
     </main>
+
+    <script src="assets/js/cursor-arma.js" defer></script>
 </body>
 </html>

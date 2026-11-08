@@ -52,6 +52,8 @@ try {
 <dialog id="ficha" aria-labelledby="nombre-modal"><div class="ficha-interior"><button id="cerrar" class="cerrar" aria-label="Cerrar receta">×</button><div class="resumen"><div id="foto-modal"></div><div class="datos"><h2 id="nombre-modal"></h2><dl id="datos-modal"></dl></div></div><section class="seccion"><h3>Ingredientes</h3><ul id="ingredientes"></ul></section><section class="seccion"><h3>Preparación</h3><ol id="preparacion"></ol></section></div></dialog>
 <script id="datos-iniciales" type="application/json">
 <?= $recetasJSON ?>
-</script><script src="assets/js/recetario.js"></script></body>
+</script>
+<script src="assets/js/recetario.js"></script>
 <script src="assets/js/cursor-arma.js" defer></script>
+</body>
 </html>
