@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 require __DIR__ . '/../app/usuarios.php';
+require __DIR__ . '/../app/seguridad.php';
 $sesion = usuarioActual();
 ?>
 
@@ -20,10 +21,16 @@ $sesion = usuarioActual();
 
         <div class="cabecera-acceso">
             <?php if ($sesion !== null): ?>
-                <span class="sesion-activa">
-                    <?= htmlspecialchars($sesion['usuario'], ENT_QUOTES, 'UTF-8') ?>
-                    <a href="salir.php">Salir</a>
-                </span>
+                <div class="sesion-activa">
+                    <p class="sesion-saludo">
+                        <span class="sesion-saludo__texto">Disfruta del cementerio, </span>
+                        <strong><?= htmlspecialchars($sesion['usuario'], ENT_QUOTES, 'UTF-8') ?></strong>
+                    </p>
+                    <button type="button" class="sesion-salir" id="abrir-salir"
+                            aria-haspopup="dialog" aria-controls="confirmar-salir">
+                        Salir del cementerio
+                    </button>
+                </div>
             <?php else: ?>
                 <a class="sesion-enlace" href="login.php">Iniciar sesión</a>
             <?php endif; ?>
@@ -93,6 +100,22 @@ $sesion = usuarioActual();
             alt="Atlántida Formación Profesional"
         >
     </footer>
+
+    <?php if ($sesion !== null): ?>
+        <dialog id="confirmar-salir" class="confirmar-salir" aria-labelledby="titulo-salir">
+            <form class="confirmar-salir__interior" method="post" action="salir.php">
+                <?= campoCsrf() ?>
+                <p id="titulo-salir">¿De verdad quieres salir del cementerio?</p>
+
+                <div class="confirmar-salir__acciones">
+                    <button type="button" class="boton-quedarme" id="cancelar-salir" autofocus>
+                        Prefiero quedarme
+                    </button>
+                    <button type="submit" class="boton-salir">Cerrar sesión</button>
+                </div>
+            </form>
+        </dialog>
+    <?php endif; ?>
 
     <dialog id="sobre-nosotros" class="modal-sobre" aria-labelledby="titulo-sobre">
         <div class="modal-interior">

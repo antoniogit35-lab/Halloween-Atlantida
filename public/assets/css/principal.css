@@ -537,3 +537,123 @@ a.acceso:focus-visible {
 .sesion-activa a:focus-visible {
     color: var(--amarillo);
 }
+
+/* ---------- Estado del usuario y salida del cementerio ---------- */
+.sesion-saludo {
+    margin: 0;
+    color: var(--marfil);
+    font-size: .95rem;
+}
+
+.sesion-saludo strong {
+    color: var(--amarillo);
+    font-weight: 400;
+}
+
+.sesion-salir {
+    justify-self: end;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: #b0ac9f;
+    font: inherit;
+    font-size: .8rem;
+    text-decoration: underline;
+    text-decoration-color: #41604290;
+    text-underline-offset: 4px;
+    cursor: pointer;
+}
+
+.sesion-salir:hover,
+.sesion-salir:focus-visible {
+    color: var(--amarillo);
+}
+
+.sesion-salir:focus-visible {
+    outline: 2px solid var(--amarillo);
+    outline-offset: 4px;
+}
+
+/* Ventana pequeña de confirmación, colocada junto al botón (la posición la pone el JS) */
+.confirmar-salir {
+    position: fixed;
+    inset: auto;
+    margin: 0;
+    width: min(19rem, calc(100vw - 24px));
+    padding: 0;
+    color: var(--marfil);
+    background: var(--negro);
+    border: 1px solid var(--verde);
+    border-top: 3px solid #CA1616;
+    border-radius: 3px;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, .7);
+}
+
+.confirmar-salir::backdrop {
+    background: rgba(20, 20, 20, .35);
+}
+
+.confirmar-salir__interior {
+    padding: 1.1rem 1.1rem 1rem;
+}
+
+.confirmar-salir p {
+    margin: 0 0 1rem;
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.confirmar-salir__acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .6rem;
+}
+
+.boton-quedarme,
+.boton-salir {
+    flex: 1 1 auto;
+    padding: .55rem .8rem;
+    border-radius: 3px;
+    font: inherit;
+    font-size: .85rem;
+    text-align: center;
+    cursor: pointer;
+}
+
+.boton-quedarme {
+    border: 1px solid rgba(242, 232, 213, .5);
+    background: transparent;
+    color: var(--marfil);
+}
+
+.boton-salir {
+    border: 1px solid #CA1616;
+    background: #CA1616;
+    color: var(--marfil);
+}
+
+.boton-quedarme:hover,
+.boton-quedarme:focus-visible {
+    border-color: var(--amarillo);
+    color: var(--amarillo);
+    outline: none;
+}
+
+.boton-salir:hover,
+.boton-salir:focus-visible {
+    border-color: var(--amarillo);
+    background: transparent;
+    color: var(--amarillo);
+    outline: none;
+}
+
+/* En móvil solo se muestra el nombre, para no apretar el título */
+@media (max-aspect-ratio: 1/1) {
+    .sesion-saludo__texto {
+        display: none;
+    }
+
+    .sesion-saludo {
+        font-size: .8rem;
+    }
+}
