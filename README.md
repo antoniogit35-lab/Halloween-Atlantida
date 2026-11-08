@@ -1,291 +1,263 @@
-# Halloween Atlántida
+# Enterrados en código · Halloween Atlántida
 
-Proyecto web de temática Halloween para Atlántida, orientado a una actividad o concurso.
+Proyecto web de temática Halloween realizado por **Sergio** y **Antonio** (2.º DAW, Atlántida Formación Profesional) para el proyecto transversal DAWlloween. Es un cementerio que se recorre con el ratón: desde la verja de entrada se accede a un recetario, a un ranking de asesinos del cine, a un juego de deducción tipo Cluedo y a un formulario para escribirle a Jack.
 
-El proyecto está en desarrollo. Actualmente cuenta con un recetario funcional llamado «Recetas malditas».
+## Qué incluye
 
-## Estado actual
-
-El recetario permite:
-
-- Consultar un catálogo de 30 recetas.
-- Buscar recetas por nombre, sin distinguir mayúsculas ni tildes.
-- Consultar fotografías, dificultad y tiempo en las tarjetas.
-- Abrir una ficha con fotografía, dificultad, tiempo, personas, ingredientes y preparación.
-- Mostrar un marcador provisional cuando una fotografía no está disponible.
-
-Los datos se mantienen en un CSV que PHP lee al generar la página. No hay que modificar una copia de las recetas dentro del HTML o del JavaScript.
-
-El recetario actual no utiliza base de datos.
+| Página | Archivo | Descripción |
+|---|---|---|
+| Entrada | `index.php` | Verja del cementerio con animación al pulsar el cartel |
+| Cementerio | `principal.php` | Portada con accesos a todas las secciones y estado de la sesión |
+| Iniciar sesión | `login.php` | Lápida que muestra la foto, las fechas y un epitafio del usuario |
+| Crear usuario | `registro.php` | Alta de usuario con elección de asesino |
+| Cambiar contraseña | `recuperar.php` | Recuperación con pregunta de seguridad |
+| Recetas malditas | `recetario.php` | Catálogo de 30 recetas con buscador y fichas |
+| Top asesinos | `ranking.php` | Ranking por asesinatos; desde la ficha de cada asesino se puede llevar su arma junto al cursor |
+| Asesinato en la mansión del código | `juego.php` | Juego de deducción estilo Cluedo contra el ordenador |
+| Contacta con Jack | `contacto.php` | Envío de correo por SMTP (requiere haber iniciado sesión) |
+| Error 404 | `404.php` | Página de error personalizada |
 
 ## Tecnologías
 
-- PHP para leer el CSV y generar los datos de la página.
-- HTML y CSS para la estructura y presentación.
-- JavaScript para la búsqueda, las tarjetas y la ficha de cada receta.
+- PHP 8.1 o superior (se usa el tipo de retorno `never`) con la extensión `mysqli`.
+- MySQL o MariaDB.
+- HTML, CSS y JavaScript sin frameworks.
+- [PHPMailer](https://github.com/PHPMailer/PHPMailer) para el correo. La carpeta `vendor/` ya viene incluida en el repositorio, así que **no hace falta Composer**.
 - Apache mediante XAMPP para el entorno local.
-- Git y GitHub para el control de versiones.
+- Se recomienda un navegador actualizado (Chrome, Edge, Firefox o Safari recientes).
+- Extensiones de PHP necesarias: mysqli, mbstring y openssl (XAMPP las trae activadas)
 
-## Estructura principal
+## Estructura del proyecto
 
 ```text
 Halloween-Atlantida/
-├── app/
-│   └── recetas.php              # Lectura y validación del CSV
-├── docs/                        # Documentación del proyecto
-├── public/                      # Raíz pública del servidor
-│   ├── recetario.php
-│   └── assets/
-│       ├── css/
-│       │   └── recetario.css
-│       ├── img/
-│       │   ├── background.jpg
-│       │   └── recetas/         # Fotografías JPG utilizadas en la web
-│       └── js/
-│           └── recetario.js
-├── recursos/
-│   └── datos/
-│       └── recetas.csv          # Fuente de datos del recetario
-└── README.md
+├── app/                        # Lógica de servidor, fuera de la raíz pública
+│   ├── config.ejemplo.php      # Plantilla de configuración (se copia a config.php)
+│   ├── conexion.php            # Conexión a la base de datos
+│   ├── seguridad.php           # Escape, token CSRF y utilidades
+│   ├── usuarios.php            # Alta, login, cambio de contraseña y datos de usuario
+│   └── recetas.php             # Lectura del CSV de recetas
+├── database/
+│   ├── schema.sql              # Crea la base de datos y la tabla de usuarios
+│   └── usuario-bd.sql          # Crea el usuario de aplicación con permisos mínimos
+├── docs/                       # Documentación y material de diseño
+├── public/                     # ÚNICA carpeta que Apache debe servir
+│   ├── index.php, principal.php, login.php, registro.php, recuperar.php,
+│   │   salir.php, ranking.php, recetario.php, juego.php, contacto.php, 404.php
+│   ├── api/                    # Datos para la lápida del login
+│   ├── data/                   # personajes.json, frases.json, cursores.json
+│   └── assets/                 # css/, js/, img/, video/
+├── recursos/datos/recetas.csv  # Fuente de datos del recetario
+├── vendor/                     # PHPMailer (incluido)
+└── composer.json
 ```
 
-Solo `public/` debe configurarse como raíz pública de Apache. Las carpetas `app/` y `recursos/` quedan fuera de ella.
+Solo `public/` se publica. `app/`, `database/`, `recursos/` y `vendor/` quedan fuera del alcance del servidor web.
 
-## Requisitos del entorno local
+## Instalación en local (XAMPP en Windows)
 
-- Git.
-- XAMPP con Apache y PHP; se recomienda PHP 8.x.
-- Un navegador actualizado.
+Los ejemplos suponen XAMPP en `C:\xampp`. Adapta las rutas si es otra.
 
-Para trabajar en el recetario solo es necesario arrancar Apache. No hace falta iniciar el módulo MySQL de XAMPP.
-
-## Preparación del proyecto
-
-### 1. Clonar el repositorio
-
-Desde la carpeta en la que se quiera guardar el proyecto:
+### 1. Obtener el proyecto
 
 ```powershell
-git clone --branch chore/estructura-proyecto [https://github.com/antoniogit35-lab/Halloween-Atlantida.git](https://github.com/antoniogit35-lab/Halloween-Atlantida.git)
+git clone https://github.com/antoniogit35-lab/Halloween-Atlantida.git
 cd Halloween-Atlantida
 ```
 
-La rama de trabajo utilizada durante esta reorganización es `chore/estructura-proyecto`.
+### 2. Crear la base de datos
 
-Si el repositorio ya está clonado, primero comprueba que no tienes cambios locales pendientes y después actualiza:
+1. Arranca **Apache** y **MySQL** desde el panel de XAMPP (si MySQL no arranca, mira la sección *Problemas habituales*).
+2. Abre `http://localhost/phpmyadmin`, entra en **Importar** y sube `database/schema.sql`. Se crean la base `halloween_atlantida` y la tabla `usuarios`.
+3. Crea el usuario de aplicación: edita `database/usuario-bd.sql`, sustituye `CAMBIA_ESTA_CLAVE` por una contraseña y ejecútalo en la pestaña **SQL** de phpMyAdmin. Ese usuario solo puede hacer `SELECT`, `INSERT` y `UPDATE` sobre la tabla `usuarios`.
 
-```powershell
-git fetch origin
-git switch chore/estructura-proyecto
-git pull
+> Para una prueba rápida en un equipo propio también se puede usar `root` sin contraseña, que es el valor por defecto de XAMPP. No lo hagas en un servidor real.
+
+### 3. Configurar la aplicación
+
+Copia `app/config.ejemplo.php` como `app/config.php` y rellena los datos. Este archivo **no se sube al repositorio** (está en `.gitignore`).
+
+```php
+<?php
+return [
+    // Base de datos
+    'host'    => '127.0.0.1',
+    'usuario' => 'dawlloween',
+    'clave'   => 'LA_CLAVE_QUE_HAS_ELEGIDO',
+    'base'    => 'halloween_atlantida',
+
+    // Correo de "Contacta con Jack" (opcional: sin esto el resto de la web funciona)
+    'correo_destinatario'     => 'cuenta-que-recibe@ejemplo.com',
+    'correo_remitente'        => 'cuenta-smtp@ejemplo.com',
+    'correo_remitente_nombre' => 'Contacta con Jack',
+    'smtp_host'               => 'smtp.mail.yahoo.com',
+    'smtp_puerto'             => 587,
+    'smtp_usuario'            => 'cuenta-smtp@ejemplo.com',
+    'smtp_clave'              => 'CONTRASEÑA_DE_APLICACION',
+];
 ```
 
-### 2. Configurar Apache
+Notas sobre el correo:
 
-Los siguientes ejemplos suponen que XAMPP está instalado en `C:/xampp`. Adapta las rutas si tu instalación utiliza otra ubicación.
+- El envío usa SMTP con STARTTLS. Con Yahoo o Gmail hay que crear una **contraseña de aplicación** en la cuenta y usarla en `smtp_clave`; la contraseña normal no funciona.
+- El formulario solo está disponible para usuarios con sesión iniciada y usa el email de su cuenta como remitente de respuesta.
+- Si falta algún dato de correo, el formulario muestra un aviso de que no se ha podido enviar, y el resto de la web no se ve afectado.
 
-Edita:
+### 4. Configurar Apache con un dominio local (`.test`)
 
-```text
-C:\xampp\apache\conf\extra\httpd-vhosts.conf
-```
+Con el dominio local `halloween-atlantida.test` no hace falta HTTPS. El nombre puede cambiarse por cualquier otro que termine en `.test`, siempre que se use el mismo en los tres pasos siguientes.
 
-Añade el VirtualHost del proyecto, sustituyendo `C:/ruta/Halloween-Atlantida` por la ubicación real del repositorio:
-
-```apache
-<VirtualHost *:80>
-    ServerName halloween-atlantida.test
-    DocumentRoot "C:/ruta/Halloween-Atlantida/public"
-
-    <Directory "C:/ruta/Halloween-Atlantida/public">
-        Options -Indexes
-        AllowOverride All
-        Require local
-    </Directory>
-</VirtualHost>
-```
-
-Conserva los VirtualHosts existentes. Si quieres mantener `localhost` apuntando a la página habitual de XAMPP y aún no tienes un bloque para él, coloca este antes del VirtualHost del proyecto:
-
-```apache
-<VirtualHost *:80>
-    ServerName localhost
-    DocumentRoot "C:/xampp/htdocs"
-
-    <Directory "C:/xampp/htdocs">
-        Require local
-    </Directory>
-</VirtualHost>
-```
-
-Comprueba que `C:\xampp\apache\conf\httpd.conf` contiene esta línea sin comentar:
+**a) Virtual Host.** Comprueba que en `C:\xampp\apache\conf\httpd.conf` está activa, sin `#`, esta línea:
 
 ```apache
 Include conf/extra/httpd-vhosts.conf
 ```
 
-### 3. Configurar el nombre local
+Después edita `C:\xampp\apache\conf\extra\httpd-vhosts.conf` y añade, sustituyendo `C:/ruta/Halloween-Atlantida` por la ubicación real del proyecto (con barras normales `/`, también en Windows):
 
-Abre como administrador el archivo:
+```apache
+# Conserva localhost apuntando a la página habitual de XAMPP
+<VirtualHost *:80>
+    ServerName localhost
+    DocumentRoot "C:/xampp/htdocs"
+    <Directory "C:/xampp/htdocs">
+        Require local
+    </Directory>
+</VirtualHost>
 
-```text
-C:\Windows\System32\drivers\etc\hosts
+<VirtualHost *:80>
+    ServerName halloween-atlantida.test
+    DocumentRoot "C:/ruta/Halloween-Atlantida/public"
+
+    # Página 404 personalizada
+    ErrorDocument 404 /404.php
+
+    <Directory "C:/ruta/Halloween-Atlantida/public">
+        Options -Indexes
+        AllowOverride None
+        Require local
+    </Directory>
+</VirtualHost>
 ```
 
-Añade, sin borrar las entradas existentes:
+**b) Archivo `hosts`.** Abre el Bloc de notas **como administrador**, abre `C:\Windows\System32\drivers\etc\hosts` (con el filtro «Todos los archivos») y añade al final:
 
 ```text
 127.0.0.1 halloween-atlantida.test
 ```
 
-Guarda el archivo sin añadir una extensión `.txt`.
+Guarda y, en PowerShell, ejecuta `ipconfig /flushdns`.
 
-### 4. Validar y arrancar Apache
-
-En PowerShell:
+**c) Validar y reiniciar Apache.**
 
 ```powershell
 & "C:\xampp\apache\bin\httpd.exe" -t
 ```
 
-Si aparece `Syntax OK`, inicia o reinicia Apache desde el panel de XAMPP.
+Debe responder `Syntax OK`. Después pulsa **Stop** y **Start** en Apache.
 
-Abre:
+### 5. Probar
 
-```text
-http://halloween-atlantida.test/recetario.php
-```
+Abre `http://halloween-atlantida.test/`. Debe aparecer la verja del cementerio; pulsa el cartel «Entrar al cementerio».
 
-La página necesita que PHP se ejecute en el servidor: no debe abrirse haciendo doble clic sobre `recetario.php`.
+La configuración de Apache y el archivo `hosts` son locales a cada ordenador y no se suben al repositorio.
 
-La configuración de Apache y el archivo `hosts` son locales a cada ordenador. No se suben al repositorio.
+## Alternativa: dominio `halloween.dev` (requiere HTTPS)
 
-## Edición de las recetas
+Los dominios `.dev` están en la lista de precarga HSTS de los navegadores, que **obligan a usar HTTPS** al visitarlos. Por eso no basta con un Virtual Host en el puerto 80: hace falta un certificado local. La forma más sencilla es `mkcert`.
 
-La fuente de datos es:
-
-```text
-recursos/datos/recetas.csv
-```
-
-El archivo utiliza UTF-8 y las siguientes columnas, en este orden:
-
-```text
-nombre,foto,tiempo,dificultad,ingredientes,preparación,personas
-```
-
-Al editarlo:
-
-- Conserva los nombres y el orden de las columnas.
-- Mantén la codificación UTF-8.
-- Utiliza un editor que respete el formato CSV, incluidos los campos entre comillas.
-- No sustituyas los separadores internos de ingredientes y preparación sin adaptar también el JavaScript.
-
-Actualmente, ingredientes y preparación utilizan caracteres de ancho cero U+200B como separadores. El JavaScript también admite saltos de línea para dividir estos apartados.
-
-PHP lee el CSV al solicitar la página y genera el bloque JSON que consume JavaScript. Después de guardar cambios en el CSV, recarga la página para consultarlos.
-
-## Fotografías de las recetas
-
-Las imágenes utilizadas por la página se guardan en:
-
-```text
-public/assets/img/recetas/
-```
-
-La columna `foto` del CSV contiene únicamente el nombre del archivo:
-
-```text
-receta_01.jpg
-```
-
-El JavaScript construye su ruta pública:
-
-```text
-assets/img/recetas/receta_01.jpg
-```
-
-El nombre y la extensión deben coincidir con los del archivo, respetando también las mayúsculas y minúsculas.
-
-### Ajustes utilizados para la conversión
-
-- Formato JPG.
-- Calidad 80.
-- Lado más largo de 1200 píxeles como máximo.
-- Proporciones originales conservadas.
-- Sin ampliar imágenes pequeñas.
-- Sin recorte automático.
-
-Estos ajustes son una convención del proyecto, no una restricción del código.
-
-Las fotografías finales del recetario están en
-`public/assets/img/recetas/`. Los WebP utilizados durante la conversión
-se han retirado del árbol de trabajo.
-
-Las imágenes de personajes están en `public/assets/img/personajes/`.
-Se utilizarán en la selección del asesino del login, el ranking y,
-para seis personajes, el Cluedo.
-
-Las imágenes de armas y objetos asociados están en
-`public/assets/img/cursores/`, pendientes de su adaptación para el
-cursor de cada asesino.
-
-Cambiar la extensión de un archivo no convierte su formato: utiliza una herramienta de conversión.
-
-## Fondo del recetario
-
-El fondo está en:
-
-```text
-public/assets/img/background.jpg
-```
-
-La hoja `public/assets/css/recetario.css` lo referencia mediante:
-
-```css
-url("../img/background.jpg")
-```
-
-## Comprobaciones antes de guardar cambios
-
-### Sintaxis PHP
-
-Desde la raíz del repositorio:
+1. Instala `mkcert` (PowerShell): `winget install FiloSottile.mkcert`. Cierra y abre la terminal.
+2. Crea la autoridad local de confianza: `mkcert -install` (acepta el aviso de Windows).
+3. Genera el certificado dentro de la configuración de Apache:
 
 ```powershell
-& "C:\xampp\php\php.exe" -l "app/recetas.php"
-& "C:\xampp\php\php.exe" -l "public/recetario.php"
+cd C:\xampp\apache\conf
+mkcert -cert-file ssl.crt\halloween.dev.pem -key-file ssl.key\halloween.dev-key.pem halloween.dev
 ```
 
-### Revisión manual
+4. En el archivo `hosts`, añade `127.0.0.1 halloween.dev` y ejecuta `ipconfig /flushdns`.
+5. En `httpd-vhosts.conf`, mantén el bloque de `localhost` de arriba y añade (con la ruta real del proyecto):
 
-- La página muestra las recetas.
-- El buscador funciona con y sin tildes.
-- Una búsqueda sin coincidencias muestra el estado vacío.
-- Las fotografías aparecen en las tarjetas y en las fichas.
-- Las fichas muestran ingredientes, preparación y personas.
-- El modal se abre y se cierra correctamente.
-- El contenido sigue siendo utilizable en una ventana estrecha.
+```apache
+<VirtualHost *:80>
+    ServerName halloween.dev
+    Redirect permanent / https://halloween.dev/
+</VirtualHost>
 
-### Control de versiones
+<VirtualHost *:443>
+    ServerName halloween.dev
+    DocumentRoot "C:/ruta/Halloween-Atlantida/public"
 
-Antes de crear un commit:
+    SSLEngine on
+    SSLCertificateFile "C:/xampp/apache/conf/ssl.crt/halloween.dev.pem"
+    SSLCertificateKeyFile "C:/xampp/apache/conf/ssl.key/halloween.dev-key.pem"
+
+    ErrorDocument 404 /404.php
+
+    <Directory "C:/ruta/Halloween-Atlantida/public">
+        Options -Indexes
+        AllowOverride None
+        Require local
+    </Directory>
+</VirtualHost>
+```
+
+6. Valida con `httpd.exe -t`, reinicia Apache y abre `https://halloween.dev/`.
+
+Si Apache no arranca con SSL, comprueba que `mod_ssl` está cargado y que existe `Listen 443` en `httpd.conf` (XAMPP lo trae activado por defecto).
+
+## Problemas habituales
+
+**MySQL de XAMPP no arranca porque el puerto 3306 está ocupado** (por ejemplo, por otro MySQL instalado en el equipo). Hay dos soluciones:
+
+- Usar ese otro MySQL: no arranques el de XAMPP, crea la base de datos en él y pon sus credenciales en `app/config.php`.
+- Mover el MySQL de XAMPP al puerto 3307:
+  1. En el panel de XAMPP: **Config** de MySQL → `my.ini`, y cambia `port=3306` a `port=3307` en las secciones `[client]` y `[mysqld]`.
+  2. En `C:\xampp\php\php.ini`, cambia `mysqli.default_port=3306` a `3307`.
+  3. En `C:\xampp\phpMyAdmin\config.inc.php`, añade `$cfg['Servers'][$i]['port'] = '3307';`.
+  4. Pon `127.0.0.1` como `host` en `app/config.php` y reinicia Apache y MySQL.
+
+**`Access denied for user` en la web.** La web está conectando a un MySQL distinto del que esperas, o las credenciales de `app/config.php` no coinciden. Si cambiaste el puerto de MySQL, revisa que `php.ini` se guardó y que se reinició Apache.
+
+**Una dirección inexistente no muestra la página 404 personalizada.** Falta `ErrorDocument 404 /404.php` en el Virtual Host o no se reinició Apache. Con el servidor interno de PHP (`php -S`) esta directiva no se aplica; la página puede verse abriendo `/404.php` directamente.
+
+**Las imágenes o estilos no cargan.** Comprueba que el `DocumentRoot` apunta a la carpeta `public` y no a la raíz del repositorio.
+
+## Comprobaciones tras instalar
+
+1. La entrada carga y el cartel inicia la animación hacia la portada.
+2. Se puede crear un usuario, iniciar sesión y salir del cementerio con la confirmación.
+3. En el login, al escribir un usuario existente aparecen su asesino, sus fechas y un epitafio.
+4. El recetario muestra 30 recetas y el buscador filtra con y sin tildes.
+5. En el ranking, la ficha de un asesino permite llevar su arma junto al cursor, y el cambio se mantiene al navegar.
+6. El juego del Cluedo permite interrogar, tachar en el cuaderno y acusar, con pantalla final de victoria o derrota.
+7. Escribir una dirección que no existe muestra la página del fantasma con el botón de vuelta.
+
+## Datos editables
+
+- **Recetas:** `recursos/datos/recetas.csv`. Columnas, en este orden: `nombre,foto,tiempo,dificultad,ingredientes,preparación,personas`. UTF-8. Las fotos van en `public/assets/img/recetas/`, y la columna `foto` lleva solo el nombre del archivo.
+- **Asesinos del ranking, la lápida y el registro:** `public/data/personajes.json`.
+- **Epitafios de la lápida:** `public/data/frases.json`.
+- **Arma de cada asesino para el cursor:** `public/data/cursores.json`, con imágenes en `public/assets/img/cursores/`.
+- **Datos del Cluedo (sospechosos, armas, habitaciones y reglas):** `public/assets/js/juego-datos.js`.
+
+## Seguridad
+
+- Las contraseñas y las respuestas de seguridad se guardan con `password_hash`.
+- Los formularios usan token CSRF; cerrar sesión solo funciona con un envío POST válido.
+- Las consultas a la base de datos son preparadas.
+- El usuario de base de datos de la aplicación solo tiene permisos de lectura, inserción y actualización sobre `usuarios`.
+- `app/config.php` contiene credenciales y está excluido del control de versiones.
+
+## Control de versiones
+
+Antes de cada commit, revisa los cambios y no subas credenciales ni configuraciones personales:
 
 ```powershell
 git status
 git diff
 ```
 
-Prepara únicamente los archivos correspondientes al cambio y revisa el contenido preparado:
+## Créditos
 
-```powershell
-git diff --cached
-```
-
-No subas contraseñas, credenciales, archivos temporales ni configuraciones personales del equipo.
-
-## Alcance de esta documentación
-
-Este README describe el entorno local y el recetario actualmente implementado.
-
-Las futuras secciones, reglas del concurso y posibles necesidades de base de datos se documentarán conforme se incorporen al proyecto.
+Sergio y Antonio · 2.º DAW · Atlántida Formación Profesional.
