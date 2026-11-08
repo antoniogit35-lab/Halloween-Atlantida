@@ -63,14 +63,20 @@
     return armas[id] ? RUTA_ARMAS + armas[id] : null;
   }
 
-  // principal.php pone data-asesino en el <body>: con valor si hay sesión, vacío si no la hay
+
+    // principal.php pone data-asesino en el <body>: con valor si hay sesión, vacío si no la hay
   function sincronizarSesion() {
     if (!document.body.hasAttribute('data-asesino')) {
       return; // esta página no sabe nada de la sesión
     }
     const asesino = document.body.dataset.asesino;
+
     if (asesino) {
-      guardar(CLAVE_SESION, asesino);
+      // Sesión nueva (o usuario distinto): vuelve a mandar el arma de su asesino
+      if (leer(CLAVE_SESION) !== asesino) {
+        borrar(CLAVE_ELEGIDA);
+        guardar(CLAVE_SESION, asesino);
+      }
     } else {
       borrar(CLAVE_SESION);
     }
