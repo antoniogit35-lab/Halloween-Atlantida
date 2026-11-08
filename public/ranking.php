@@ -68,7 +68,6 @@ $maximo = $personajes ? max(1, $personajes[0]['muertes']) : 1;
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Ranking de asesinos · Halloween Atlántida</title>
     <script>document.documentElement.classList.add('js');</script>
-    <link rel="stylesheet" href="assets/css/global.css">
     <link rel="stylesheet" href="assets/css/ranking.css">
 </head>
 <body class="ranking-pagina">
