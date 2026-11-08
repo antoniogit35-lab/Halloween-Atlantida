@@ -431,6 +431,11 @@ a.acceso:focus-visible {
     background: linear-gradient(135deg, #41604218, transparent);
 }
 
+.modal-sobre p {
+    text-align: justify;
+    
+}
+
 .cerrar-modal {
     position: absolute;
     top: 10px;
