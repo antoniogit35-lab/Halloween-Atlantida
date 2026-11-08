@@ -1,0 +1,23 @@
+/* Tipografías del proyecto (Google Fonts, licencia SIL Open Font License) */
+
+@font-face {
+    font-family: "Eater";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("../fonts/Eater-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Rubik Wet Paint";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("../fonts/rubik-wet-paint-v2-latin-regular.woff2") format("woff2");
+}
+
+:root {
+    --tipo-titulo: "Eater", Georgia, "Times New Roman", serif;
+    --tipo-decorativa: "Rubik Wet Paint", Georgia, "Times New Roman", serif;
+    --tipo-texto: Georgia, "Times New Roman", serif;
+}
